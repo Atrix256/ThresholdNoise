@@ -1,0 +1,114 @@
+{
+    "version": "2.0",
+    "snapshot": {
+        "resourceViewNodeIndex": 6,
+        "resourceViewResourceIndex": 5,
+        "cameraAltitudeAzimuth": [
+            0.0,
+            6.273237705230713
+        ],
+        "importedResources": [
+            {
+                "nodeName": "Input",
+                "texture": {
+                    "fileName": "Textures\\flags_512.png",
+                    "binaryFormat": "Any"
+                }
+            }
+        ],
+        "savedVariables": [
+            {
+                "name": "BitsPerColorChannel",
+                "value": "1"
+            },
+            {
+                "name": "Animate",
+                "value": "true"
+            },
+            {
+                "name": "NoiseType1",
+                "value": "1"
+            },
+            {
+                "name": "SpatialFilter1",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilterParam1",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlpha1",
+                "value": "1.000000"
+            },
+            {
+                "name": "NoiseType2",
+                "value": "1"
+            },
+            {
+                "name": "SpatialFilter2",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilterParam2",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlpha2",
+                "value": "0.100000"
+            },
+            {
+                "name": "NoiseType3",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilter3",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilterParam3",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlpha3",
+                "value": "1.000000"
+            },
+            {
+                "name": "NoiseType4",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilter4",
+                "value": "0"
+            },
+            {
+                "name": "SpatialFilterParam4",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlpha4",
+                "value": "0.100000"
+            },
+            {
+                "name": "FrameIndex",
+                "value": "185160"
+            },
+            {
+                "name": "TemporalFilterAlphaLastFrame1",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlphaLastFrame2",
+                "value": "0.100000"
+            },
+            {
+                "name": "TemporalFilterAlphaLastFrame3",
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilterAlphaLastFrame4",
+                "value": "0.100000"
+            }
+        ]
+    }
+}

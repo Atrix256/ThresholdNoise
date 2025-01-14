@@ -1,0 +1,523 @@
+{
+    "$schema": "gigischema.json",
+    "version": "0.99b",
+    "variables": [
+        {
+            "name": "BitsPerColorChannel",
+            "type": "Int",
+            "dflt": "8",
+            "visibility": "User"
+        },
+        {
+            "name": "Animate",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User"
+        },
+        {
+            "name": "NoiseType1",
+            "comment": "Upper Left",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "Panel1"
+        },
+        {
+            "name": "SpatialFilter1",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "Panel1"
+        },
+        {
+            "name": "SpatialFilterParam1",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "Panel1"
+        },
+        {
+            "name": "TemporalFilterAlpha1",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "Panel1"
+        },
+        {
+            "name": "NoiseType2",
+            "comment": "Upper Right",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "Panel2"
+        },
+        {
+            "name": "SpatialFilter2",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "Panel2"
+        },
+        {
+            "name": "SpatialFilterParam2",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "Panel2"
+        },
+        {
+            "name": "TemporalFilterAlpha2",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "Panel2"
+        },
+        {
+            "name": "NoiseType3",
+            "comment": "Lower Left",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "Panel3"
+        },
+        {
+            "name": "SpatialFilter3",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "Panel3"
+        },
+        {
+            "name": "SpatialFilterParam3",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "Panel3"
+        },
+        {
+            "name": "TemporalFilterAlpha3",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "Panel3"
+        },
+        {
+            "name": "NoiseType4",
+            "comment": "Lower Right",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "Panel4"
+        },
+        {
+            "name": "SpatialFilter4",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "Panel4"
+        },
+        {
+            "name": "SpatialFilterParam4",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "Panel4"
+        },
+        {
+            "name": "TemporalFilterAlpha4",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "Panel4"
+        },
+        {
+            "name": "FrameIndex",
+            "type": "Int",
+            "dflt": "0"
+        },
+        {
+            "name": "TemporalFilterAlphaLastFrame1",
+            "type": "Float",
+            "dflt": "1.0f"
+        },
+        {
+            "name": "TemporalFilterAlphaLastFrame2",
+            "type": "Float",
+            "dflt": "1.0f"
+        },
+        {
+            "name": "TemporalFilterAlphaLastFrame3",
+            "type": "Float",
+            "dflt": "1.0f"
+        },
+        {
+            "name": "TemporalFilterAlphaLastFrame4",
+            "type": "Float",
+            "dflt": "1.0f"
+        }
+    ],
+    "shaders": [
+        {
+            "name": "Dither",
+            "fileName": "DitherCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ],
+            "samplers": [
+                {
+                    "name": "linearWrapSampler"
+                }
+            ]
+        },
+        {
+            "name": "DitherSpatialFilter",
+            "fileName": "DitherSpatialFilterCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        },
+        {
+            "name": "DitherTemporalFilter",
+            "fileName": "DitherTemporalFilterCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                },
+                {
+                    "name": "TemporalAccum",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        }
+    ],
+    "fileCopies": [
+        {
+            "fileName": "Shared.hlsli",
+            "type": "Shader"
+        }
+    ],
+    "nodes": [
+        {
+            "actionComputeShader": {
+                "name": "Dither",
+                "editorPos": [
+                    -11.0,
+                    -30.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "Color",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "Input",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "Dither"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Color",
+                "editorPos": [
+                    -117.0,
+                    2.0
+                ],
+                "format": {
+                    "format": "RGBA8_Unorm_sRGB"
+                },
+                "size": {
+                    "node": {
+                        "name": "Input"
+                    },
+                    "multiply": [
+                        2,
+                        2,
+                        1
+                    ]
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Input",
+                "editorPos": [
+                    -117.0,
+                    -46.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Temp",
+                "editorPos": [
+                    27.0,
+                    66.0
+                ],
+                "format": {
+                    "format": "RGBA8_Unorm_sRGB"
+                },
+                "size": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "SpatialFilter",
+                "editorPos": [
+                    187.0,
+                    -14.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "Dither",
+                        "dstPin": "Output"
+                    },
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "Temp",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "DitherSpatialFilter"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "TemporalAccum",
+                "editorPos": [
+                    199.0,
+                    82.0
+                ],
+                "transient": false,
+                "format": {
+                    "format": "RGBA32_Float"
+                },
+                "size": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "TemporalFilter",
+                "editorPos": [
+                    373.0,
+                    -14.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "SpatialFilter",
+                        "dstPin": "Output"
+                    },
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "SpatialFilter",
+                        "dstPin": "Input"
+                    },
+                    {
+                        "srcPin": "TemporalAccum",
+                        "dstNode": "TemporalAccum",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "DitherTemporalFilter"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        }
+    ],
+    "enums": [
+        {
+            "name": "NoiseTypes",
+            "items": [
+                {
+                    "label": "White"
+                },
+                {
+                    "label": "STBN_10"
+                },
+                {
+                    "label": "STBN_19"
+                },
+                {
+                    "label": "R2"
+                },
+                {
+                    "label": "IGN"
+                },
+                {
+                    "label": "Bayer"
+                }
+            ]
+        },
+        {
+            "name": "SpatialFilters",
+            "items": [
+                {
+                    "label": "None"
+                },
+                {
+                    "label": "Box"
+                },
+                {
+                    "label": "Gauss"
+                }
+            ]
+        }
+    ],
+    "setVars": [
+        {
+            "destination": {
+                "name": "BitsPerColorChannel"
+            },
+            "AVar": {
+                "name": "BitsPerColorChannel"
+            },
+            "op": "Maximum",
+            "BLiteral": "1"
+        },
+        {
+            "destination": {
+                "name": "BitsPerColorChannel"
+            },
+            "AVar": {
+                "name": "BitsPerColorChannel"
+            },
+            "op": "Minimum",
+            "BLiteral": "8"
+        },
+        {
+            "destination": {
+                "name": "FrameIndex"
+            },
+            "AVar": {
+                "name": "FrameIndex"
+            },
+            "BLiteral": "1",
+            "condition": {
+                "variable1": "Animate",
+                "comparison": "IsTrue"
+            }
+        },
+        {
+            "destination": {
+                "name": "TemporalFilterAlphaLastFrame1"
+            },
+            "AVar": {
+                "name": "TemporalFilterAlpha1"
+            },
+            "op": "Noop",
+            "setBefore": false
+        },
+        {
+            "destination": {
+                "name": "TemporalFilterAlphaLastFrame2"
+            },
+            "AVar": {
+                "name": "TemporalFilterAlpha2"
+            },
+            "op": "Noop",
+            "setBefore": false
+        },
+        {
+            "destination": {
+                "name": "TemporalFilterAlphaLastFrame3"
+            },
+            "AVar": {
+                "name": "TemporalFilterAlpha3"
+            },
+            "op": "Noop",
+            "setBefore": false
+        },
+        {
+            "destination": {
+                "name": "TemporalFilterAlphaLastFrame4"
+            },
+            "AVar": {
+                "name": "TemporalFilterAlpha4"
+            },
+            "op": "Noop",
+            "setBefore": false
+        }
+    ]
+}
