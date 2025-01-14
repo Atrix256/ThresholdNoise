@@ -36,8 +36,12 @@ float GetRng(uint3 px, int noiseType, inout uint wangState, int index)
 	switch (noiseType)
 	{
 		case NoiseTypes::White: return float3(wang_hash_float01(wangState), wang_hash_float01(wangState), wang_hash_float01(wangState));
+		case NoiseTypes::Blue2D: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, offsetF);
 		case NoiseTypes::STBN_10: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_10/stbn_scalar_10_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, offsetF);
 		case NoiseTypes::STBN_19: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_19/stbn_scalar_19_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, offsetF);
+		case NoiseTypes::FAST_Blue_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, offsetF);
+		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, offsetF);
+		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, offsetF);
 		case NoiseTypes::R2:
 		{
 			 // TODO: how to handle px.z? maybe a white noise offset.
@@ -53,6 +57,14 @@ float GetRng(uint3 px, int noiseType, inout uint wangState, int index)
 			 // TODO: how to handle px.z? maybe a white noise offset.
 			 // If so, note in the blog notes that we don't have a way to animate R2
 			return Bayer(px.x, px.y, 4);
+		}
+		case NoiseTypes::Round:
+		{
+			return 0.5f;
+		}
+		case NoiseTypes::Floor:
+		{
+			return 0.0f;
 		}
 	}
 	return 0.0f;
@@ -113,23 +125,17 @@ Shader Resources:
 /*
 
 TODO:
-
-? can we keep track of what the temporal params were last frame, and reset it when they are different (set it to 1 temporarily!)
-
-* This is a dither test. Also make a threshold test.
-
 * noise types for dithering
- * FAST STBN, FAST Box noise, FAST binomial noise, bayer
- * also some of that competitive blue noise?
+  * also some of that competitive blue noise?
   * https://tellusim.com/improved-blue-noise/
   * https://acko.net/blog/stable-fiddusion/
  ? also round and floor options?
 
+* Finish bayer
 * Need to dive deeper into Bayer. Can you use it like you are, or do you need different logic? also verify the function works correctly. Can include that in the blog post.
  * could also try with a bayer texture.
  
-* want to be able to choose a spatial blur (gaussian, box? with a parameter to them), and temporal (EMA with an alpha?)
- * for temporal could also have EMA with neighborhood clamp.
+* for temporal could also have EMA with neighborhood clamp.
 
 * code generate C++ dx12 too.
 
@@ -137,13 +143,17 @@ TODO:
 
 * checkbox to do per channel dithering?
 
-* add FAST noise to https://en.wikipedia.org/wiki/Ordered_dithering#Non-Bayer_approaches
-
+* golden ratio animated blue noise?
 
 BLOG NOTES:
+* Threshold test as a second blog post!
+* compare round and floor vs something nicely dithered (could maybe even be white noise?)
 * show difference between STBN 1.0 and 1.9
+* show difference between blue2d and a temporal blue noise. if you gauss blur, it's less compelling than if you don't!
 
 * Link to STBN and FAST repos.
  * also the competitive blue noise
+
+
 
 */

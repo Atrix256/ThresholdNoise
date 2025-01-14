@@ -20,14 +20,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Panel1"
+            "UIGroup": "Upper Left"
         },
         {
             "name": "SpatialFilter1",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Panel1"
+            "UIGroup": "Upper Left"
         },
         {
             "name": "SpatialFilterParam1",
@@ -35,14 +35,14 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Panel1"
+            "UIGroup": "Upper Left"
         },
         {
             "name": "TemporalFilterAlpha1",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Panel1"
+            "UIGroup": "Upper Left"
         },
         {
             "name": "NoiseType2",
@@ -50,14 +50,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Panel2"
+            "UIGroup": "Upper Right"
         },
         {
             "name": "SpatialFilter2",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Panel2"
+            "UIGroup": "Upper Right"
         },
         {
             "name": "SpatialFilterParam2",
@@ -65,14 +65,14 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Panel2"
+            "UIGroup": "Upper Right"
         },
         {
             "name": "TemporalFilterAlpha2",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Panel2"
+            "UIGroup": "Upper Right"
         },
         {
             "name": "NoiseType3",
@@ -80,14 +80,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Panel3"
+            "UIGroup": "Lower Left"
         },
         {
             "name": "SpatialFilter3",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Panel3"
+            "UIGroup": "Lower Left"
         },
         {
             "name": "SpatialFilterParam3",
@@ -95,14 +95,14 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Panel3"
+            "UIGroup": "Lower Left"
         },
         {
             "name": "TemporalFilterAlpha3",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Panel3"
+            "UIGroup": "Lower Left"
         },
         {
             "name": "NoiseType4",
@@ -110,14 +110,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Panel4"
+            "UIGroup": "Lower Right"
         },
         {
             "name": "SpatialFilter4",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Panel4"
+            "UIGroup": "Lower Right"
         },
         {
             "name": "SpatialFilterParam4",
@@ -125,14 +125,14 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Panel4"
+            "UIGroup": "Lower Right"
         },
         {
             "name": "TemporalFilterAlpha4",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Panel4"
+            "UIGroup": "Lower Right"
         },
         {
             "name": "FrameIndex",
@@ -414,10 +414,22 @@
                     "label": "White"
                 },
                 {
+                    "label": "Blue2D"
+                },
+                {
                     "label": "STBN_10"
                 },
                 {
                     "label": "STBN_19"
+                },
+                {
+                    "label": "FAST_Blue_Exp"
+                },
+                {
+                    "label": "FAST_Binomial3x3_Exp"
+                },
+                {
+                    "label": "FAST_Box3x3_Exp"
                 },
                 {
                     "label": "R2"
@@ -427,6 +439,12 @@
                 },
                 {
                     "label": "Bayer"
+                },
+                {
+                    "label": "Round"
+                },
+                {
+                    "label": "Floor"
                 }
             ]
         },

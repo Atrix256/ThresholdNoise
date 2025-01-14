@@ -1,4 +1,9 @@
 ====================================
+FAST_Binomial3x3_Exp, FAST_Blue_Exp, FAST_Blue2D, FAST_Box3x3_Exp
+These were made by the FAST optimizer
+https://github.com/electronicarts/fastnoise
+
+====================================
 STBN_10 and STBN_19 are "spatiotemporal blue noise" textures, made with a sigma of 1.0 and 1.9 respectively.
 https://github.com/NVIDIAGameWorks/SpatiotemporalBlueNoiseSDK
 

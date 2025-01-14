@@ -5,7 +5,7 @@
         "resourceViewResourceIndex": 5,
         "cameraAltitudeAzimuth": [
             0.0,
-            6.273237705230713
+            6.273210048675537
         ],
         "importedResources": [
             {
@@ -19,7 +19,7 @@
         "savedVariables": [
             {
                 "name": "BitsPerColorChannel",
-                "value": "1"
+                "value": "2"
             },
             {
                 "name": "Animate",
@@ -43,11 +43,11 @@
             },
             {
                 "name": "NoiseType2",
-                "value": "1"
+                "value": "0"
             },
             {
                 "name": "SpatialFilter2",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam2",
@@ -59,7 +59,7 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "0"
+                "value": "4"
             },
             {
                 "name": "SpatialFilter3",
@@ -75,11 +75,11 @@
             },
             {
                 "name": "NoiseType4",
-                "value": "0"
+                "value": "4"
             },
             {
                 "name": "SpatialFilter4",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam4",
@@ -91,7 +91,7 @@
             },
             {
                 "name": "FrameIndex",
-                "value": "185160"
+                "value": "44245"
             },
             {
                 "name": "TemporalFilterAlphaLastFrame1",
