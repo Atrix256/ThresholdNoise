@@ -20,14 +20,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Upper Left"
+            "UIGroup": "1 Upper Left"
         },
         {
             "name": "SpatialFilter1",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Upper Left"
+            "UIGroup": "1 Upper Left"
         },
         {
             "name": "SpatialFilterParam1",
@@ -35,14 +35,30 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Upper Left"
+            "UIGroup": "1 Upper Left"
         },
         {
             "name": "TemporalFilterAlpha1",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Upper Left"
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "NeighborhoodClamp1",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "Animate1",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
         },
         {
             "name": "NoiseType2",
@@ -50,14 +66,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Upper Right"
+            "UIGroup": "2 Upper Right"
         },
         {
             "name": "SpatialFilter2",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Upper Right"
+            "UIGroup": "2 Upper Right"
         },
         {
             "name": "SpatialFilterParam2",
@@ -65,14 +81,30 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Upper Right"
+            "UIGroup": "2 Upper Right"
         },
         {
             "name": "TemporalFilterAlpha2",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Upper Right"
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "NeighborhoodClamp2",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "Animate2",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
         },
         {
             "name": "NoiseType3",
@@ -80,14 +112,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Lower Left"
+            "UIGroup": "3 Lower Left"
         },
         {
             "name": "SpatialFilter3",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Lower Left"
+            "UIGroup": "3 Lower Left"
         },
         {
             "name": "SpatialFilterParam3",
@@ -95,14 +127,30 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Lower Left"
+            "UIGroup": "3 Lower Left"
         },
         {
             "name": "TemporalFilterAlpha3",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Lower Left"
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "NeighborhoodClamp3",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "Animate3",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
         },
         {
             "name": "NoiseType4",
@@ -110,14 +158,14 @@
             "type": "Int",
             "visibility": "User",
             "Enum": "NoiseTypes",
-            "UIGroup": "Lower Right"
+            "UIGroup": "4 Lower Right"
         },
         {
             "name": "SpatialFilter4",
             "type": "Int",
             "visibility": "User",
             "Enum": "SpatialFilters",
-            "UIGroup": "Lower Right"
+            "UIGroup": "4 Lower Right"
         },
         {
             "name": "SpatialFilterParam4",
@@ -125,39 +173,35 @@
             "type": "Float",
             "dflt": "1",
             "visibility": "User",
-            "UIGroup": "Lower Right"
+            "UIGroup": "4 Lower Right"
         },
         {
             "name": "TemporalFilterAlpha4",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
             "type": "Float",
             "dflt": "1.0f",
             "visibility": "User",
-            "UIGroup": "Lower Right"
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "NeighborhoodClamp4",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "Animate4",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
         },
         {
             "name": "FrameIndex",
             "type": "Int",
             "dflt": "0"
-        },
-        {
-            "name": "TemporalFilterAlphaLastFrame1",
-            "type": "Float",
-            "dflt": "1.0f"
-        },
-        {
-            "name": "TemporalFilterAlphaLastFrame2",
-            "type": "Float",
-            "dflt": "1.0f"
-        },
-        {
-            "name": "TemporalFilterAlphaLastFrame3",
-            "type": "Float",
-            "dflt": "1.0f"
-        },
-        {
-            "name": "TemporalFilterAlphaLastFrame4",
-            "type": "Float",
-            "dflt": "1.0f"
         }
     ],
     "shaders": [
@@ -417,6 +461,9 @@
                     "label": "Blue2D"
                 },
                 {
+                    "label": "Blue2D + Golden Ratio"
+                },
+                {
                     "label": "STBN_10"
                 },
                 {
@@ -496,46 +543,6 @@
                 "variable1": "Animate",
                 "comparison": "IsTrue"
             }
-        },
-        {
-            "destination": {
-                "name": "TemporalFilterAlphaLastFrame1"
-            },
-            "AVar": {
-                "name": "TemporalFilterAlpha1"
-            },
-            "op": "Noop",
-            "setBefore": false
-        },
-        {
-            "destination": {
-                "name": "TemporalFilterAlphaLastFrame2"
-            },
-            "AVar": {
-                "name": "TemporalFilterAlpha2"
-            },
-            "op": "Noop",
-            "setBefore": false
-        },
-        {
-            "destination": {
-                "name": "TemporalFilterAlphaLastFrame3"
-            },
-            "AVar": {
-                "name": "TemporalFilterAlpha3"
-            },
-            "op": "Noop",
-            "setBefore": false
-        },
-        {
-            "destination": {
-                "name": "TemporalFilterAlphaLastFrame4"
-            },
-            "AVar": {
-                "name": "TemporalFilterAlpha4"
-            },
-            "op": "Noop",
-            "setBefore": false
         }
     ]
 }

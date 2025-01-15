@@ -39,12 +39,9 @@ float R2LDG(uint2 pos)
 }
 
 // From http://www.iryoku.com/next-generation-post-processing-in-call-of-duty-advanced-warfare
-float IGNLDG(int3 pixelPosAndFrame)
+float IGNLDG(int2 pixelPos)
 {
-	// This scrolling value was found by Jorge Jimenez, the maker of IGN, but not published anywhere.
-	// AW: He said I could use it and share it so long as I gave him credit :)
-	pixelPosAndFrame.xy += pixelPosAndFrame.z * 5.588238f;
-	return (52.9829189f * ((0.06711056f * float(pixelPosAndFrame.x) + 0.00583715f * float(pixelPosAndFrame.y)) % 1)) % 1;
+	return (52.9829189f * ((0.06711056f * float(pixelPos.x) + 0.00583715f * float(pixelPos.y)) % 1)) % 1;
 }
 
 float3 LinearToSRGB(float3 linearCol)
@@ -138,3 +135,5 @@ float Bayer(uint i, uint j, uint N)
     j = j % N;
     return float(reversebits(InterleaveBits(i ^ j, i))) / float(N*N);
 }
+
+static const float c_goldenRatioConjugate = 0.61803399f;

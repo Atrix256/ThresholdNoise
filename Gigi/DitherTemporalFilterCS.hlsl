@@ -14,18 +14,18 @@
 
 	// Get the parameters for whatever quadrant we are in
 	float temporalAlpha = 1.0f;
-	float temporalAlphaLastFrame = 1.0f;
+	bool neighborhoodClamp = false;
 	if (px.x <= dims.x)
 	{
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha1)*/;
-			temporalAlphaLastFrame = /*$(Variable:TemporalFilterAlphaLastFrame1)*/;
+			neighborhoodClamp = /*$(Variable:NeighborhoodClamp1)*/;
 		}
 		else
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha3)*/;
-			temporalAlphaLastFrame = /*$(Variable:TemporalFilterAlphaLastFrame3)*/;
+			neighborhoodClamp = /*$(Variable:NeighborhoodClamp3)*/;
 		}
 	}
 	else
@@ -33,28 +33,49 @@
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha2)*/;
-			temporalAlphaLastFrame = /*$(Variable:TemporalFilterAlphaLastFrame2)*/;
+			neighborhoodClamp = /*$(Variable:NeighborhoodClamp2)*/;
 		}
 		else
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha4)*/;
-			temporalAlphaLastFrame = /*$(Variable:TemporalFilterAlphaLastFrame4)*/;
+			neighborhoodClamp = /*$(Variable:NeighborhoodClamp4)*/;
 		}
 	}
 
-	// Reset temporal buffer when the temporal filter parameters change
-	if (temporalAlpha != temporalAlphaLastFrame)
-		temporalAlpha = 1.0f;
-
-	temporalAlpha = clamp(temporalAlpha, 0.0f, 1.0f);
-
-	float3 lastValue = TemporalAccum[px].rgb;
+	// Get the previous and next colors
+	float4 temporalAccum = TemporalAccum[px];
+	float3 lastValue = temporalAccum.rgb;
 	float3 nextValue = Input[px].rgb;
 
+	// Reset temporal buffer when the temporal filter parameters change, or when the temporal accumulation buffer doesn't have data in it yet (alpha is 0)
+	if (temporalAccum.a < 1.0f)
+		temporalAlpha = 1.0f;
+	temporalAlpha = clamp(temporalAlpha, 0.0f, 1.0f);
+
+	// Do a neighborhood clamp if we should, to simulate that anti ghosting feature of TAA
+	if (neighborhoodClamp && temporalAlpha < 1.0f)
+	{
+		float3 themin = nextValue;
+		float3 themax = nextValue;
+
+		for (int iy = -2; iy <= 2; ++iy)
+		{
+			for (int ix = -2; ix <= 2; ++ix)
+			{
+				float3 neighborhoodSample = Input[int2(px) + int2(ix, iy)].rgb;
+				themin = min(themin, neighborhoodSample);
+				themax = max(themax, neighborhoodSample);
+			}
+		}
+
+		lastValue = clamp(lastValue, themin, themax);
+	}
+
+	// Lerp
 	float3 value = lerp(lastValue, nextValue, temporalAlpha);
 
+	// Write result to output, and accumulation buffer
 	TemporalAccum[px] = float4(value, 1.0f);
-
 	Output[px] = float4(LinearToSRGB(value), 1.0f);
 }
 

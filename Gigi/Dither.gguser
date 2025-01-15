@@ -3,10 +3,6 @@
     "snapshot": {
         "resourceViewNodeIndex": 6,
         "resourceViewResourceIndex": 5,
-        "cameraAltitudeAzimuth": [
-            0.0,
-            6.273210048675537
-        ],
         "importedResources": [
             {
                 "nodeName": "Input",
@@ -19,7 +15,7 @@
         "savedVariables": [
             {
                 "name": "BitsPerColorChannel",
-                "value": "2"
+                "value": "1"
             },
             {
                 "name": "Animate",
@@ -27,7 +23,7 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "1"
+                "value": "11"
             },
             {
                 "name": "SpatialFilter1",
@@ -42,12 +38,20 @@
                 "value": "1.000000"
             },
             {
+                "name": "NeighborhoodClamp1",
+                "value": "false"
+            },
+            {
+                "name": "Animate1",
+                "value": "false"
+            },
+            {
                 "name": "NoiseType2",
                 "value": "0"
             },
             {
                 "name": "SpatialFilter2",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam2",
@@ -55,11 +59,19 @@
             },
             {
                 "name": "TemporalFilterAlpha2",
-                "value": "0.100000"
+                "value": "1.000000"
+            },
+            {
+                "name": "NeighborhoodClamp2",
+                "value": "false"
+            },
+            {
+                "name": "Animate2",
+                "value": "false"
             },
             {
                 "name": "NoiseType3",
-                "value": "4"
+                "value": "5"
             },
             {
                 "name": "SpatialFilter3",
@@ -74,12 +86,20 @@
                 "value": "1.000000"
             },
             {
+                "name": "NeighborhoodClamp3",
+                "value": "false"
+            },
+            {
+                "name": "Animate3",
+                "value": "false"
+            },
+            {
                 "name": "NoiseType4",
-                "value": "4"
+                "value": "5"
             },
             {
                 "name": "SpatialFilter4",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam4",
@@ -90,24 +110,16 @@
                 "value": "0.100000"
             },
             {
+                "name": "NeighborhoodClamp4",
+                "value": "false"
+            },
+            {
+                "name": "Animate4",
+                "value": "true"
+            },
+            {
                 "name": "FrameIndex",
-                "value": "44245"
-            },
-            {
-                "name": "TemporalFilterAlphaLastFrame1",
-                "value": "1.000000"
-            },
-            {
-                "name": "TemporalFilterAlphaLastFrame2",
-                "value": "0.100000"
-            },
-            {
-                "name": "TemporalFilterAlphaLastFrame3",
-                "value": "1.000000"
-            },
-            {
-                "name": "TemporalFilterAlphaLastFrame4",
-                "value": "0.100000"
+                "value": "203624"
             }
         ]
     }

@@ -20,7 +20,6 @@ float3 ConvertToNBits(float3 value, int bits, float3 ditherRnd)
 
 float ReadNoiseTexture(Texture2DArray<float> tex, uint3 px, float2 offsetF)
 {
-	// TODO: use offsetF. multiply by dims.
 	uint3 noiseDims;
 	tex.GetDimensions(noiseDims.x, noiseDims.y, noiseDims.z);
 	int3 readPos;
@@ -29,34 +28,49 @@ float ReadNoiseTexture(Texture2DArray<float> tex, uint3 px, float2 offsetF)
 	return tex[readPos % noiseDims];
 }
 
-float GetRng(uint3 px, int noiseType, inout uint wangState, int index)
+float ReadNoiseTexture(Texture2D<float> tex, uint2 px, float2 offsetF)
 {
-	float2 offsetF = R2LDS(index);
+	uint2 noiseDims;
+	tex.GetDimensions(noiseDims.x, noiseDims.y);
+	int2 readPos = (px + int2(offsetF * float2(noiseDims.xy)));
+	return tex[readPos % noiseDims];
+}
+
+float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wangStateGlobal, int index)
+{
+	float2 indexOffsetF = R2LDS(index);
 
 	switch (noiseType)
 	{
-		case NoiseTypes::White: return float3(wang_hash_float01(wangState), wang_hash_float01(wangState), wang_hash_float01(wangState));
-		case NoiseTypes::Blue2D: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, offsetF);
-		case NoiseTypes::STBN_10: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_10/stbn_scalar_10_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, offsetF);
-		case NoiseTypes::STBN_19: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_19/stbn_scalar_19_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, offsetF);
-		case NoiseTypes::FAST_Blue_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, offsetF);
-		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, offsetF);
-		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, offsetF);
+		case NoiseTypes::White: return wang_hash_float01(wangStatePixel);
+		case NoiseTypes::Blue2D: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::Blue2D_plus_Golden_Ratio:
+		{
+			float value = ReadNoiseTexture(/*$(Image2D:Textures/FAST_Blue2D/blue2d_0.png:R8_Unorm:float:false)*/, px.xy, indexOffsetF);
+			int frameIndex = px.z % 64;
+			value = frac(value + frameIndex * c_goldenRatioConjugate);
+			return value;
+		}
+		case NoiseTypes::STBN_10: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_10/stbn_scalar_10_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::STBN_19: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_19/stbn_scalar_19_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::FAST_Blue_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::R2:
 		{
-			 // TODO: how to handle px.z? maybe a white noise offset.
-			 // If so, note in the blog notes that we don't have a way to animate R2
-			return R2LDG(px.xy + int2(offsetF * 512.0f));
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return R2LDG(px.xy + int2((indexOffsetF + frameOffsetF) * 512.0f));
 		}
 		case NoiseTypes::IGN:
 		{
-			return IGNLDG(int3(px.xy + int2(offsetF * 512.0f), px.z));
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+
+			return IGNLDG(int2(px.xy + int2((indexOffsetF + frameOffsetF) * 512.0f)));
 		}
 		case NoiseTypes::Bayer:
 		{
-			 // TODO: how to handle px.z? maybe a white noise offset.
-			 // If so, note in the blog notes that we don't have a way to animate R2
-			return Bayer(px.x, px.y, 4);
+			 float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return Bayer(px.x + int(frameOffsetF.x * 4.0f), px.y + int(frameOffsetF.y * 4.0f), 4);
 		}
 		case NoiseTypes::Round:
 		{
@@ -70,12 +84,12 @@ float GetRng(uint3 px, int noiseType, inout uint wangState, int index)
 	return 0.0f;
 }
 
-float3 GetRng3(uint3 px, int noiseType, inout uint wangState)
+float3 GetRng3(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wangStateGlobal)
 {
 	float3 ret;
-	ret.x = GetRng(px, noiseType, wangState, 0);
-	ret.y = GetRng(px, noiseType, wangState, 1);
-	ret.z = GetRng(px, noiseType, wangState, 2);
+	ret.x = GetRng(px, noiseType, wangStatePixel, wangStateGlobal, 0);
+	ret.y = GetRng(px, noiseType, wangStatePixel, wangStateGlobal, 1);
+	ret.z = GetRng(px, noiseType, wangStatePixel, wangStateGlobal, 2);
 	return ret;
 }
 
@@ -89,26 +103,43 @@ float3 GetRng3(uint3 px, int noiseType, inout uint wangState)
 
 	// Get the parameters for whatever quadrant we are in
 	int noiseType = 0;
+	bool animate = true;
 	if (px.x <= dims.x)
 	{
 		if (px.y <= dims.y)
+		{
 			noiseType = /*$(Variable:NoiseType1)*/;
+			animate = /*$(Variable:Animate1)*/;
+		}
 		else
+		{
 			noiseType = /*$(Variable:NoiseType3)*/;
+			animate = /*$(Variable:Animate3)*/;
+		}
 	}
 	else
 	{
 		if (px.y <= dims.y)
+		{
 			noiseType = /*$(Variable:NoiseType2)*/;
+			animate = /*$(Variable:Animate2)*/;
+		}
 		else
+		{
 			noiseType = /*$(Variable:NoiseType4)*/;
+			animate = /*$(Variable:Animate4)*/;
+		}
 	}
 
+	if (!animate)
+		px.z = 0;
+
 	// Initialize wang hash
-	uint wangState = wang_hash_init(px);
+	uint wangStatePixel = wang_hash_init(px);
+	uint wangStateGlobal = wang_hash_init(uint3(1337, 435, px.z));
 
 	// Dither
-	float3 rng = GetRng3(px, noiseType, wangState);
+	float3 rng = GetRng3(px, noiseType, wangStatePixel, wangStateGlobal);
 	color.rgb = ConvertToNBits(color.rgb, /*$(Variable:BitsPerColorChannel)*/, rng);
 
 	// Write out result
@@ -126,34 +157,47 @@ Shader Resources:
 
 TODO:
 * noise types for dithering
-  * also some of that competitive blue noise?
   * https://tellusim.com/improved-blue-noise/
   * https://acko.net/blog/stable-fiddusion/
- ? also round and floor options?
+ 
 
 * Finish bayer
 * Need to dive deeper into Bayer. Can you use it like you are, or do you need different logic? also verify the function works correctly. Can include that in the blog post.
  * could also try with a bayer texture.
  
-* for temporal could also have EMA with neighborhood clamp.
-
 * code generate C++ dx12 too.
 
-* look for TODOs in this file
-
-* checkbox to do per channel dithering?
-
-* golden ratio animated blue noise?
 
 BLOG NOTES:
-* Threshold test as a second blog post!
+
+* Title "Analyzing Animated Dithering Techniques"?
+
+* Threshold test as a second blog post!  Maybe investigate it before writing post?
+
+* talk about how we offset the texture to get the 3 values
+
+* R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset
+
+* do everything with flags_256 to make 512x512 images
+
 * compare round and floor vs something nicely dithered (could maybe even be white noise?)
 * show difference between STBN 1.0 and 1.9
 * show difference between blue2d and a temporal blue noise. if you gauss blur, it's less compelling than if you don't!
+* show what neighborhood clamping does to results (in different noise types)
+
+* feature box noise too
+
+* compare blue to binomial?
 
 * Link to STBN and FAST repos.
  * also the competitive blue noise
 
+* note that doing a random offset each frame is ~ the same as doing a flip book of 2d blue noise.
+* show animating blue noise with golden ratio. flickering in both taa and non taa. can link to that other blog post on animating blue noise.
 
+! Fast BLUE Exp is the best blue noise.
+
+A progression of quality. 1 bit per color channel. 3 bits per pixel.
+round, white, blue, TAA blue
 
 */
