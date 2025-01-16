@@ -187,6 +187,8 @@ Shader Resources:
 /*
 TODO:
 
+* maybe move this into a "Dither" subfolder, and make a new one for "Threshold"
+
 * code generate C++ dx12 too.
 
 Theshold TODO:
@@ -199,6 +201,7 @@ BLOG NOTES:
 
 title image: Evolution of dithering
 * Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
+* show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
 
 * Threshold test as a second blog post!  Maybe investigate it before writing post?
 
