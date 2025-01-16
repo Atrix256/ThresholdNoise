@@ -164,8 +164,12 @@ TODO:
 * Finish bayer
 * Need to dive deeper into Bayer. Can you use it like you are, or do you need different logic? also verify the function works correctly. Can include that in the blog post.
  * could also try with a bayer texture.
+* do rectangular bayer - https://bisqwit.iki.fi/story/howto/dither/jy/.
+ * for N bits, you can make that a rectangle. Make it as square as possible, then make the bayer matrix of that size.
  
 * code generate C++ dx12 too.
+
+* add blue 2d with offsets. so people can see it's the same as flipbook.
 
 
 BLOG NOTES:
@@ -191,6 +195,8 @@ BLOG NOTES:
 
 * Link to STBN and FAST repos.
  * also the competitive blue noise
+  * https://tellusim.com/improved-blue-noise/
+  * https://acko.net/blog/stable-fiddusion/
 
 * note that doing a random offset each frame is ~ the same as doing a flip book of 2d blue noise.
 * show animating blue noise with golden ratio. flickering in both taa and non taa. can link to that other blog post on animating blue noise.
@@ -199,5 +205,12 @@ BLOG NOTES:
 
 A progression of quality. 1 bit per color channel. 3 bits per pixel.
 round, white, blue, TAA blue
+
+* link to blog post about LDS shuffler for offsets
+
+* link to ordered dithering wikipedia :P
+* and this https://bisqwit.iki.fi/story/howto/dither/jy/
+ * Bayer is not fully Bayer, but it's close. I adapted to shader code.
+* 16x16 (4 bits x 4 bits) is the largest bayer matrix you need, it's for for 8 bit color and has 256 different values
 
 */
