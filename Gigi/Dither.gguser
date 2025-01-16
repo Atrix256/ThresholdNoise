@@ -23,7 +23,7 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "12"
+                "value": "13"
             },
             {
                 "name": "SpatialFilter1",
@@ -71,7 +71,7 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "5"
+                "value": "6"
             },
             {
                 "name": "SpatialFilter3",
@@ -95,7 +95,7 @@
             },
             {
                 "name": "NoiseType4",
-                "value": "5"
+                "value": "6"
             },
             {
                 "name": "SpatialFilter4",

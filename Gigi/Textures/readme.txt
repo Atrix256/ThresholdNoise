@@ -8,6 +8,11 @@ STBN_10 and STBN_19 are "spatiotemporal blue noise" textures, made with a sigma 
 https://github.com/NVIDIAGameWorks/SpatiotemporalBlueNoiseSDK
 
 ====================================
+tellusim
+From https://tellusim.com/improved-blue-noise/
+I was having problems with the png from the site, so resaved it in mspaint and that seems to have fixed it.
+
+====================================
 flags.jpg & flags_small.png
 Photo by Sanjay Hona.
 https://unsplash.com/@sssanjaya?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash

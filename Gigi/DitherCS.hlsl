@@ -61,6 +61,19 @@ float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wang
 		case NoiseTypes::FAST_Blue_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::Blue_Tellusim_128_128_64:
+		{
+			// This texture is an 8x8 grid of tiles that are each 128x128.
+			// The time axis goes left to right, then top to bottom.
+			uint z = px.z % 64;
+			uint2 xy = (px.xy + uint2(indexOffsetF*128.0f)) % uint2(128, 128);
+
+			uint2 tilexy = uint2 (z % 8, z / 8);
+
+			uint2 readpx = (tilexy * 128) + xy;
+
+			return ReadNoiseTexture(/*$(Image2D:Textures/tellusim/128x128_l64_s16_resave.png:R8_Unorm:float:false)*/, readpx, float2(0.0f, 0.0f));
+		}
 		case NoiseTypes::R2:
 		{
 			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
@@ -166,7 +179,6 @@ Shader Resources:
 
 TODO:
 * noise types for dithering
-  * https://tellusim.com/improved-blue-noise/
   * https://acko.net/blog/stable-fiddusion/
  
 
