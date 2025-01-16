@@ -316,6 +316,7 @@
                     -117.0,
                     2.0
                 ],
+                "visibility": "Exported",
                 "format": {
                     "format": "RGBA8_Unorm_sRGB"
                 },

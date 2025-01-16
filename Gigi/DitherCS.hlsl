@@ -189,6 +189,9 @@ TODO:
 
 * code generate C++ dx12 too.
 
+Theshold TODO:
+* have a slider that is a threshold level
+* also optional to multiply it by a threshold map
 
 BLOG NOTES:
 
@@ -237,4 +240,7 @@ round, white, blue, TAA blue
  * explain how we divide the number of color bits by 2 to get the x bits for bayer, and the remainder are y bits.
 
 * show separate vs compiled FAST noise results.
+
+* talk about how bayer does pixel swapping to optimize, and so does FAST noise. What is the next step to optimize for?
+
 */

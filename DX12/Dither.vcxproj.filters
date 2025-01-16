@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\Camera.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\CompileShaders_dxc.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\CompileShaders_fxc.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\FileCache.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\TextureCache.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\dxutils.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\tinyexr\deps\miniz\miniz.c">
+      <Filter>DX12Utils\tinyexr\deps\miniz</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_impl_dx12.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\main.cpp" />
+    <ClCompile Include="D:\dev\github\ThresholdNoise\DX12\private\technique.cpp">
+      <Filter>private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\Camera.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\CompileShaders.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\DelayedReleaseTracker.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\FileCache.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\HeapAllocationTracker.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\ParseCSV.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\ReadbackHelper.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\SRGB.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\TextureCache.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\dxutils.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\logfn.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\stb\stb_image.h">
+      <Filter>DX12Utils\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\stb\stb_image_write.h">
+      <Filter>DX12Utils\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\tinyexr\deps\miniz\miniz.h">
+      <Filter>DX12Utils\tinyexr\deps\miniz</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\DX12Utils\tinyexr\tinyexr.h">
+      <Filter>DX12Utils\tinyexr</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEvents.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsCommon.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsLegacy.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3_win.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_impl_dx12.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_impl_win32.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\private\technique.h">
+      <Filter>private</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\public\all.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\public\imgui.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\public\pythoninterface.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\public\technique.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\shaders\DitherCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\shaders\DitherSpatialFilterCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\shaders\DitherTemporalFilterCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\async.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\async_logger-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\async_logger.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\cfg\argv.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\cfg\env.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\cfg\helpers-inl.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\cfg\helpers.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\common-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\common.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\backtracer-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\backtracer.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\circular_q.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\console_globals.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\file_helper-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\file_helper.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\fmt_helper.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\log_msg-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\log_msg.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\log_msg_buffer-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\log_msg_buffer.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\mpmc_blocking_q.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\null_mutex.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\os-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\os.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\periodic_worker-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\periodic_worker.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\registry-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\registry.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\synchronous_factory.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\tcp_client-windows.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\tcp_client.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\thread_pool-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\thread_pool.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\udp_client-windows.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\udp_client.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\details\windows_include.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bin_to_hex.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\args.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\chrono.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\color.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\compile.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\core.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\format-inl.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\format.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\locale.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\os.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\ostream.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\printf.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\ranges.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\std.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\bundled\xchar.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\chrono.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\compile.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\fmt.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\ostr.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\ranges.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\std.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fmt\xchar.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\formatter.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\fwd.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\logger-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\logger.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\pattern_formatter-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\pattern_formatter.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\android_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\ansicolor_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\ansicolor_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\base_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\base_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\basic_file_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\basic_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\daily_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\dist_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\dup_filter_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\hourly_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\mongo_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\msvc_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\null_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\ostream_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\qt_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\ringbuffer_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\rotating_file_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\rotating_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\stdout_color_sinks-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\stdout_color_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\stdout_sinks-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\stdout_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\syslog_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\systemd_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\tcp_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\udp_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\win_eventlog_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\wincolor_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\sinks\wincolor_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\spdlog-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\spdlog.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\stopwatch.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\tweakme.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\dev\github\ThresholdNoise\DX12\spdlog\version.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DX12Utils">
+      <UniqueIdentifier>{4E0AC9CB-801C-35EB-BD8D-146C28CCD0EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\stb">
+      <UniqueIdentifier>{5FDBE70F-31F5-3AAE-ACFA-D28204E9FFBC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr">
+      <UniqueIdentifier>{57F3F7F3-F681-3BEB-86F3-8BE091D00041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr\deps">
+      <UniqueIdentifier>{251AB557-4714-3978-B5EB-79C45B7D7039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr\deps\miniz">
+      <UniqueIdentifier>{89F8CFC1-9C32-38A0-A45F-82AEBF77EC1C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001">
+      <UniqueIdentifier>{05CDA91F-1DAD-3925-9D05-E4A8545338A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001\Include">
+      <UniqueIdentifier>{5FAB8B2D-93B7-3FD2-ABA6-6B6B84D8D345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime">
+      <UniqueIdentifier>{2C3D3B43-6E2D-3678-A277-2F2900F161C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{5D41D01B-0373-3C1F-92F1-55A05D6C7368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="private">
+      <UniqueIdentifier>{86EAB77F-C778-3951-8D4B-441A94084D96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="public">
+      <UniqueIdentifier>{DABECB9B-7A88-3084-9894-147381604F6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{CC847B39-B86B-3AD2-8C7C-8F942560AA9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog">
+      <UniqueIdentifier>{45668D93-57FD-3BBB-9106-9578C6BE2C92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\cfg">
+      <UniqueIdentifier>{488F5E28-9330-3DAC-990F-C2F3FCCE81F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\details">
+      <UniqueIdentifier>{AF31E093-9297-3905-9A78-D86DA39FCA40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\fmt">
+      <UniqueIdentifier>{B679E9A8-3B14-3EAB-9459-660E8F2B7E64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\fmt\bundled">
+      <UniqueIdentifier>{58B37D93-8E2D-3F9F-805C-306D3FDBA418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\sinks">
+      <UniqueIdentifier>{3428050A-BE8A-363C-8D09-85B9B7B2393D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
