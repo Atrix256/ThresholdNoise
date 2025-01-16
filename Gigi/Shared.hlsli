@@ -126,8 +126,8 @@ float Bayer(uint x, uint y, uint XBits, uint YBits)
         y = temp;
     }
 
-    int matrixWidth = 1 << XBits;
-    int matrixHeight = 1 << YBits;
+    int matrixWidth = 1U << XBits;
+    int matrixHeight = 1U << YBits;
     x = x % matrixWidth;
     y = y % matrixHeight;
 

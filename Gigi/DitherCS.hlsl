@@ -58,7 +58,8 @@ float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wang
 		}
 		case NoiseTypes::STBN_10: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_10/stbn_scalar_10_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::STBN_19: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_19/stbn_scalar_19_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
-		case NoiseTypes::FAST_Blue_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::FAST_Blue_Exp_Separate: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::FAST_Blue_Exp_Product: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
 		case NoiseTypes::Blue_Tellusim_128_128_64:
@@ -73,6 +74,14 @@ float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wang
 			uint2 readpx = (tilexy * 128) + xy;
 
 			return ReadNoiseTexture(/*$(Image2D:Textures/tellusim/128x128_l64_s16_resave.png:R8_Unorm:float:false)*/, readpx, float2(0.0f, 0.0f));
+		}
+		case NoiseTypes::Blue_Stable_Fiddusion:
+		{
+			// The texture has 16 tiles vertically, each 64x64
+			uint z = px.z % 16;
+			uint2 xy = (px.xy + uint2(indexOffsetF*128.0f)) % uint2(64, 64);
+			xy.y += z * 64;
+			return ReadNoiseTexture(/*$(Image2D:Textures/Stable_Fiddusion/64x64x16 - S Rolloff - T Cosine - 0.0353.png:R8_Unorm:float:false)*/, xy, float2(0.0f, 0.0f));
 		}
 		case NoiseTypes::R2:
 		{
@@ -176,13 +185,7 @@ Shader Resources:
 */
 
 /*
-
 TODO:
-* noise types for dithering
-  * https://acko.net/blog/stable-fiddusion/
- 
-
-
 
 * code generate C++ dx12 too.
 
@@ -191,13 +194,17 @@ BLOG NOTES:
 
 * Title "Analyzing Animated Dithering Techniques"?
 
+title image: Evolution of dithering
+* Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
+
 * Threshold test as a second blog post!  Maybe investigate it before writing post?
 
-* talk about how we offset the texture to get the 3 values
+* talk about how we offset the texture to get the 3 values for each noise type
 
-* R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset
+* R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset (others don't either)
+* describe each noise type
 
-* do everything with flags_256 to make 512x512 images
+* do everything with flags_256 to make 512x512 images for the post?
 
 * compare round and floor vs something nicely dithered (could maybe even be white noise?)
 * show difference between STBN 1.0 and 1.9
@@ -228,4 +235,6 @@ round, white, blue, TAA blue
  * Bayer is not fully Bayer, but it's close. I adapted to shader code.
 * 16x16 (4 bits x 4 bits) is the largest bayer matrix you need, it's for for 8 bit color and has 256 different values
  * explain how we divide the number of color bits by 2 to get the x bits for bayer, and the remainder are y bits.
+
+* show separate vs compiled FAST noise results.
 */

@@ -23,11 +23,11 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "13"
+                "value": "6"
             },
             {
                 "name": "SpatialFilter1",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam1",
@@ -35,7 +35,7 @@
             },
             {
                 "name": "TemporalFilterAlpha1",
-                "value": "1.000000"
+                "value": "0.100000"
             },
             {
                 "name": "NeighborhoodClamp1",
@@ -43,15 +43,15 @@
             },
             {
                 "name": "Animate1",
-                "value": "false"
+                "value": "true"
             },
             {
                 "name": "NoiseType2",
-                "value": "0"
+                "value": "7"
             },
             {
                 "name": "SpatialFilter2",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam2",
@@ -59,7 +59,7 @@
             },
             {
                 "name": "TemporalFilterAlpha2",
-                "value": "1.000000"
+                "value": "0.100000"
             },
             {
                 "name": "NeighborhoodClamp2",
@@ -67,23 +67,23 @@
             },
             {
                 "name": "Animate2",
-                "value": "false"
+                "value": "true"
             },
             {
                 "name": "NoiseType3",
-                "value": "6"
+                "value": "10"
             },
             {
                 "name": "SpatialFilter3",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam3",
-                "value": "1.000000"
+                "value": "2.000000"
             },
             {
                 "name": "TemporalFilterAlpha3",
-                "value": "1.000000"
+                "value": "0.100000"
             },
             {
                 "name": "NeighborhoodClamp3",
@@ -91,19 +91,19 @@
             },
             {
                 "name": "Animate3",
-                "value": "false"
+                "value": "true"
             },
             {
                 "name": "NoiseType4",
-                "value": "6"
+                "value": "9"
             },
             {
                 "name": "SpatialFilter4",
-                "value": "0"
+                "value": "2"
             },
             {
                 "name": "SpatialFilterParam4",
-                "value": "1.000000"
+                "value": "2.000000"
             },
             {
                 "name": "TemporalFilterAlpha4",

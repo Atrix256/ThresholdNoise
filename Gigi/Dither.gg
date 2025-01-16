@@ -474,7 +474,10 @@
                     "label": "STBN_19"
                 },
                 {
-                    "label": "FAST_Blue_Exp"
+                    "label": "FAST_Blue_Exp_Separate"
+                },
+                {
+                    "label": "FAST_Blue_Exp_Product"
                 },
                 {
                     "label": "FAST_Binomial3x3_Exp"
@@ -484,6 +487,9 @@
                 },
                 {
                     "label": "Blue_Tellusim_128_128_64"
+                },
+                {
+                    "label": "Blue_Stable_Fiddusion"
                 },
                 {
                     "label": "R2"
