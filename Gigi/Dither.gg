@@ -201,7 +201,8 @@
         {
             "name": "FrameIndex",
             "type": "Int",
-            "dflt": "0"
+            "dflt": "0",
+            "transient": true
         }
     ],
     "shaders": [
@@ -458,10 +459,13 @@
                     "label": "White"
                 },
                 {
-                    "label": "Blue2D"
+                    "label": "Blue2D Offset"
                 },
                 {
-                    "label": "Blue2D + Golden Ratio"
+                    "label": "Blue2D Flipbook"
+                },
+                {
+                    "label": "Blue2D Golden Ratio"
                 },
                 {
                     "label": "STBN_10"

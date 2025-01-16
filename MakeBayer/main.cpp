@@ -58,39 +58,52 @@ uint Bayer(uint x, uint y, uint XBits, uint YBits)
 	return value;
 }
 
-int main(int argc, char** argv)
+void MakeBayerMatrix(int matrixBitsX, int matrixBitsY)
 {
-	static const uint c_matrixBitsX = 4;
-	static const uint c_matrixBitsY = 4;
+	const uint c_matrixWidth = 1 << matrixBitsX;
+	const uint c_matrixHeight = 1 << matrixBitsY;
 
-	static const uint c_matrixWidth = 1 << c_matrixBitsX;
-	static const uint c_matrixHeight = 1 << c_matrixBitsY;
-
-	static const uint c_matrixEntries = c_matrixWidth * c_matrixHeight;
+	const uint c_matrixEntries = c_matrixWidth * c_matrixHeight;
 
 	std::vector<unsigned char> pixels(c_matrixEntries);
 	unsigned char* pixel = pixels.data();
 
-	for (uint iy = 0; iy < c_matrixWidth; ++iy)
+	printf("%i x %i\n", c_matrixWidth, c_matrixHeight);
+
+	for (uint iy = 0; iy < c_matrixHeight; ++iy)
 	{
 		printf("[ ");
-		for (uint ix = 0; ix < c_matrixHeight; ++ix)
+		for (uint ix = 0; ix < c_matrixWidth; ++ix)
 		{
-			uint bayerU = Bayer(ix, iy, c_matrixBitsX, c_matrixBitsY);
+			uint bayerU = Bayer(ix, iy, matrixBitsX, matrixBitsY);
+
 			float bayerF = float(bayerU) / float(c_matrixEntries);
-			printf("%0.2f ", bayerF);
+			printf("%u ", bayerU);
+			//printf("%0.2f ", bayerF);
 
 			pixel[0] = (unsigned char)Clamp(bayerF * 256.0f, 0.0f, 255.0f);
 			pixel++;
 		}
 		printf("]\n");
 	}
-
-	_mkdir("out");
+	printf("\n");
 
 	char fileName[1024];
 	sprintf(fileName, "out/Bayer_%u_%u.png", c_matrixWidth, c_matrixHeight);
 	stbi_write_png(fileName, c_matrixWidth, c_matrixHeight, 1, pixels.data(), 0);
+}
+
+int main(int argc, char** argv)
+{
+	_mkdir("out");
+
+	for (int ix = 0; ix <= 4; ++ix)
+	{
+		for (int iy = ix; iy <= 4; ++iy)
+		{
+			MakeBayerMatrix(ix, iy);
+		}
+	}
 
 	return 0;
 }

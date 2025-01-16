@@ -23,7 +23,7 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "11"
+                "value": "12"
             },
             {
                 "name": "SpatialFilter1",
@@ -116,10 +116,6 @@
             {
                 "name": "Animate4",
                 "value": "true"
-            },
-            {
-                "name": "FrameIndex",
-                "value": "203624"
             }
         ]
     }

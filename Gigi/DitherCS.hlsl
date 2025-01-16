@@ -43,8 +43,13 @@ float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wang
 	switch (noiseType)
 	{
 		case NoiseTypes::White: return wang_hash_float01(wangStatePixel);
-		case NoiseTypes::Blue2D: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
-		case NoiseTypes::Blue2D_plus_Golden_Ratio:
+		case NoiseTypes::Blue2D_Offset:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return ReadNoiseTexture(/*$(Image2D:Textures/FAST_Blue2D/blue2d_0.png:R8_Unorm:float:false)*/, px.xy, indexOffsetF + frameOffsetF);
+		}
+		case NoiseTypes::Blue2D_Flipbook: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF);
+		case NoiseTypes::Blue2D_Golden_Ratio:
 		{
 			float value = ReadNoiseTexture(/*$(Image2D:Textures/FAST_Blue2D/blue2d_0.png:R8_Unorm:float:false)*/, px.xy, indexOffsetF);
 			int frameIndex = px.z % 64;
@@ -70,7 +75,11 @@ float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wang
 		case NoiseTypes::Bayer:
 		{
 			 float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
-			return Bayer(px.x + int(frameOffsetF.x * 4.0f), px.y + int(frameOffsetF.y * 4.0f), 4);
+
+			int bitsX = /*$(Variable:BitsPerColorChannel)*/ / 2;
+			int bitsY = /*$(Variable:BitsPerColorChannel)*/ - bitsX;
+
+			return Bayer(px.x + int(frameOffsetF.x * 4.0f), px.y + int(frameOffsetF.y * 4.0f), bitsX, bitsY);
 		}
 		case NoiseTypes::Round:
 		{
@@ -161,15 +170,9 @@ TODO:
   * https://acko.net/blog/stable-fiddusion/
  
 
-* Finish bayer
-* Need to dive deeper into Bayer. Can you use it like you are, or do you need different logic? also verify the function works correctly. Can include that in the blog post.
- * could also try with a bayer texture.
-* do rectangular bayer - https://bisqwit.iki.fi/story/howto/dither/jy/.
- * for N bits, you can make that a rectangle. Make it as square as possible, then make the bayer matrix of that size.
- 
-* code generate C++ dx12 too.
 
-* add blue 2d with offsets. so people can see it's the same as flipbook.
+
+* code generate C++ dx12 too.
 
 
 BLOG NOTES:
@@ -212,5 +215,5 @@ round, white, blue, TAA blue
 * and this https://bisqwit.iki.fi/story/howto/dither/jy/
  * Bayer is not fully Bayer, but it's close. I adapted to shader code.
 * 16x16 (4 bits x 4 bits) is the largest bayer matrix you need, it's for for 8 bit color and has 256 different values
-
+ * explain how we divide the number of color bits by 2 to get the x bits for bayer, and the remainder are y bits.
 */
