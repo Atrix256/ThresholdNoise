@@ -12,3 +12,4 @@ RelWithDebInfo/
 *.vcxproj
 *.vcxproj.filters
 *.sln
+imgui.ini
