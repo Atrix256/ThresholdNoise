@@ -1,0 +1,645 @@
+{
+    "$schema": "gigischema.json",
+    "version": "0.99b",
+    "variables": [
+        {
+            "name": "Threshold",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UISettings": {
+                "UIHint": "Slider",
+                "min": "0.0f",
+                "max": "1.0f"
+            }
+        },
+        {
+            "name": "BrightnessMultiplier",
+            "comment": "Stippling can dim the result by adding dark pixels. This can brighten it.",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User"
+        },
+        {
+            "name": "Auto Brightness",
+            "comment": "if true, sets BrightnessMultiplier to 1/Threshold",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User"
+        },
+        {
+            "name": "Animate",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User"
+        },
+        {
+            "name": "NoiseType1",
+            "comment": "Upper Left",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "SpatialFilter1",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "SpatialFilterParam1",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "TemporalFilterAlpha1",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "NeighborhoodClamp1",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "Animate1",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
+            "name": "NoiseType2",
+            "comment": "Upper Right",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "SpatialFilter2",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "SpatialFilterParam2",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "TemporalFilterAlpha2",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "NeighborhoodClamp2",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "Animate2",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "NoiseType3",
+            "comment": "Lower Left",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "SpatialFilter3",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "SpatialFilterParam3",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "TemporalFilterAlpha3",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "NeighborhoodClamp3",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "Animate3",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
+            "name": "NoiseType4",
+            "comment": "Lower Right",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "NoiseTypes",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "SpatialFilter4",
+            "type": "Int",
+            "visibility": "User",
+            "Enum": "SpatialFilters",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "SpatialFilterParam4",
+            "comment": "Radius for box, sigma for gauss",
+            "type": "Float",
+            "dflt": "1",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "TemporalFilterAlpha4",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "1.0f",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "NeighborhoodClamp4",
+            "type": "Bool",
+            "dflt": "false",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "Animate4",
+            "comment": "If false, does not animate, even if the global Animate variable is true",
+            "type": "Bool",
+            "dflt": "true",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "FrameIndex",
+            "type": "Int",
+            "dflt": "0",
+            "transient": true
+        }
+    ],
+    "shaders": [
+        {
+            "name": "Threshold",
+            "fileName": "ThresholdCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                },
+                {
+                    "name": "ThresholdMap",
+                    "type": "Texture",
+                    "access": "SRV"
+                }
+            ],
+            "samplers": [
+                {
+                    "name": "linearWrapSampler"
+                }
+            ]
+        },
+        {
+            "name": "SpatialFilter",
+            "fileName": "SpatialFilterCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        },
+        {
+            "name": "TemporalFilter",
+            "fileName": "TemporalFilterCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
+                    "type": "Texture",
+                    "access": "UAV"
+                },
+                {
+                    "name": "TemporalAccum",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        },
+        {
+            "name": "AdjustBrightness",
+            "fileName": "AdjustBrightnessCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Color",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        }
+    ],
+    "fileCopies": [
+        {
+            "fileName": "Shared.hlsli",
+            "type": "Shader"
+        }
+    ],
+    "nodes": [
+        {
+            "actionComputeShader": {
+                "name": "Threshold",
+                "editorPos": [
+                    -11.0,
+                    -49.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "Color",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "Input",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "ThresholdMap",
+                        "dstNode": "ThresholdMap",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "Threshold"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Color",
+                "editorPos": [
+                    -133.0,
+                    -30.0
+                ],
+                "visibility": "Exported",
+                "format": {
+                    "format": "RGBA8_Unorm_sRGB"
+                },
+                "size": {
+                    "node": {
+                        "name": "Input"
+                    },
+                    "multiply": [
+                        2,
+                        2,
+                        1
+                    ]
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Input",
+                "editorPos": [
+                    -133.0,
+                    -78.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Temp",
+                "editorPos": [
+                    27.0,
+                    66.0
+                ],
+                "format": {
+                    "format": "RGBA8_Unorm_sRGB"
+                },
+                "size": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "SpatialFilter",
+                "editorPos": [
+                    187.0,
+                    -14.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "Threshold",
+                        "dstPin": "Output"
+                    },
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "Temp",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "SpatialFilter"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "TemporalAccum",
+                "editorPos": [
+                    199.0,
+                    82.0
+                ],
+                "transient": false,
+                "format": {
+                    "format": "RGBA32_Float"
+                },
+                "size": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "TemporalFilter",
+                "editorPos": [
+                    373.0,
+                    -14.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "SpatialFilter",
+                        "dstPin": "Output"
+                    },
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "SpatialFilter",
+                        "dstPin": "Input"
+                    },
+                    {
+                        "srcPin": "TemporalAccum",
+                        "dstNode": "TemporalAccum",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "TemporalFilter"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "AdjustBrightness",
+                "editorPos": [
+                    581.0,
+                    2.0
+                ],
+                "linkProperties": [
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Color",
+                        "dstNode": "TemporalFilter",
+                        "dstPin": "Output"
+                    }
+                ],
+                "shader": {
+                    "name": "AdjustBrightness"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "ThresholdMap",
+                "editorPos": [
+                    -159.0,
+                    18.0
+                ],
+                "visibility": "Imported"
+            }
+        }
+    ],
+    "enums": [
+        {
+            "name": "NoiseTypes",
+            "items": [
+                {
+                    "label": "White"
+                },
+                {
+                    "label": "Blue2D Offset"
+                },
+                {
+                    "label": "Blue2D Flipbook"
+                },
+                {
+                    "label": "Blue2D Golden Ratio"
+                },
+                {
+                    "label": "STBN_10"
+                },
+                {
+                    "label": "STBN_19"
+                },
+                {
+                    "label": "FAST_Blue_Exp_Separate"
+                },
+                {
+                    "label": "FAST_Blue_Exp_Product"
+                },
+                {
+                    "label": "FAST_Binomial3x3_Exp"
+                },
+                {
+                    "label": "FAST_Box3x3_Exp"
+                },
+                {
+                    "label": "Blue_Tellusim_128_128_64"
+                },
+                {
+                    "label": "Blue_Stable_Fiddusion"
+                },
+                {
+                    "label": "R2"
+                },
+                {
+                    "label": "IGN"
+                },
+                {
+                    "label": "Bayer4"
+                },
+                {
+                    "label": "Bayer16"
+                },
+                {
+                    "label": "Bayer64"
+                },
+                {
+                    "label": "Bayer256"
+                },
+                {
+                    "label": "Round"
+                },
+                {
+                    "label": "Floor"
+                }
+            ]
+        },
+        {
+            "name": "SpatialFilters",
+            "items": [
+                {
+                    "label": "None"
+                },
+                {
+                    "label": "Box"
+                },
+                {
+                    "label": "Gauss"
+                }
+            ]
+        }
+    ],
+    "setVars": [
+        {
+            "destination": {
+                "name": "FrameIndex"
+            },
+            "AVar": {
+                "name": "FrameIndex"
+            },
+            "BLiteral": "1",
+            "condition": {
+                "variable1": "Animate",
+                "comparison": "IsTrue"
+            }
+        },
+        {
+            "destination": {
+                "name": "BrightnessMultiplier"
+            },
+            "ALiteral": "1.0f",
+            "op": "Divide",
+            "BVar": {
+                "name": "Threshold"
+            },
+            "condition": {
+                "variable1": "Auto Brightness",
+                "comparison": "IsTrue"
+            }
+        }
+    ]
+}

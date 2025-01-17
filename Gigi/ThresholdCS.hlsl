@@ -1,0 +1,245 @@
+// Unnamed technique, shader Threshold
+/*$(ShaderResources)*/
+
+#include "Shared.hlsli"
+
+float ReadNoiseTexture(Texture2DArray<float> tex, uint3 px, float2 offsetF)
+{
+	uint3 noiseDims;
+	tex.GetDimensions(noiseDims.x, noiseDims.y, noiseDims.z);
+	int3 readPos;
+	readPos.xy = (px.xy + int2(offsetF * float2(noiseDims.xy)));
+	readPos.z = px.z;
+	return tex[readPos % noiseDims];
+}
+
+float ReadNoiseTexture(Texture2D<float> tex, uint2 px, float2 offsetF)
+{
+	uint2 noiseDims;
+	tex.GetDimensions(noiseDims.x, noiseDims.y);
+	int2 readPos = (px + int2(offsetF * float2(noiseDims.xy)));
+	return tex[readPos % noiseDims];
+}
+
+float GetRng(uint3 px, int noiseType, inout uint wangStatePixel, inout uint wangStateGlobal)
+{
+	switch (noiseType)
+	{
+		case NoiseTypes::White: return wang_hash_float01(wangStatePixel);
+		case NoiseTypes::Blue2D_Offset:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return ReadNoiseTexture(/*$(Image2D:Textures/FAST_Blue2D/blue2d_0.png:R8_Unorm:float:false)*/, px.xy, frameOffsetF);
+		}
+		case NoiseTypes::Blue2D_Flipbook: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue2D/blue2d_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::Blue2D_Golden_Ratio:
+		{
+			float value = ReadNoiseTexture(/*$(Image2D:Textures/FAST_Blue2D/blue2d_0.png:R8_Unorm:float:false)*/, px.xy, float2(0.0f, 0.0f));
+			int frameIndex = px.z % 64;
+			value = frac(value + frameIndex * c_goldenRatioConjugate);
+			return value;
+		}
+		case NoiseTypes::STBN_10: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_10/stbn_scalar_10_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::STBN_19: return ReadNoiseTexture(/*$(Image2DArray:Textures/STBN_19/stbn_scalar_19_2Dx1Dx1D_128x128x32x1_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::FAST_Blue_Exp_Separate: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::FAST_Blue_Exp_Product: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, float2(0.0f, 0.0f));
+		case NoiseTypes::Blue_Tellusim_128_128_64:
+		{
+			// This texture is an 8x8 grid of tiles that are each 128x128.
+			// The time axis goes left to right, then top to bottom.
+			uint z = px.z % 64;
+			uint2 xy = (px.xy) % uint2(128, 128);
+
+			uint2 tilexy = uint2 (z % 8, z / 8);
+
+			uint2 readpx = (tilexy * 128) + xy;
+
+			return ReadNoiseTexture(/*$(Image2D:Textures/tellusim/128x128_l64_s16_resave.png:R8_Unorm:float:false)*/, readpx, float2(0.0f, 0.0f));
+		}
+		case NoiseTypes::Blue_Stable_Fiddusion:
+		{
+			// The texture has 16 tiles vertically, each 64x64
+			uint z = px.z % 16;
+			uint2 xy = (px.xy) % uint2(64, 64);
+			xy.y += z * 64;
+			return ReadNoiseTexture(/*$(Image2D:Textures/Stable_Fiddusion/64x64x16 - S Rolloff - T Cosine - 0.0353.png:R8_Unorm:float:false)*/, xy, float2(0.0f, 0.0f));
+		}
+		case NoiseTypes::R2:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return R2LDG(px.xy + int2((frameOffsetF) * 512.0f));
+		}
+		case NoiseTypes::IGN:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+
+			return IGNLDG(int2(px.xy + int2((frameOffsetF) * 512.0f)));
+		}
+		case NoiseTypes::Bayer4:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return Bayer(px.x + int(frameOffsetF.x * 2.0f), px.y + int(frameOffsetF.y * 2.0f), 1, 1);
+		}
+		case NoiseTypes::Bayer16:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return Bayer(px.x + int(frameOffsetF.x * 4.0f), px.y + int(frameOffsetF.y * 4.0f), 2, 2);
+		}
+		case NoiseTypes::Bayer64:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return Bayer(px.x + int(frameOffsetF.x * 8.0f), px.y + int(frameOffsetF.y * 8.0f), 3, 3);
+		}
+		case NoiseTypes::Bayer256:
+		{
+			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			return Bayer(px.x + int(frameOffsetF.x * 16.0f), px.y + int(frameOffsetF.y * 16.0f), 4, 4);
+		}
+		case NoiseTypes::Round:
+		{
+			return 0.5f;
+		}
+		case NoiseTypes::Floor:
+		{
+			return 0.0f;
+		}
+	}
+	return 0.0f;
+}
+
+/*$(_compute:csmain)*/(uint3 DTid : SV_DispatchThreadID)
+{
+	// Get the color of the pixel
+	uint2 dims;
+	Input.GetDimensions(dims.x, dims.y);
+	uint3 px = uint3(DTid.xy, /*$(Variable:FrameIndex)*/);
+	float4 color = Input[px.xy % dims];
+
+	// Get the parameters for whatever quadrant we are in
+	int noiseType = 0;
+	bool animate = true;
+	if (px.x <= dims.x)
+	{
+		if (px.y <= dims.y)
+		{
+			noiseType = /*$(Variable:NoiseType1)*/;
+			animate = /*$(Variable:Animate1)*/;
+		}
+		else
+		{
+			noiseType = /*$(Variable:NoiseType3)*/;
+			animate = /*$(Variable:Animate3)*/;
+		}
+	}
+	else
+	{
+		if (px.y <= dims.y)
+		{
+			noiseType = /*$(Variable:NoiseType2)*/;
+			animate = /*$(Variable:Animate2)*/;
+		}
+		else
+		{
+			noiseType = /*$(Variable:NoiseType4)*/;
+			animate = /*$(Variable:Animate4)*/;
+		}
+	}
+
+	if (!animate)
+		px.z = 0;
+
+	// Initialize wang hash
+	uint wangStatePixel = wang_hash_init(px);
+	uint wangStateGlobal = wang_hash_init(uint3(1337, 435, px.z));
+
+	// threshold
+	float rng = GetRng(px, noiseType, wangStatePixel, wangStateGlobal);
+
+	float threshold = /*$(Variable:Threshold)*/;
+
+	float2 uv = (float2(px % dims) + 0.5f) / float2(dims);
+	threshold *= ThresholdMap.SampleLevel(linearWrapSampler, uv, 0).r;
+
+	if (rng >= threshold && threshold < 1.0f)
+		color = float4(0.0f, 0.0f, 0.0f, 1.0f);
+
+	// Write out result
+	color.rgb = LinearToSRGB(color.rgb);
+	Output[px.xy] = color;
+}
+
+/*
+Shader Resources:
+	Texture Input (as SRV)
+	Texture Output (as UAV)
+	Texture ThresholdMap (as SRV)
+*/
+
+
+/*
+TODO:
+
+* Make sure c++ dx12 generated code is up to date for both
+
+
+Threshold blog post notes:
+* auto brightness to make up for pixels being black.
+* dithering vs thresholding: dithering can reduce bit count of the colors. thresholding can eliminate having to do logic for certain colors.
+* a nice demo: threshold down to 0.018. AKA 2% of the pixels rendered.  0.1 temporal filter. gauss 4.0 spatial filter. FAST looks pretty darn decent! looks so crazy filtered vs unfiltered. sort of less impressive when you look at the dots without auto brightness. still impressive though.
+ * should do it that way. show dots without auto brightness and show filtered with auto brightness.
+
+
+Dither BLOG NOTES:
+
+* Title "Analyzing Animated Dithering Techniques"?
+
+title image: Evolution of dithering
+* Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
+* show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
+
+* Threshold test as a second blog post!  Maybe investigate it before writing post?
+
+* talk about how we offset the texture to get the 3 values for each noise type
+
+* R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset (others don't either)
+* describe each noise type
+
+* do everything with flags_256 to make 512x512 images for the post?
+
+* compare round and floor vs something nicely dithered (could maybe even be white noise?)
+* show difference between STBN 1.0 and 1.9
+* show difference between blue2d and a temporal blue noise. if you gauss blur, it's less compelling than if you don't!
+* show what neighborhood clamping does to results (in different noise types)
+
+* feature box noise too
+
+* compare blue to binomial?
+
+* Link to STBN and FAST repos.
+ * also the competitive blue noise
+  * https://tellusim.com/improved-blue-noise/
+  * https://acko.net/blog/stable-fiddusion/
+
+* note that doing a random offset each frame is ~ the same as doing a flip book of 2d blue noise.
+* show animating blue noise with golden ratio. flickering in both taa and non taa. can link to that other blog post on animating blue noise.
+
+! Fast BLUE Exp is the best blue noise.
+
+A progression of quality. 1 bit per color channel. 3 bits per pixel.
+round, white, blue, TAA blue
+
+* link to blog post about LDS shuffler for offsets
+
+* link to ordered dithering wikipedia :P
+* and this https://bisqwit.iki.fi/story/howto/dither/jy/
+ * Bayer is not fully Bayer, but it's close. I adapted to shader code.
+* 16x16 (4 bits x 4 bits) is the largest bayer matrix you need, it's for for 8 bit color and has 256 different values
+ * explain how we divide the number of color bits by 2 to get the x bits for bayer, and the remainder are y bits.
+
+* show separate vs compiled FAST noise results.
+
+* talk about how bayer does pixel swapping to optimize, and so does FAST noise. What is the next step to optimize for?
+
+*/

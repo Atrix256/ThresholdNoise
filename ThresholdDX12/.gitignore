@@ -1,0 +1,15 @@
+Dither.dir/
+Dither.exe
+Dither.exp
+Dither.lib
+Dither.pdb
+*.vcxproj.user
+Debug/
+MinSizeRel/
+Release/
+RelWithDebInfo/
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.sln
+imgui.ini
