@@ -1,4 +1,4 @@
-// Unnamed technique, shader DitherSpatialFilter
+// Unnamed technique, shader SpatialFilter
 
 
 struct NoiseTypes
@@ -29,7 +29,7 @@ struct SpatialFilters
     static const int Gauss = 2;
 };
 
-struct Struct__DitherSpatialFilterCB
+struct Struct__SpatialFilterCB
 {
     int SpatialFilter1;
     int SpatialFilter2;
@@ -43,7 +43,7 @@ struct Struct__DitherSpatialFilterCB
 
 Texture2D<float4> Input : register(t0);
 RWTexture2D<float4> Output : register(u0);
-ConstantBuffer<Struct__DitherSpatialFilterCB> _DitherSpatialFilterCB : register(b0);
+ConstantBuffer<Struct__SpatialFilterCB> _SpatialFilterCB : register(b0);
 
 #line 2
 
@@ -68,26 +68,26 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 	{
 		if (px.y <= dims.y)
 		{
-			spatialFilterType = _DitherSpatialFilterCB.SpatialFilter1;
-			spatialFilterParam = _DitherSpatialFilterCB.SpatialFilterParam1;
+			spatialFilterType = _SpatialFilterCB.SpatialFilter1;
+			spatialFilterParam = _SpatialFilterCB.SpatialFilterParam1;
 		}
 		else
 		{
-			spatialFilterType = _DitherSpatialFilterCB.SpatialFilter3;
-			spatialFilterParam = _DitherSpatialFilterCB.SpatialFilterParam3;
+			spatialFilterType = _SpatialFilterCB.SpatialFilter3;
+			spatialFilterParam = _SpatialFilterCB.SpatialFilterParam3;
 		}
 	}
 	else
 	{
 		if (px.y <= dims.y)
 		{
-			spatialFilterType = _DitherSpatialFilterCB.SpatialFilter2;
-			spatialFilterParam = _DitherSpatialFilterCB.SpatialFilterParam2;
+			spatialFilterType = _SpatialFilterCB.SpatialFilter2;
+			spatialFilterParam = _SpatialFilterCB.SpatialFilterParam2;
 		}
 		else
 		{
-			spatialFilterType = _DitherSpatialFilterCB.SpatialFilter4;
-			spatialFilterParam = _DitherSpatialFilterCB.SpatialFilterParam4;
+			spatialFilterType = _SpatialFilterCB.SpatialFilter4;
+			spatialFilterParam = _SpatialFilterCB.SpatialFilterParam4;
 		}
 	}
 

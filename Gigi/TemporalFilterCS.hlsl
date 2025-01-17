@@ -1,4 +1,4 @@
-// Unnamed technique, shader DitherTemporalFilter
+// Unnamed technique, shader TemporalFilter
 /*$(ShaderResources)*/
 
 #include "Shared.hlsli"

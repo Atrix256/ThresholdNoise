@@ -1,4 +1,4 @@
-// Unnamed technique, shader DitherSpatialFilter
+// Unnamed technique, shader SpatialFilter
 /*$(ShaderResources)*/
 
 #include "Shared.hlsli"

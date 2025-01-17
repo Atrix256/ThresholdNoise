@@ -1,4 +1,4 @@
-// Unnamed technique, shader DitherTemporalFilter
+// Unnamed technique, shader TemporalFilter
 
 
 struct NoiseTypes
@@ -29,7 +29,7 @@ struct SpatialFilters
     static const int Gauss = 2;
 };
 
-struct Struct__DitherTemporalFilterCB
+struct Struct__TemporalFilterCB
 {
     uint NeighborhoodClamp1;
     uint NeighborhoodClamp2;
@@ -44,7 +44,7 @@ struct Struct__DitherTemporalFilterCB
 Texture2D<float4> Input : register(t0);
 RWTexture2D<float4> Output : register(u0);
 RWTexture2D<float4> TemporalAccum : register(u1);
-ConstantBuffer<Struct__DitherTemporalFilterCB> _DitherTemporalFilterCB : register(b0);
+ConstantBuffer<Struct__TemporalFilterCB> _TemporalFilterCB : register(b0);
 
 #line 2
 
@@ -69,26 +69,26 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 	{
 		if (px.y <= dims.y)
 		{
-			temporalAlpha = _DitherTemporalFilterCB.TemporalFilterAlpha1;
-			neighborhoodClamp = _DitherTemporalFilterCB.NeighborhoodClamp1;
+			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha1;
+			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp1;
 		}
 		else
 		{
-			temporalAlpha = _DitherTemporalFilterCB.TemporalFilterAlpha3;
-			neighborhoodClamp = _DitherTemporalFilterCB.NeighborhoodClamp3;
+			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha3;
+			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp3;
 		}
 	}
 	else
 	{
 		if (px.y <= dims.y)
 		{
-			temporalAlpha = _DitherTemporalFilterCB.TemporalFilterAlpha2;
-			neighborhoodClamp = _DitherTemporalFilterCB.NeighborhoodClamp2;
+			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha2;
+			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp2;
 		}
 		else
 		{
-			temporalAlpha = _DitherTemporalFilterCB.TemporalFilterAlpha4;
-			neighborhoodClamp = _DitherTemporalFilterCB.NeighborhoodClamp4;
+			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha4;
+			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp4;
 		}
 	}
 

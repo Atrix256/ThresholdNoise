@@ -107,7 +107,7 @@ namespace Dither
             float2 _padding0 = {0.0f,0.0f};  // Padding
         };
 
-        struct Struct__DitherSpatialFilterCB
+        struct Struct__SpatialFilterCB
         {
             int SpatialFilter1 = (int)SpatialFilters::None;
             int SpatialFilter2 = (int)SpatialFilters::None;
@@ -119,7 +119,7 @@ namespace Dither
             float SpatialFilterParam4 = 1.000000f;  // Radius for box, sigma for gauss
         };
 
-        struct Struct__DitherTemporalFilterCB
+        struct Struct__TemporalFilterCB
         {
             unsigned int NeighborhoodClamp1 = false;
             unsigned int NeighborhoodClamp2 = false;
@@ -224,14 +224,14 @@ namespace Dither
         static ID3D12PipelineState* computeShader_Dither_pso;
         static ID3D12RootSignature* computeShader_Dither_rootSig;
 
-        Struct__DitherSpatialFilterCB constantBuffer__DitherSpatialFilterCB_cpu;
-        ID3D12Resource* constantBuffer__DitherSpatialFilterCB = nullptr;
+        Struct__SpatialFilterCB constantBuffer__SpatialFilterCB_cpu;
+        ID3D12Resource* constantBuffer__SpatialFilterCB = nullptr;
 
         static ID3D12PipelineState* computeShader_SpatialFilter_pso;
         static ID3D12RootSignature* computeShader_SpatialFilter_rootSig;
 
-        Struct__DitherTemporalFilterCB constantBuffer__DitherTemporalFilterCB_cpu;
-        ID3D12Resource* constantBuffer__DitherTemporalFilterCB = nullptr;
+        Struct__TemporalFilterCB constantBuffer__TemporalFilterCB_cpu;
+        ID3D12Resource* constantBuffer__TemporalFilterCB = nullptr;
 
         static ID3D12PipelineState* computeShader_TemporalFilter_pso;
         static ID3D12RootSignature* computeShader_TemporalFilter_rootSig;

@@ -196,7 +196,7 @@ namespace Dither
             ranges[1].RegisterSpace = 0;
             ranges[1].OffsetInDescriptorsFromTableStart = 1;
 
-            // _DitherSpatialFilterCB
+            // _SpatialFilterCB
             ranges[2].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
             ranges[2].NumDescriptors = 1;
             ranges[2].BaseShaderRegister = 0;
@@ -214,7 +214,7 @@ namespace Dither
                 { nullptr, nullptr }
             };
 
-            if(!DX12Utils::MakeComputePSO_DXC(device, Context::s_techniqueLocation.c_str(), L"shaders/DitherSpatialFilterCS.hlsl", "csmain", "cs_6_1", defines,
+            if(!DX12Utils::MakeComputePSO_DXC(device, Context::s_techniqueLocation.c_str(), L"shaders/SpatialFilterCS.hlsl", "csmain", "cs_6_1", defines,
                ContextInternal::computeShader_SpatialFilter_rootSig, &ContextInternal::computeShader_SpatialFilter_pso, c_debugShaders, (c_debugNames ? L"SpatialFilter" : nullptr), Context::LogFn))
                 return false;
         }
@@ -246,7 +246,7 @@ namespace Dither
             ranges[2].RegisterSpace = 0;
             ranges[2].OffsetInDescriptorsFromTableStart = 2;
 
-            // _DitherTemporalFilterCB
+            // _TemporalFilterCB
             ranges[3].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
             ranges[3].NumDescriptors = 1;
             ranges[3].BaseShaderRegister = 0;
@@ -264,7 +264,7 @@ namespace Dither
                 { nullptr, nullptr }
             };
 
-            if(!DX12Utils::MakeComputePSO_DXC(device, Context::s_techniqueLocation.c_str(), L"shaders/DitherTemporalFilterCS.hlsl", "csmain", "cs_6_1", defines,
+            if(!DX12Utils::MakeComputePSO_DXC(device, Context::s_techniqueLocation.c_str(), L"shaders/TemporalFilterCS.hlsl", "csmain", "cs_6_1", defines,
                ContextInternal::computeShader_TemporalFilter_rootSig, &ContextInternal::computeShader_TemporalFilter_pso, c_debugShaders, (c_debugNames ? L"TemporalFilter" : nullptr), Context::LogFn))
                 return false;
         }
@@ -991,18 +991,18 @@ namespace Dither
             m_internal.constantBuffer__DitherCB = nullptr;
         }
 
-        // _DitherSpatialFilterCB
-        if (m_internal.constantBuffer__DitherSpatialFilterCB)
+        // _SpatialFilterCB
+        if (m_internal.constantBuffer__SpatialFilterCB)
         {
-            s_delayedRelease.Add(m_internal.constantBuffer__DitherSpatialFilterCB);
-            m_internal.constantBuffer__DitherSpatialFilterCB = nullptr;
+            s_delayedRelease.Add(m_internal.constantBuffer__SpatialFilterCB);
+            m_internal.constantBuffer__SpatialFilterCB = nullptr;
         }
 
-        // _DitherTemporalFilterCB
-        if (m_internal.constantBuffer__DitherTemporalFilterCB)
+        // _TemporalFilterCB
+        if (m_internal.constantBuffer__TemporalFilterCB)
         {
-            s_delayedRelease.Add(m_internal.constantBuffer__DitherTemporalFilterCB);
-            m_internal.constantBuffer__DitherTemporalFilterCB = nullptr;
+            s_delayedRelease.Add(m_internal.constantBuffer__TemporalFilterCB);
+            m_internal.constantBuffer__TemporalFilterCB = nullptr;
         }
     }
 
@@ -1154,17 +1154,17 @@ namespace Dither
             }
         }
 
-        // Shader Constants: _DitherSpatialFilterCB
+        // Shader Constants: _SpatialFilterCB
         {
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilter1 = (int)context->m_input.variable_SpatialFilter1;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilter2 = (int)context->m_input.variable_SpatialFilter2;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilter3 = (int)context->m_input.variable_SpatialFilter3;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilter4 = (int)context->m_input.variable_SpatialFilter4;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilterParam1 = context->m_input.variable_SpatialFilterParam1;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilterParam2 = context->m_input.variable_SpatialFilterParam2;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilterParam3 = context->m_input.variable_SpatialFilterParam3;
-            context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu.SpatialFilterParam4 = context->m_input.variable_SpatialFilterParam4;
-            DX12Utils::CopyConstantsCPUToGPU(s_ubTracker, device, commandList, context->m_internal.constantBuffer__DitherSpatialFilterCB, context->m_internal.constantBuffer__DitherSpatialFilterCB_cpu, Context::LogFn);
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilter1 = (int)context->m_input.variable_SpatialFilter1;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilter2 = (int)context->m_input.variable_SpatialFilter2;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilter3 = (int)context->m_input.variable_SpatialFilter3;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilter4 = (int)context->m_input.variable_SpatialFilter4;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilterParam1 = context->m_input.variable_SpatialFilterParam1;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilterParam2 = context->m_input.variable_SpatialFilterParam2;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilterParam3 = context->m_input.variable_SpatialFilterParam3;
+            context->m_internal.constantBuffer__SpatialFilterCB_cpu.SpatialFilterParam4 = context->m_input.variable_SpatialFilterParam4;
+            DX12Utils::CopyConstantsCPUToGPU(s_ubTracker, device, commandList, context->m_internal.constantBuffer__SpatialFilterCB, context->m_internal.constantBuffer__SpatialFilterCB_cpu, Context::LogFn);
         }
 
         // Transition resources for the next action
@@ -1204,7 +1204,7 @@ namespace Dither
             DX12Utils::ResourceDescriptor descriptors[] = {
                 { context->m_output.texture_Color, context->m_output.texture_Color_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
                 { context->m_internal.texture_Temp, context->m_internal.texture_Temp_format, DX12Utils::AccessType::UAV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
-                { context->m_internal.constantBuffer__DitherSpatialFilterCB, DXGI_FORMAT_UNKNOWN, DX12Utils::AccessType::CBV, DX12Utils::ResourceType::Buffer, false, 256, 1, 0 }
+                { context->m_internal.constantBuffer__SpatialFilterCB, DXGI_FORMAT_UNKNOWN, DX12Utils::AccessType::CBV, DX12Utils::ResourceType::Buffer, false, 256, 1, 0 }
             };
 
             D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable = GetDescriptorTable(device, s_srvHeap, descriptors, 3, Context::LogFn);
@@ -1232,17 +1232,17 @@ namespace Dither
             }
         }
 
-        // Shader Constants: _DitherTemporalFilterCB
+        // Shader Constants: _TemporalFilterCB
         {
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.NeighborhoodClamp1 = context->m_input.variable_NeighborhoodClamp1;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.NeighborhoodClamp2 = context->m_input.variable_NeighborhoodClamp2;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.NeighborhoodClamp3 = context->m_input.variable_NeighborhoodClamp3;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.NeighborhoodClamp4 = context->m_input.variable_NeighborhoodClamp4;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.TemporalFilterAlpha1 = context->m_input.variable_TemporalFilterAlpha1;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.TemporalFilterAlpha2 = context->m_input.variable_TemporalFilterAlpha2;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.TemporalFilterAlpha3 = context->m_input.variable_TemporalFilterAlpha3;
-            context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu.TemporalFilterAlpha4 = context->m_input.variable_TemporalFilterAlpha4;
-            DX12Utils::CopyConstantsCPUToGPU(s_ubTracker, device, commandList, context->m_internal.constantBuffer__DitherTemporalFilterCB, context->m_internal.constantBuffer__DitherTemporalFilterCB_cpu, Context::LogFn);
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp1 = context->m_input.variable_NeighborhoodClamp1;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp2 = context->m_input.variable_NeighborhoodClamp2;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp3 = context->m_input.variable_NeighborhoodClamp3;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp4 = context->m_input.variable_NeighborhoodClamp4;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha1 = context->m_input.variable_TemporalFilterAlpha1;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha2 = context->m_input.variable_TemporalFilterAlpha2;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha3 = context->m_input.variable_TemporalFilterAlpha3;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha4 = context->m_input.variable_TemporalFilterAlpha4;
+            DX12Utils::CopyConstantsCPUToGPU(s_ubTracker, device, commandList, context->m_internal.constantBuffer__TemporalFilterCB, context->m_internal.constantBuffer__TemporalFilterCB_cpu, Context::LogFn);
         }
 
         // Transition resources for the next action
@@ -1287,7 +1287,7 @@ namespace Dither
                 { context->m_internal.texture_Temp, context->m_internal.texture_Temp_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
                 { context->m_output.texture_Color, context->m_output.texture_Color_format, DX12Utils::AccessType::UAV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
                 { context->m_internal.texture_TemporalAccum, context->m_internal.texture_TemporalAccum_format, DX12Utils::AccessType::UAV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
-                { context->m_internal.constantBuffer__DitherTemporalFilterCB, DXGI_FORMAT_UNKNOWN, DX12Utils::AccessType::CBV, DX12Utils::ResourceType::Buffer, false, 256, 1, 0 }
+                { context->m_internal.constantBuffer__TemporalFilterCB, DXGI_FORMAT_UNKNOWN, DX12Utils::AccessType::CBV, DX12Utils::ResourceType::Buffer, false, 256, 1, 0 }
             };
 
             D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable = GetDescriptorTable(device, s_srvHeap, descriptors, 4, Context::LogFn);
@@ -2010,18 +2010,18 @@ namespace Dither
             m_internal.constantBuffer__DitherCB = DX12Utils::CreateBuffer(device, 256, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_COMMON, D3D12_HEAP_TYPE_DEFAULT, (c_debugNames ? L"_DitherCB" : nullptr), Context::LogFn);
         }
 
-        // _DitherSpatialFilterCB
-        if (m_internal.constantBuffer__DitherSpatialFilterCB == nullptr)
+        // _SpatialFilterCB
+        if (m_internal.constantBuffer__SpatialFilterCB == nullptr)
         {
             dirty = true;
-            m_internal.constantBuffer__DitherSpatialFilterCB = DX12Utils::CreateBuffer(device, 256, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_COMMON, D3D12_HEAP_TYPE_DEFAULT, (c_debugNames ? L"_DitherSpatialFilterCB" : nullptr), Context::LogFn);
+            m_internal.constantBuffer__SpatialFilterCB = DX12Utils::CreateBuffer(device, 256, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_COMMON, D3D12_HEAP_TYPE_DEFAULT, (c_debugNames ? L"_SpatialFilterCB" : nullptr), Context::LogFn);
         }
 
-        // _DitherTemporalFilterCB
-        if (m_internal.constantBuffer__DitherTemporalFilterCB == nullptr)
+        // _TemporalFilterCB
+        if (m_internal.constantBuffer__TemporalFilterCB == nullptr)
         {
             dirty = true;
-            m_internal.constantBuffer__DitherTemporalFilterCB = DX12Utils::CreateBuffer(device, 256, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_COMMON, D3D12_HEAP_TYPE_DEFAULT, (c_debugNames ? L"_DitherTemporalFilterCB" : nullptr), Context::LogFn);
+            m_internal.constantBuffer__TemporalFilterCB = DX12Utils::CreateBuffer(device, 256, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_COMMON, D3D12_HEAP_TYPE_DEFAULT, (c_debugNames ? L"_TemporalFilterCB" : nullptr), Context::LogFn);
         }
         EnsureDrawCallPSOsCreated(device, dirty);
     }

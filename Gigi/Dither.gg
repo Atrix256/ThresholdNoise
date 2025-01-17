@@ -229,8 +229,8 @@
             ]
         },
         {
-            "name": "DitherSpatialFilter",
-            "fileName": "DitherSpatialFilterCS.hlsl",
+            "name": "SpatialFilter",
+            "fileName": "SpatialFilterCS.hlsl",
             "entryPoint": "csmain",
             "resources": [
                 {
@@ -246,8 +246,8 @@
             ]
         },
         {
-            "name": "DitherTemporalFilter",
-            "fileName": "DitherTemporalFilterCS.hlsl",
+            "name": "TemporalFilter",
+            "fileName": "TemporalFilterCS.hlsl",
             "entryPoint": "csmain",
             "resources": [
                 {
@@ -384,7 +384,7 @@
                     }
                 ],
                 "shader": {
-                    "name": "DitherSpatialFilter"
+                    "name": "SpatialFilter"
                 },
                 "dispatchSize": {
                     "node": {
@@ -442,7 +442,7 @@
                     }
                 ],
                 "shader": {
-                    "name": "DitherTemporalFilter"
+                    "name": "TemporalFilter"
                 },
                 "dispatchSize": {
                     "node": {
