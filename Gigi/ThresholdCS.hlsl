@@ -189,7 +189,7 @@ Threshold blog post notes:
 * dithering vs thresholding: dithering can reduce bit count of the colors. thresholding can eliminate having to do logic for certain colors.
 * a nice demo: threshold down to 0.018. AKA 2% of the pixels rendered.  0.1 temporal filter. gauss 4.0 spatial filter. FAST looks pretty darn decent! looks so crazy filtered vs unfiltered. sort of less impressive when you look at the dots without auto brightness. still impressive though.
  * should do it that way. show dots without auto brightness and show filtered with auto brightness.
-
+* also mention the C++ code to make bayer matrix images.
 
 Dither BLOG NOTES:
 

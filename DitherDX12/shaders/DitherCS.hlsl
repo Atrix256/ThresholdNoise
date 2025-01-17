@@ -44,7 +44,6 @@ struct Struct__DitherCB
     float2 _padding0;
 };
 
-SamplerState linearWrapSampler : register(s0);
 Texture2D<float4> Input : register(t0);
 RWTexture2D<float4> Output : register(u0);
 Texture2D<float> _loadedTexture_0 : register(t1);
@@ -245,68 +244,4 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 Shader Resources:
 	Texture Input (as SRV)
 	Texture Output (as UAV)
-*/
-
-/*
-TODO:
-
-* maybe move this into a "Dither" subfolder, and make a new one for "Threshold"
-
-* code generate C++ dx12 too.
-
-Theshold TODO:
-* have a slider that is a threshold level
-* also optional to multiply it by a threshold map
-
-BLOG NOTES:
-
-* Title "Analyzing Animated Dithering Techniques"?
-
-title image: Evolution of dithering
-* Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
-* show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
-
-* Threshold test as a second blog post!  Maybe investigate it before writing post?
-
-* talk about how we offset the texture to get the 3 values for each noise type
-
-* R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset (others don't either)
-* describe each noise type
-
-* do everything with flags_256 to make 512x512 images for the post?
-
-* compare round and floor vs something nicely dithered (could maybe even be white noise?)
-* show difference between STBN 1.0 and 1.9
-* show difference between blue2d and a temporal blue noise. if you gauss blur, it's less compelling than if you don't!
-* show what neighborhood clamping does to results (in different noise types)
-
-* feature box noise too
-
-* compare blue to binomial?
-
-* Link to STBN and FAST repos.
- * also the competitive blue noise
-  * https://tellusim.com/improved-blue-noise/
-  * https://acko.net/blog/stable-fiddusion/
-
-* note that doing a random offset each frame is ~ the same as doing a flip book of 2d blue noise.
-* show animating blue noise with golden ratio. flickering in both taa and non taa. can link to that other blog post on animating blue noise.
-
-! Fast BLUE Exp is the best blue noise.
-
-A progression of quality. 1 bit per color channel. 3 bits per pixel.
-round, white, blue, TAA blue
-
-* link to blog post about LDS shuffler for offsets
-
-* link to ordered dithering wikipedia :P
-* and this https://bisqwit.iki.fi/story/howto/dither/jy/
- * Bayer is not fully Bayer, but it's close. I adapted to shader code.
-* 16x16 (4 bits x 4 bits) is the largest bayer matrix you need, it's for for 8 bit color and has 256 different values
- * explain how we divide the number of color bits by 2 to get the x bits for bayer, and the remainder are y bits.
-
-* show separate vs compiled FAST noise results.
-
-* talk about how bayer does pixel swapping to optimize, and so does FAST noise. What is the next step to optimize for?
-
 */

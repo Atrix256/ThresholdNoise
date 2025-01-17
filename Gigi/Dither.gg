@@ -267,6 +267,31 @@
         {
             "fileName": "Shared.hlsli",
             "type": "Shader"
+        },
+        {
+            "fileName": "Textures\\flags.jpg",
+            "type": "Asset",
+            "binary": true
+        },
+        {
+            "fileName": "Textures\\flags_256.png",
+            "type": "Asset",
+            "binary": true
+        },
+        {
+            "fileName": "Textures\\flags_512.png",
+            "type": "Asset",
+            "binary": true
+        },
+        {
+            "fileName": "Textures\\readme.txt",
+            "type": "Asset",
+            "binary": true
+        },
+        {
+            "fileName": "Textures\\threshold.png",
+            "type": "Asset",
+            "binary": true
         }
     ],
     "nodes": [
@@ -553,5 +578,8 @@
                 "comparison": "IsTrue"
             }
         }
-    ]
+    ],
+    "buildSettings": {
+        "outDX12": "../DitherDX12/"
+    }
 }

@@ -50,22 +50,7 @@ namespace Dither
 
         // Compute Shader: Dither
         {
-            D3D12_STATIC_SAMPLER_DESC samplers[1];
-
-            // linearWrapSampler
-            samplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
-            samplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-            samplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-            samplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-            samplers[0].MipLODBias  = 0;
-            samplers[0].MaxAnisotropy  = 0;
-            samplers[0].ComparisonFunc  = D3D12_COMPARISON_FUNC_NEVER;
-            samplers[0].BorderColor  = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
-            samplers[0].MinLOD = 0.0f;
-            samplers[0].MaxLOD = D3D12_FLOAT32_MAX;
-            samplers[0].ShaderRegister = 0;
-            samplers[0].RegisterSpace = 0;
-            samplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+            D3D12_STATIC_SAMPLER_DESC* samplers = nullptr;
 
             D3D12_DESCRIPTOR_RANGE ranges[13];
 
@@ -160,7 +145,7 @@ namespace Dither
             ranges[12].RegisterSpace = 0;
             ranges[12].OffsetInDescriptorsFromTableStart = 12;
 
-            if(!DX12Utils::MakeRootSig(device, ranges, 13, samplers, 1, &ContextInternal::computeShader_Dither_rootSig, (c_debugNames ? L"Dither" : nullptr), Context::LogFn))
+            if(!DX12Utils::MakeRootSig(device, ranges, 13, samplers, 0, &ContextInternal::computeShader_Dither_rootSig, (c_debugNames ? L"Dither" : nullptr), Context::LogFn))
                 return false;
 
             D3D_SHADER_MACRO defines[] = {

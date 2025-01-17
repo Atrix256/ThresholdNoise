@@ -1,8 +1,8 @@
-Dither.dir/
-Dither.exe
-Dither.exp
-Dither.lib
-Dither.pdb
+Threshold.dir/
+Threshold.exe
+Threshold.exp
+Threshold.lib
+Threshold.pdb
 *.vcxproj.user
 Debug/
 MinSizeRel/
