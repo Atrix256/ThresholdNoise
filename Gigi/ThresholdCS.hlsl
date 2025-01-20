@@ -247,6 +247,8 @@ title image: Evolution of dithering
 * show what neighborhood clamping does to results (in different noise types)
  * white gets a way bigger impact to it than blue.__XB_AddI64 totally visible in temporally accumulated result.
 
+* bayer doesn't converge. it's biased! kind of surprising.
+
 * feature box noise too
 
 * compare blue to binomial?
@@ -279,7 +281,7 @@ Link to:
 * inside rendering: https://loopit.dk/rendering_inside.pdf
 * bart's post: https://bartwronski.com/2016/10/30/dithering-part-three-real-world-2d-quantization-dithering/
 * srgb or not: http://www.thetenthplanet.de/archives/5367
-* the thesis
+* the thesis: https://dspacemainprd01.lib.uwaterloo.ca/server/api/core/bitstreams/022b1b01-5e4d-441a-bc53-ea13c65d1dd7/content
 * https://tellusim.com/improved-blue-noise/
 * https://acko.net/blog/stable-fiddusion/
 * beyond white noise video

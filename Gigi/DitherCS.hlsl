@@ -110,17 +110,16 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 		case NoiseTypes::IGN:
 		{
 			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
-
 			return IGNLDG(int2(px.xy + int2((indexOffsetF + frameOffsetF) * 512.0f)));
 		}
 		case NoiseTypes::Bayer:
 		{
-			 float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
+			uint2 frameOffset = uint2(wang_hash_uint(wangStateGlobal), wang_hash_uint(wangStateGlobal));
 
 			int bitsX = /*$(Variable:BitsPerColorChannel)*/ / 2;
 			int bitsY = /*$(Variable:BitsPerColorChannel)*/ - bitsX;
 
-			return Bayer(px.x + int(frameOffsetF.x * 4.0f), px.y + int(frameOffsetF.y * 4.0f), bitsX, bitsY);
+			return Bayer(px.x + frameOffset.x, px.y + frameOffset.y, bitsX, bitsY);
 		}
 		case NoiseTypes::Round:
 		{
