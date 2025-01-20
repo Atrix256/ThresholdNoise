@@ -9,6 +9,11 @@
 
 using uint = unsigned int;
 
+float Lerp(float A, float B, float t)
+{
+	return A * (1.0f - t) + B * t;
+}
+
 template <typename T>
 T Clamp(T value, T themin, T themax)
 {
@@ -70,6 +75,10 @@ void MakeBayerMatrix(int matrixBitsX, int matrixBitsY)
 
 	printf("%i x %i\n", c_matrixWidth, c_matrixHeight);
 
+	float averageF = 0.0f;
+	float averageU8 = 0.0f;
+
+	int pixelCount = 0;
 	for (uint iy = 0; iy < c_matrixHeight; ++iy)
 	{
 		printf("[ ");
@@ -77,16 +86,22 @@ void MakeBayerMatrix(int matrixBitsX, int matrixBitsY)
 		{
 			uint bayerU = Bayer(ix, iy, matrixBitsX, matrixBitsY);
 
-			float bayerF = float(bayerU) / float(c_matrixEntries);
+			float bayerF = (float(bayerU)+0.5f) / float(c_matrixEntries);
 			printf("%u ", bayerU);
 			//printf("%0.2f ", bayerF);
 
 			pixel[0] = (unsigned char)Clamp(bayerF * 256.0f, 0.0f, 255.0f);
+
+			averageF = Lerp(averageF, bayerF, 1.0f / float(pixelCount + 1));
+			averageU8 = Lerp(averageU8, float(pixel[0]), 1.0f / float(pixelCount + 1));
+
 			pixel++;
+			pixelCount++;
 		}
 		printf("]\n");
 	}
-	printf("\n");
+	printf("/ %u\n", c_matrixEntries);
+	printf("\nAverageF = %f\naverageU8 = %f\n\n", averageF, averageU8);
 
 	char fileName[1024];
 	sprintf(fileName, "out/Bayer_%u_%u.png", c_matrixWidth, c_matrixHeight);

@@ -45,31 +45,40 @@ namespace Dither
         {
 
             // Variables
+            bool variable_Reset_Accumulation = false;
             int variable_BitsPerColorChannel = 8;
             bool variable_Animate = false;
             NoiseTypes variable_NoiseType1 = NoiseTypes::White;  // Upper Left
+            bool variable_ExtendNoise1 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            bool variable_SubtractiveDither1 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
             SpatialFilters variable_SpatialFilter1 = SpatialFilters::None;
             float variable_SpatialFilterParam1 = 1.000000f;  // Radius for box, sigma for gauss
-            float variable_TemporalFilterAlpha1 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            bool variable_NeighborhoodClamp1 = false;
+            TemporalFilters variable_TemporalFilter1 = TemporalFilters::None;
+            float variable_TemporalFilterAlpha1 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
             bool variable_Animate1 = true;  // If false, does not animate, even if the global Animate variable is true
             NoiseTypes variable_NoiseType2 = NoiseTypes::White;  // Upper Right
+            bool variable_ExtendNoise2 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            bool variable_SubtractiveDither2 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
             SpatialFilters variable_SpatialFilter2 = SpatialFilters::None;
             float variable_SpatialFilterParam2 = 1.000000f;  // Radius for box, sigma for gauss
-            float variable_TemporalFilterAlpha2 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            bool variable_NeighborhoodClamp2 = false;
+            TemporalFilters variable_TemporalFilter2 = TemporalFilters::None;
+            float variable_TemporalFilterAlpha2 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
             bool variable_Animate2 = true;  // If false, does not animate, even if the global Animate variable is true
             NoiseTypes variable_NoiseType3 = NoiseTypes::White;  // Lower Left
+            bool variable_ExtendNoise3 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            bool variable_SubtractiveDither3 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
             SpatialFilters variable_SpatialFilter3 = SpatialFilters::None;
             float variable_SpatialFilterParam3 = 1.000000f;  // Radius for box, sigma for gauss
-            float variable_TemporalFilterAlpha3 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            bool variable_NeighborhoodClamp3 = false;
+            TemporalFilters variable_TemporalFilter3 = TemporalFilters::None;
+            float variable_TemporalFilterAlpha3 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
             bool variable_Animate3 = true;  // If false, does not animate, even if the global Animate variable is true
             NoiseTypes variable_NoiseType4 = NoiseTypes::White;  // Lower Right
+            bool variable_ExtendNoise4 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            bool variable_SubtractiveDither4 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
             SpatialFilters variable_SpatialFilter4 = SpatialFilters::None;
             float variable_SpatialFilterParam4 = 1.000000f;  // Radius for box, sigma for gauss
-            float variable_TemporalFilterAlpha4 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            bool variable_NeighborhoodClamp4 = false;
+            TemporalFilters variable_TemporalFilter4 = TemporalFilters::None;
+            float variable_TemporalFilterAlpha4 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
             bool variable_Animate4 = true;  // If false, does not animate, even if the global Animate variable is true
 
             ID3D12Resource* texture_Input = nullptr;
@@ -170,6 +179,16 @@ namespace Dither
             AddManagedResource(tlas);
 
             return true;
+        }
+
+        ID3D12Resource* GetPrimaryOutputTexture()
+        {
+            
+        }
+
+        D3D12_RESOURCE_STATES GetPrimaryOutputTextureState()
+        {
+            
         }
 
     private:

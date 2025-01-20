@@ -21,6 +21,7 @@ namespace Threshold
     {
         ImGui::PushID("gigi_Threshold");
 
+        context->m_input.variable_Reset_Accumulation = ImGui::Button("Reset_Accumulation");
         ImGui::InputFloat("Threshold", &context->m_input.variable_Threshold);
         ImGui::InputFloat("BrightnessMultiplier", &context->m_input.variable_BrightnessMultiplier);
         ShowToolTip("Stippling can dim the result by adding dark pixels. This can brighten it.");
@@ -37,6 +38,8 @@ namespace Threshold
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -50,9 +53,11 @@ namespace Threshold
                 "Round",
                 "Floor",
             };
-            ImGui::Combo("NoiseType1", (int*)&context->m_input.variable_NoiseType1, labels, 20);
+            ImGui::Combo("NoiseType1", (int*)&context->m_input.variable_NoiseType1, labels, 22);
             ShowToolTip("Upper Left");
         }
+        ImGui::Checkbox("ExtendNoise1", &context->m_input.variable_ExtendNoise1);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
         {
             static const char* labels[] = {
                 "None",
@@ -63,11 +68,21 @@ namespace Threshold
         }
         ImGui::InputFloat("SpatialFilterParam1", &context->m_input.variable_SpatialFilterParam1);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "Ema",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter1", (int*)&context->m_input.variable_TemporalFilter1, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha1", &context->m_input.variable_TemporalFilterAlpha1);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp1", &context->m_input.variable_NeighborhoodClamp1);
         ImGui::Checkbox("Animate1", &context->m_input.variable_Animate1);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
+        ImGui::Checkbox("Brighten1", &context->m_input.variable_Brighten1);
+        ShowToolTip("If true, multiplies result by BrightnessMultiplier");
         {
             static const char* labels[] = {
                 "White",
@@ -78,6 +93,8 @@ namespace Threshold
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -91,9 +108,11 @@ namespace Threshold
                 "Round",
                 "Floor",
             };
-            ImGui::Combo("NoiseType2", (int*)&context->m_input.variable_NoiseType2, labels, 20);
+            ImGui::Combo("NoiseType2", (int*)&context->m_input.variable_NoiseType2, labels, 22);
             ShowToolTip("Upper Right");
         }
+        ImGui::Checkbox("ExtendNoise2", &context->m_input.variable_ExtendNoise2);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
         {
             static const char* labels[] = {
                 "None",
@@ -104,11 +123,21 @@ namespace Threshold
         }
         ImGui::InputFloat("SpatialFilterParam2", &context->m_input.variable_SpatialFilterParam2);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "Ema",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter2", (int*)&context->m_input.variable_TemporalFilter2, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha2", &context->m_input.variable_TemporalFilterAlpha2);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp2", &context->m_input.variable_NeighborhoodClamp2);
         ImGui::Checkbox("Animate2", &context->m_input.variable_Animate2);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
+        ImGui::Checkbox("Brighten2", &context->m_input.variable_Brighten2);
+        ShowToolTip("If true, multiplies result by BrightnessMultiplier");
         {
             static const char* labels[] = {
                 "White",
@@ -119,6 +148,8 @@ namespace Threshold
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -132,9 +163,11 @@ namespace Threshold
                 "Round",
                 "Floor",
             };
-            ImGui::Combo("NoiseType3", (int*)&context->m_input.variable_NoiseType3, labels, 20);
+            ImGui::Combo("NoiseType3", (int*)&context->m_input.variable_NoiseType3, labels, 22);
             ShowToolTip("Lower Left");
         }
+        ImGui::Checkbox("ExtendNoise3", &context->m_input.variable_ExtendNoise3);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
         {
             static const char* labels[] = {
                 "None",
@@ -145,11 +178,21 @@ namespace Threshold
         }
         ImGui::InputFloat("SpatialFilterParam3", &context->m_input.variable_SpatialFilterParam3);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "Ema",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter3", (int*)&context->m_input.variable_TemporalFilter3, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha3", &context->m_input.variable_TemporalFilterAlpha3);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp3", &context->m_input.variable_NeighborhoodClamp3);
         ImGui::Checkbox("Animate3", &context->m_input.variable_Animate3);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
+        ImGui::Checkbox("Brighten3", &context->m_input.variable_Brighten3);
+        ShowToolTip("If true, multiplies result by BrightnessMultiplier");
         {
             static const char* labels[] = {
                 "White",
@@ -160,6 +203,8 @@ namespace Threshold
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -173,9 +218,11 @@ namespace Threshold
                 "Round",
                 "Floor",
             };
-            ImGui::Combo("NoiseType4", (int*)&context->m_input.variable_NoiseType4, labels, 20);
+            ImGui::Combo("NoiseType4", (int*)&context->m_input.variable_NoiseType4, labels, 22);
             ShowToolTip("Lower Right");
         }
+        ImGui::Checkbox("ExtendNoise4", &context->m_input.variable_ExtendNoise4);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
         {
             static const char* labels[] = {
                 "None",
@@ -186,11 +233,21 @@ namespace Threshold
         }
         ImGui::InputFloat("SpatialFilterParam4", &context->m_input.variable_SpatialFilterParam4);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "Ema",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter4", (int*)&context->m_input.variable_TemporalFilter4, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha4", &context->m_input.variable_TemporalFilterAlpha4);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp4", &context->m_input.variable_NeighborhoodClamp4);
         ImGui::Checkbox("Animate4", &context->m_input.variable_Animate4);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
+        ImGui::Checkbox("Brighten4", &context->m_input.variable_Brighten4);
+        ShowToolTip("If true, multiplies result by BrightnessMultiplier");
 
         ImGui::Checkbox("Profile", &context->m_profile);
         if (context->m_profile)

@@ -11,15 +11,24 @@ struct NoiseTypes
     static const int STBN_19 = 5;
     static const int FAST_Blue_Exp_Separate = 6;
     static const int FAST_Blue_Exp_Product = 7;
-    static const int FAST_Binomial3x3_Exp = 8;
-    static const int FAST_Box3x3_Exp = 9;
-    static const int Blue_Tellusim_128_128_64 = 10;
-    static const int Blue_Stable_Fiddusion = 11;
-    static const int R2 = 12;
-    static const int IGN = 13;
-    static const int Bayer = 14;
-    static const int Round = 15;
-    static const int Floor = 16;
+    static const int FAST_Triangle_Blue_Exp_Separate = 8;
+    static const int FAST_Triangle_Blue_Exp_Product = 9;
+    static const int FAST_Binomial3x3_Exp = 10;
+    static const int FAST_Box3x3_Exp = 11;
+    static const int Blue_Tellusim_128_128_64 = 12;
+    static const int Blue_Stable_Fiddusion = 13;
+    static const int R2 = 14;
+    static const int IGN = 15;
+    static const int Bayer = 16;
+    static const int Bayer_Plus_Half = 17;
+    static const int Round = 18;
+    static const int Floor = 19;
+    static const int White4 = 20;
+    static const int White4_Plus_Half = 21;
+    static const int White8 = 22;
+    static const int White8_Plus_Half = 23;
+    static const int White512 = 24;
+    static const int White_Triangular = 25;
 };
 
 struct SpatialFilters
@@ -29,16 +38,26 @@ struct SpatialFilters
     static const int Gauss = 2;
 };
 
+struct TemporalFilters
+{
+    static const int None = 0;
+    static const int EMA = 1;
+    static const int EMA_plus_Clamp = 2;
+    static const int Monte_Carlo = 3;
+};
+
 struct Struct__TemporalFilterCB
 {
-    uint NeighborhoodClamp1;
-    uint NeighborhoodClamp2;
-    uint NeighborhoodClamp3;
-    uint NeighborhoodClamp4;
+    uint Reset_Accumulation;
+    int TemporalFilter1;
+    int TemporalFilter2;
+    int TemporalFilter3;
+    int TemporalFilter4;
     float TemporalFilterAlpha1;
     float TemporalFilterAlpha2;
     float TemporalFilterAlpha3;
     float TemporalFilterAlpha4;
+    float3 _padding0;
 };
 
 Texture2D<float4> Input : register(t0);
@@ -64,18 +83,18 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 
 	// Get the parameters for whatever quadrant we are in
 	float temporalAlpha = 1.0f;
-	bool neighborhoodClamp = false;
+	int temporalFilter = TemporalFilters::None;
 	if (px.x <= dims.x)
 	{
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha1;
-			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp1;
+			temporalFilter = _TemporalFilterCB.TemporalFilter1;
 		}
 		else
 		{
 			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha3;
-			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp3;
+			temporalFilter = _TemporalFilterCB.TemporalFilter3;
 		}
 	}
 	else
@@ -83,14 +102,15 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha2;
-			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp2;
+			temporalFilter = _TemporalFilterCB.TemporalFilter2;
 		}
 		else
 		{
 			temporalAlpha = _TemporalFilterCB.TemporalFilterAlpha4;
-			neighborhoodClamp = _TemporalFilterCB.NeighborhoodClamp4;
+			temporalFilter = _TemporalFilterCB.TemporalFilter4;
 		}
 	}
+	bool neighborhoodClamp = (temporalFilter == TemporalFilters::EMA_plus_Clamp);
 
 	// Get the previous and next colors
 	float4 temporalAccum = TemporalAccum[px];
@@ -98,9 +118,23 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 	float3 nextValue = Input[px].rgb;
 
 	// Reset temporal buffer when the temporal filter parameters change, or when the temporal accumulation buffer doesn't have data in it yet (alpha is 0)
-	if (temporalAccum.a < 1.0f)
+	// Also reset every frame if the filter is "none"
+	// Also reset if the user clicks "Reset Accumulation"
+	if (temporalAccum.a < 1.0f || temporalFilter == TemporalFilters::None)
 		temporalAlpha = 1.0f;
 	temporalAlpha = clamp(temporalAlpha, 0.0f, 1.0f);
+
+	// Logic for monte carlo
+	float alphaOut = 1.0f;
+	if (temporalFilter == TemporalFilters::Monte_Carlo)
+	{
+		if (_TemporalFilterCB.Reset_Accumulation)
+			temporalAccum.a = 1.0f;
+
+		float sampleCount = max(temporalAccum.a, 1.0f);
+		alphaOut = sampleCount + 1.0f;
+		temporalAlpha = 1.0f / sampleCount;
+	}
 
 	// Do a neighborhood clamp if we should, to simulate that anti ghosting feature of TAA
 	if (neighborhoodClamp && temporalAlpha < 1.0f)
@@ -125,7 +159,7 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 	float3 value = lerp(lastValue, nextValue, temporalAlpha);
 
 	// Write result to output, and accumulation buffer
-	TemporalAccum[px] = float4(value, 1.0f);
+	TemporalAccum[px] = float4(value, alphaOut);
 	Output[px] = float4(LinearToSRGB(value), 1.0f);
 }
 

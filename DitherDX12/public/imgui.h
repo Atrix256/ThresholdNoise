@@ -21,6 +21,7 @@ namespace Dither
     {
         ImGui::PushID("gigi_Dither");
 
+        context->m_input.variable_Reset_Accumulation = ImGui::Button("Reset_Accumulation");
         ImGui::InputInt("BitsPerColorChannel", &context->m_input.variable_BitsPerColorChannel, 0);
         ImGui::Checkbox("Animate", &context->m_input.variable_Animate);
         {
@@ -33,6 +34,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -40,12 +43,23 @@ namespace Dither
                 "R2",
                 "IGN",
                 "Bayer",
+                "Bayer Plus Half",
                 "Round",
                 "Floor",
+                "White4",
+                "White4 Plus Half",
+                "White8",
+                "White8 Plus Half",
+                "White512",
+                "White Triangular",
             };
-            ImGui::Combo("NoiseType1", (int*)&context->m_input.variable_NoiseType1, labels, 17);
+            ImGui::Combo("NoiseType1", (int*)&context->m_input.variable_NoiseType1, labels, 26);
             ShowToolTip("Upper Left");
         }
+        ImGui::Checkbox("ExtendNoise1", &context->m_input.variable_ExtendNoise1);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
+        ImGui::Checkbox("SubtractiveDither1", &context->m_input.variable_SubtractiveDither1);
+        ShowToolTip("If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.");
         {
             static const char* labels[] = {
                 "None",
@@ -56,9 +70,17 @@ namespace Dither
         }
         ImGui::InputFloat("SpatialFilterParam1", &context->m_input.variable_SpatialFilterParam1);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "EMA",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter1", (int*)&context->m_input.variable_TemporalFilter1, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha1", &context->m_input.variable_TemporalFilterAlpha1);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp1", &context->m_input.variable_NeighborhoodClamp1);
         ImGui::Checkbox("Animate1", &context->m_input.variable_Animate1);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
         {
@@ -71,6 +93,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -78,12 +102,23 @@ namespace Dither
                 "R2",
                 "IGN",
                 "Bayer",
+                "Bayer Plus Half",
                 "Round",
                 "Floor",
+                "White4",
+                "White4 Plus Half",
+                "White8",
+                "White8 Plus Half",
+                "White512",
+                "White Triangular",
             };
-            ImGui::Combo("NoiseType2", (int*)&context->m_input.variable_NoiseType2, labels, 17);
+            ImGui::Combo("NoiseType2", (int*)&context->m_input.variable_NoiseType2, labels, 26);
             ShowToolTip("Upper Right");
         }
+        ImGui::Checkbox("ExtendNoise2", &context->m_input.variable_ExtendNoise2);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
+        ImGui::Checkbox("SubtractiveDither2", &context->m_input.variable_SubtractiveDither2);
+        ShowToolTip("If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.");
         {
             static const char* labels[] = {
                 "None",
@@ -94,9 +129,17 @@ namespace Dither
         }
         ImGui::InputFloat("SpatialFilterParam2", &context->m_input.variable_SpatialFilterParam2);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "EMA",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter2", (int*)&context->m_input.variable_TemporalFilter2, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha2", &context->m_input.variable_TemporalFilterAlpha2);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp2", &context->m_input.variable_NeighborhoodClamp2);
         ImGui::Checkbox("Animate2", &context->m_input.variable_Animate2);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
         {
@@ -109,6 +152,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -116,12 +161,23 @@ namespace Dither
                 "R2",
                 "IGN",
                 "Bayer",
+                "Bayer Plus Half",
                 "Round",
                 "Floor",
+                "White4",
+                "White4 Plus Half",
+                "White8",
+                "White8 Plus Half",
+                "White512",
+                "White Triangular",
             };
-            ImGui::Combo("NoiseType3", (int*)&context->m_input.variable_NoiseType3, labels, 17);
+            ImGui::Combo("NoiseType3", (int*)&context->m_input.variable_NoiseType3, labels, 26);
             ShowToolTip("Lower Left");
         }
+        ImGui::Checkbox("ExtendNoise3", &context->m_input.variable_ExtendNoise3);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
+        ImGui::Checkbox("SubtractiveDither3", &context->m_input.variable_SubtractiveDither3);
+        ShowToolTip("If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.");
         {
             static const char* labels[] = {
                 "None",
@@ -132,9 +188,17 @@ namespace Dither
         }
         ImGui::InputFloat("SpatialFilterParam3", &context->m_input.variable_SpatialFilterParam3);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "EMA",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter3", (int*)&context->m_input.variable_TemporalFilter3, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha3", &context->m_input.variable_TemporalFilterAlpha3);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp3", &context->m_input.variable_NeighborhoodClamp3);
         ImGui::Checkbox("Animate3", &context->m_input.variable_Animate3);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
         {
@@ -147,6 +211,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Triangle_Blue_Exp_Separate",
+                "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
                 "FAST_Box3x3_Exp",
                 "Blue_Tellusim_128_128_64",
@@ -154,12 +220,23 @@ namespace Dither
                 "R2",
                 "IGN",
                 "Bayer",
+                "Bayer Plus Half",
                 "Round",
                 "Floor",
+                "White4",
+                "White4 Plus Half",
+                "White8",
+                "White8 Plus Half",
+                "White512",
+                "White Triangular",
             };
-            ImGui::Combo("NoiseType4", (int*)&context->m_input.variable_NoiseType4, labels, 17);
+            ImGui::Combo("NoiseType4", (int*)&context->m_input.variable_NoiseType4, labels, 26);
             ShowToolTip("Lower Right");
         }
+        ImGui::Checkbox("ExtendNoise4", &context->m_input.variable_ExtendNoise4);
+        ShowToolTip("If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.");
+        ImGui::Checkbox("SubtractiveDither4", &context->m_input.variable_SubtractiveDither4);
+        ShowToolTip("If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.");
         {
             static const char* labels[] = {
                 "None",
@@ -170,9 +247,17 @@ namespace Dither
         }
         ImGui::InputFloat("SpatialFilterParam4", &context->m_input.variable_SpatialFilterParam4);
         ShowToolTip("Radius for box, sigma for gauss");
+        {
+            static const char* labels[] = {
+                "None",
+                "EMA",
+                "EMA + Clamp",
+                "Monte Carlo",
+            };
+            ImGui::Combo("TemporalFilter4", (int*)&context->m_input.variable_TemporalFilter4, labels, 4);
+        }
         ImGui::InputFloat("TemporalFilterAlpha4", &context->m_input.variable_TemporalFilterAlpha4);
         ShowToolTip("Alpha for exponential moving average. 0.1 is common for TAA.");
-        ImGui::Checkbox("NeighborhoodClamp4", &context->m_input.variable_NeighborhoodClamp4);
         ImGui::Checkbox("Animate4", &context->m_input.variable_Animate4);
         ShowToolTip("If false, does not animate, even if the global Animate variable is true");
 

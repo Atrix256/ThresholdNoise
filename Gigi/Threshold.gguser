@@ -46,7 +46,7 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "4"
+                "value": "16"
             },
             {
                 "name": "ExtendNoise1",
@@ -78,7 +78,7 @@
             },
             {
                 "name": "NoiseType2",
-                "value": "4"
+                "value": "16"
             },
             {
                 "name": "ExtendNoise2",

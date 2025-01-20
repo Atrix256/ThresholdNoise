@@ -38,6 +38,13 @@
             "UIGroup": "1 Upper Left"
         },
         {
+            "name": "SubtractiveDither1",
+            "comment": "If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
             "name": "SpatialFilter1",
             "type": "Int",
             "visibility": "User",
@@ -87,6 +94,13 @@
         {
             "name": "ExtendNoise2",
             "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
+            "name": "SubtractiveDither2",
+            "comment": "If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.",
             "type": "Bool",
             "visibility": "User",
             "UIGroup": "2 Upper Right"
@@ -146,6 +160,13 @@
             "UIGroup": "3 Lower Left"
         },
         {
+            "name": "SubtractiveDither3",
+            "comment": "If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
             "name": "SpatialFilter3",
             "type": "Int",
             "visibility": "User",
@@ -195,6 +216,13 @@
         {
             "name": "ExtendNoise4",
             "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
+            "name": "SubtractiveDither4",
+            "comment": "If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.",
             "type": "Bool",
             "visibility": "User",
             "UIGroup": "4 Lower Right"
@@ -572,10 +600,31 @@
                     "label": "Bayer"
                 },
                 {
+                    "label": "Bayer Plus Half"
+                },
+                {
                     "label": "Round"
                 },
                 {
                     "label": "Floor"
+                },
+                {
+                    "label": "White4"
+                },
+                {
+                    "label": "White4 Plus Half"
+                },
+                {
+                    "label": "White8"
+                },
+                {
+                    "label": "White8 Plus Half"
+                },
+                {
+                    "label": "White512"
+                },
+                {
+                    "label": "White Triangular"
                 }
             ]
         },

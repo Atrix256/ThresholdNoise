@@ -11,18 +11,20 @@ struct NoiseTypes
     static const int STBN_19 = 5;
     static const int FAST_Blue_Exp_Separate = 6;
     static const int FAST_Blue_Exp_Product = 7;
-    static const int FAST_Binomial3x3_Exp = 8;
-    static const int FAST_Box3x3_Exp = 9;
-    static const int Blue_Tellusim_128_128_64 = 10;
-    static const int Blue_Stable_Fiddusion = 11;
-    static const int R2 = 12;
-    static const int IGN = 13;
-    static const int Bayer4 = 14;
-    static const int Bayer16 = 15;
-    static const int Bayer64 = 16;
-    static const int Bayer256 = 17;
-    static const int Round = 18;
-    static const int Floor = 19;
+    static const int FAST_Triangle_Blue_Exp_Separate = 8;
+    static const int FAST_Triangle_Blue_Exp_Product = 9;
+    static const int FAST_Binomial3x3_Exp = 10;
+    static const int FAST_Box3x3_Exp = 11;
+    static const int Blue_Tellusim_128_128_64 = 12;
+    static const int Blue_Stable_Fiddusion = 13;
+    static const int R2 = 14;
+    static const int IGN = 15;
+    static const int Bayer4 = 16;
+    static const int Bayer16 = 17;
+    static const int Bayer64 = 18;
+    static const int Bayer256 = 19;
+    static const int Round = 20;
+    static const int Floor = 21;
 };
 
 struct SpatialFilters
@@ -30,6 +32,14 @@ struct SpatialFilters
     static const int None = 0;
     static const int Box = 1;
     static const int Gauss = 2;
+};
+
+struct TemporalFilters
+{
+    static const int None = 0;
+    static const int Ema = 1;
+    static const int EMA_plus_Clamp = 2;
+    static const int Monte_Carlo = 3;
 };
 
 struct Struct__SpatialFilterCB

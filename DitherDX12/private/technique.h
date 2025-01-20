@@ -31,6 +31,8 @@ namespace Dither
         STBN_19,
         FAST_Blue_Exp_Separate,
         FAST_Blue_Exp_Product,
+        FAST_Triangle_Blue_Exp_Separate,
+        FAST_Triangle_Blue_Exp_Product,
         FAST_Binomial3x3_Exp,
         FAST_Box3x3_Exp,
         Blue_Tellusim_128_128_64,
@@ -38,8 +40,15 @@ namespace Dither
         R2,
         IGN,
         Bayer,
+        Bayer_Plus_Half,
         Round,
         Floor,
+        White4,
+        White4_Plus_Half,
+        White8,
+        White8_Plus_Half,
+        White512,
+        White_Triangular,
     };
 
     enum class SpatialFilters: int
@@ -47,6 +56,14 @@ namespace Dither
         None,
         Box,
         Gauss,
+    };
+
+    enum class TemporalFilters: int
+    {
+        None,
+        EMA,
+        EMA_plus_Clamp,
+        Monte_Carlo,
     };
 
     inline const char* EnumToString(NoiseTypes value, bool displayString = false)
@@ -61,6 +78,8 @@ namespace Dither
             case NoiseTypes::STBN_19: return displayString ? "STBN_19" : "STBN_19";
             case NoiseTypes::FAST_Blue_Exp_Separate: return displayString ? "FAST_Blue_Exp_Separate" : "FAST_Blue_Exp_Separate";
             case NoiseTypes::FAST_Blue_Exp_Product: return displayString ? "FAST_Blue_Exp_Product" : "FAST_Blue_Exp_Product";
+            case NoiseTypes::FAST_Triangle_Blue_Exp_Separate: return displayString ? "FAST_Triangle_Blue_Exp_Separate" : "FAST_Triangle_Blue_Exp_Separate";
+            case NoiseTypes::FAST_Triangle_Blue_Exp_Product: return displayString ? "FAST_Triangle_Blue_Exp_Product" : "FAST_Triangle_Blue_Exp_Product";
             case NoiseTypes::FAST_Binomial3x3_Exp: return displayString ? "FAST_Binomial3x3_Exp" : "FAST_Binomial3x3_Exp";
             case NoiseTypes::FAST_Box3x3_Exp: return displayString ? "FAST_Box3x3_Exp" : "FAST_Box3x3_Exp";
             case NoiseTypes::Blue_Tellusim_128_128_64: return displayString ? "Blue_Tellusim_128_128_64" : "Blue_Tellusim_128_128_64";
@@ -68,8 +87,15 @@ namespace Dither
             case NoiseTypes::R2: return displayString ? "R2" : "R2";
             case NoiseTypes::IGN: return displayString ? "IGN" : "IGN";
             case NoiseTypes::Bayer: return displayString ? "Bayer" : "Bayer";
+            case NoiseTypes::Bayer_Plus_Half: return displayString ? "Bayer Plus Half" : "Bayer_Plus_Half";
             case NoiseTypes::Round: return displayString ? "Round" : "Round";
             case NoiseTypes::Floor: return displayString ? "Floor" : "Floor";
+            case NoiseTypes::White4: return displayString ? "White4" : "White4";
+            case NoiseTypes::White4_Plus_Half: return displayString ? "White4 Plus Half" : "White4_Plus_Half";
+            case NoiseTypes::White8: return displayString ? "White8" : "White8";
+            case NoiseTypes::White8_Plus_Half: return displayString ? "White8 Plus Half" : "White8_Plus_Half";
+            case NoiseTypes::White512: return displayString ? "White512" : "White512";
+            case NoiseTypes::White_Triangular: return displayString ? "White Triangular" : "White_Triangular";
             default: return nullptr;
         }
     }
@@ -81,6 +107,18 @@ namespace Dither
             case SpatialFilters::None: return displayString ? "None" : "None";
             case SpatialFilters::Box: return displayString ? "Box" : "Box";
             case SpatialFilters::Gauss: return displayString ? "Gauss" : "Gauss";
+            default: return nullptr;
+        }
+    }
+
+    inline const char* EnumToString(TemporalFilters value, bool displayString = false)
+    {
+        switch(value)
+        {
+            case TemporalFilters::None: return displayString ? "None" : "None";
+            case TemporalFilters::EMA: return displayString ? "EMA" : "EMA";
+            case TemporalFilters::EMA_plus_Clamp: return displayString ? "EMA + Clamp" : "EMA_plus_Clamp";
+            case TemporalFilters::Monte_Carlo: return displayString ? "Monte Carlo" : "Monte_Carlo";
             default: return nullptr;
         }
     }
@@ -99,11 +137,19 @@ namespace Dither
             unsigned int Animate3 = true;  // If false, does not animate, even if the global Animate variable is true
             unsigned int Animate4 = true;  // If false, does not animate, even if the global Animate variable is true
             int BitsPerColorChannel = 8;
+            unsigned int ExtendNoise1 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            unsigned int ExtendNoise2 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            unsigned int ExtendNoise3 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
+            unsigned int ExtendNoise4 = false;  // If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.
             int FrameIndex = 0;
             int NoiseType1 = (int)NoiseTypes::White;  // Upper Left
             int NoiseType2 = (int)NoiseTypes::White;  // Upper Right
             int NoiseType3 = (int)NoiseTypes::White;  // Lower Left
             int NoiseType4 = (int)NoiseTypes::White;  // Lower Right
+            unsigned int SubtractiveDither1 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
+            unsigned int SubtractiveDither2 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
+            unsigned int SubtractiveDither3 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
+            unsigned int SubtractiveDither4 = false;  // If true, simulates subtractive dither by dequantizing after quantization, and subtracting dither value.
             float2 _padding0 = {0.0f,0.0f};  // Padding
         };
 
@@ -121,14 +167,16 @@ namespace Dither
 
         struct Struct__TemporalFilterCB
         {
-            unsigned int NeighborhoodClamp1 = false;
-            unsigned int NeighborhoodClamp2 = false;
-            unsigned int NeighborhoodClamp3 = false;
-            unsigned int NeighborhoodClamp4 = false;
-            float TemporalFilterAlpha1 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            float TemporalFilterAlpha2 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            float TemporalFilterAlpha3 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
-            float TemporalFilterAlpha4 = 1.000000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
+            unsigned int Reset_Accumulation = false;
+            int TemporalFilter1 = (int)TemporalFilters::None;
+            int TemporalFilter2 = (int)TemporalFilters::None;
+            int TemporalFilter3 = (int)TemporalFilters::None;
+            int TemporalFilter4 = (int)TemporalFilters::None;
+            float TemporalFilterAlpha1 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
+            float TemporalFilterAlpha2 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
+            float TemporalFilterAlpha3 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
+            float TemporalFilterAlpha4 = 0.100000f;  // Alpha for exponential moving average. 0.1 is common for TAA.
+            float3 _padding0 = {0.0f,0.0f,0.0f};  // Padding
         };
 
         // Variables
@@ -217,6 +265,20 @@ namespace Dither
         DXGI_FORMAT texture__loadedTexture_9_format = DXGI_FORMAT_UNKNOWN;
         static const D3D12_RESOURCE_FLAGS texture__loadedTexture_9_flags =  D3D12_RESOURCE_FLAG_NONE;
         const D3D12_RESOURCE_STATES c_texture__loadedTexture_9_endingState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+        ID3D12Resource* texture__loadedTexture_10 = nullptr;
+        unsigned int texture__loadedTexture_10_size[3] = { 0, 0, 0 };
+        unsigned int texture__loadedTexture_10_numMips = 0;
+        DXGI_FORMAT texture__loadedTexture_10_format = DXGI_FORMAT_UNKNOWN;
+        static const D3D12_RESOURCE_FLAGS texture__loadedTexture_10_flags =  D3D12_RESOURCE_FLAG_NONE;
+        const D3D12_RESOURCE_STATES c_texture__loadedTexture_10_endingState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+        ID3D12Resource* texture__loadedTexture_11 = nullptr;
+        unsigned int texture__loadedTexture_11_size[3] = { 0, 0, 0 };
+        unsigned int texture__loadedTexture_11_numMips = 0;
+        DXGI_FORMAT texture__loadedTexture_11_format = DXGI_FORMAT_UNKNOWN;
+        static const D3D12_RESOURCE_FLAGS texture__loadedTexture_11_flags =  D3D12_RESOURCE_FLAG_NONE;
+        const D3D12_RESOURCE_STATES c_texture__loadedTexture_11_endingState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
 
         Struct__DitherCB constantBuffer__DitherCB_cpu;
         ID3D12Resource* constantBuffer__DitherCB = nullptr;

@@ -205,11 +205,9 @@ Shader Resources:
 /*
 TODO:
 
-* find info about triangle noise going to non triangle at low and high?
-* I don't think bayer is animating correctly. it isn't converging at 1 bit
-* also add subtractive dithering and talk about it.
-* check in proj and solution files, but with relative paths instead of absolute.
+* find info about triangle noise going to non triangle at low and high? and link to it.
 * Make sure c++ dx12 generated code is up to date for both
+* check in proj and solution files, but with relative paths instead of absolute.
 
 
 Threshold blog post notes:
@@ -228,6 +226,10 @@ title image: Evolution of dithering
 * Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
 * show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
 
+* subtractive dithering: show how there is no obvious banding. both with white noise and blue noise. does darken at low bit depths though (and triangular brightens). compare to triangular which also doesn't have banding?
+
+* dithering link to integration?
+
 * show extended vs not under monte carlo
 
 * Threshold test as a second blog post!  Maybe investigate it before writing post?
@@ -235,6 +237,11 @@ title image: Evolution of dithering
 * maybe mention that the random offset noise could be seen as part of the "noise extension" logic. It is just that Z is 1.
 
 * talk about how we offset the texture to get the 3 values for each noise type
+
+* bayer doesn't converge when randomly offset, weird!
+ * why not?
+ * i think it might be due to for instance 8x8 being 1/64th values, while blue noise has 1/256
+ * yes, the quantization. Use quantized white noise to show it!
 
 * R2 and Bayer don't have a natural way to animate them over time, so each frame has a different white noise offset (others don't either)
 * describe each noise type
@@ -287,4 +294,9 @@ Link to:
 * beyond white noise video
 * STBN and FAST repos
 
+* triangular dithering stuff:
+ * https://www.shadertoy.com/view/4ssXRX
+ * "proper dithering" https://www.shadertoy.com/view/Wts3zH
+ * you added comments here: https://www.shadertoy.com/view/4t2SDh
+ 
 */

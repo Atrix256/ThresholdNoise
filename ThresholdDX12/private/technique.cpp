@@ -70,7 +70,7 @@ namespace Threshold
             samplers[0].RegisterSpace = 0;
             samplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-            D3D12_DESCRIPTOR_RANGE ranges[14];
+            D3D12_DESCRIPTOR_RANGE ranges[16];
 
             // Input
             ranges[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
@@ -163,14 +163,28 @@ namespace Threshold
             ranges[12].RegisterSpace = 0;
             ranges[12].OffsetInDescriptorsFromTableStart = 12;
 
-            // _ThresholdCB
-            ranges[13].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
+            // _loadedTexture_10
+            ranges[13].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
             ranges[13].NumDescriptors = 1;
-            ranges[13].BaseShaderRegister = 0;
+            ranges[13].BaseShaderRegister = 12;
             ranges[13].RegisterSpace = 0;
             ranges[13].OffsetInDescriptorsFromTableStart = 13;
 
-            if(!DX12Utils::MakeRootSig(device, ranges, 14, samplers, 1, &ContextInternal::computeShader_Threshold_rootSig, (c_debugNames ? L"Threshold" : nullptr), Context::LogFn))
+            // _loadedTexture_11
+            ranges[14].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+            ranges[14].NumDescriptors = 1;
+            ranges[14].BaseShaderRegister = 13;
+            ranges[14].RegisterSpace = 0;
+            ranges[14].OffsetInDescriptorsFromTableStart = 14;
+
+            // _ThresholdCB
+            ranges[15].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
+            ranges[15].NumDescriptors = 1;
+            ranges[15].BaseShaderRegister = 0;
+            ranges[15].RegisterSpace = 0;
+            ranges[15].OffsetInDescriptorsFromTableStart = 15;
+
+            if(!DX12Utils::MakeRootSig(device, ranges, 16, samplers, 1, &ContextInternal::computeShader_Threshold_rootSig, (c_debugNames ? L"Threshold" : nullptr), Context::LogFn))
                 return false;
 
             D3D_SHADER_MACRO defines[] = {
@@ -1043,6 +1057,18 @@ namespace Threshold
             m_internal.texture__loadedTexture_9 = nullptr;
         }
 
+        if(m_internal.texture__loadedTexture_10)
+        {
+            s_delayedRelease.Add(m_internal.texture__loadedTexture_10);
+            m_internal.texture__loadedTexture_10 = nullptr;
+        }
+
+        if(m_internal.texture__loadedTexture_11)
+        {
+            s_delayedRelease.Add(m_internal.texture__loadedTexture_11);
+            m_internal.texture__loadedTexture_11 = nullptr;
+        }
+
         // _ThresholdCB
         if (m_internal.constantBuffer__ThresholdCB)
         {
@@ -1077,7 +1103,7 @@ namespace Threshold
         // reset the timer index
         s_timerIndex = 0;
 
-        ScopedPerfEvent scopedPerf("Threshold", commandList, 23);
+        ScopedPerfEvent scopedPerf("Threshold", commandList, 25);
 
         std::chrono::high_resolution_clock::time_point startPointCPUTechnique;
         if(context->m_profile)
@@ -1163,6 +1189,10 @@ namespace Threshold
             context->m_internal.constantBuffer__ThresholdCB_cpu.Animate2 = context->m_input.variable_Animate2;
             context->m_internal.constantBuffer__ThresholdCB_cpu.Animate3 = context->m_input.variable_Animate3;
             context->m_internal.constantBuffer__ThresholdCB_cpu.Animate4 = context->m_input.variable_Animate4;
+            context->m_internal.constantBuffer__ThresholdCB_cpu.ExtendNoise1 = context->m_input.variable_ExtendNoise1;
+            context->m_internal.constantBuffer__ThresholdCB_cpu.ExtendNoise2 = context->m_input.variable_ExtendNoise2;
+            context->m_internal.constantBuffer__ThresholdCB_cpu.ExtendNoise3 = context->m_input.variable_ExtendNoise3;
+            context->m_internal.constantBuffer__ThresholdCB_cpu.ExtendNoise4 = context->m_input.variable_ExtendNoise4;
             context->m_internal.constantBuffer__ThresholdCB_cpu.FrameIndex = context->m_internal.variable_FrameIndex;
             context->m_internal.constantBuffer__ThresholdCB_cpu.NoiseType1 = (int)context->m_input.variable_NoiseType1;
             context->m_internal.constantBuffer__ThresholdCB_cpu.NoiseType2 = (int)context->m_input.variable_NoiseType2;
@@ -1208,12 +1238,14 @@ namespace Threshold
                 { context->m_internal.texture__loadedTexture_5, context->m_internal.texture__loadedTexture_5_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2DArray, false, 0, context->m_internal.texture__loadedTexture_5_size[2], 0 },
                 { context->m_internal.texture__loadedTexture_6, context->m_internal.texture__loadedTexture_6_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2DArray, false, 0, context->m_internal.texture__loadedTexture_6_size[2], 0 },
                 { context->m_internal.texture__loadedTexture_7, context->m_internal.texture__loadedTexture_7_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2DArray, false, 0, context->m_internal.texture__loadedTexture_7_size[2], 0 },
-                { context->m_internal.texture__loadedTexture_8, context->m_internal.texture__loadedTexture_8_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
-                { context->m_internal.texture__loadedTexture_9, context->m_internal.texture__loadedTexture_9_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
+                { context->m_internal.texture__loadedTexture_8, context->m_internal.texture__loadedTexture_8_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2DArray, false, 0, context->m_internal.texture__loadedTexture_8_size[2], 0 },
+                { context->m_internal.texture__loadedTexture_9, context->m_internal.texture__loadedTexture_9_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2DArray, false, 0, context->m_internal.texture__loadedTexture_9_size[2], 0 },
+                { context->m_internal.texture__loadedTexture_10, context->m_internal.texture__loadedTexture_10_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
+                { context->m_internal.texture__loadedTexture_11, context->m_internal.texture__loadedTexture_11_format, DX12Utils::AccessType::SRV, DX12Utils::ResourceType::Texture2D, false, 0, 0, 0 },
                 { context->m_internal.constantBuffer__ThresholdCB, DXGI_FORMAT_UNKNOWN, DX12Utils::AccessType::CBV, DX12Utils::ResourceType::Buffer, false, 256, 1, 0 }
             };
 
-            D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable = GetDescriptorTable(device, s_srvHeap, descriptors, 14, Context::LogFn);
+            D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable = GetDescriptorTable(device, s_srvHeap, descriptors, 16, Context::LogFn);
             commandList->SetComputeRootDescriptorTable(0, descriptorTable);
 
             unsigned int baseDispatchSize[3] = {
@@ -1318,10 +1350,11 @@ namespace Threshold
 
         // Shader Constants: _TemporalFilterCB
         {
-            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp1 = context->m_input.variable_NeighborhoodClamp1;
-            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp2 = context->m_input.variable_NeighborhoodClamp2;
-            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp3 = context->m_input.variable_NeighborhoodClamp3;
-            context->m_internal.constantBuffer__TemporalFilterCB_cpu.NeighborhoodClamp4 = context->m_input.variable_NeighborhoodClamp4;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.Reset_Accumulation = context->m_input.variable_Reset_Accumulation;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilter1 = (int)context->m_input.variable_TemporalFilter1;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilter2 = (int)context->m_input.variable_TemporalFilter2;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilter3 = (int)context->m_input.variable_TemporalFilter3;
+            context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilter4 = (int)context->m_input.variable_TemporalFilter4;
             context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha1 = context->m_input.variable_TemporalFilterAlpha1;
             context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha2 = context->m_input.variable_TemporalFilterAlpha2;
             context->m_internal.constantBuffer__TemporalFilterCB_cpu.TemporalFilterAlpha3 = context->m_input.variable_TemporalFilterAlpha3;
@@ -1401,6 +1434,10 @@ namespace Threshold
 
         // Shader Constants: _AdjustBrightnessCB
         {
+            context->m_internal.constantBuffer__AdjustBrightnessCB_cpu.Brighten1 = context->m_input.variable_Brighten1;
+            context->m_internal.constantBuffer__AdjustBrightnessCB_cpu.Brighten2 = context->m_input.variable_Brighten2;
+            context->m_internal.constantBuffer__AdjustBrightnessCB_cpu.Brighten3 = context->m_input.variable_Brighten3;
+            context->m_internal.constantBuffer__AdjustBrightnessCB_cpu.Brighten4 = context->m_input.variable_Brighten4;
             context->m_internal.constantBuffer__AdjustBrightnessCB_cpu.BrightnessMultiplier = context->m_input.variable_BrightnessMultiplier;
             DX12Utils::CopyConstantsCPUToGPU(s_ubTracker, device, commandList, context->m_internal.constantBuffer__AdjustBrightnessCB, context->m_internal.constantBuffer__AdjustBrightnessCB_cpu, Context::LogFn);
         }
@@ -1972,7 +2009,7 @@ namespace Threshold
                 {
                     textureIndex++;
                     char indexedFileName[1024];
-                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png", s_techniqueLocation.c_str(), textureIndex);
+                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Tent_Blue_Exp/real_tent_gauss1_0_exp0101_separate05_%i.png", s_techniqueLocation.c_str(), textureIndex);
                     DX12Utils::TextureCache::Texture loadedTextureSlice = DX12Utils::TextureCache::GetAs(indexedFileName, false, desiredType, formatInfo.sRGB, formatInfo.channelCount);
 
                     if(!loadedTextureSlice.Valid())
@@ -2030,7 +2067,7 @@ namespace Threshold
                 {
                     textureIndex++;
                     char indexedFileName[1024];
-                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png", s_techniqueLocation.c_str(), textureIndex);
+                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Tent_Blue_Exp/real_tent_gauss1_0_exp0101_product_%i.png", s_techniqueLocation.c_str(), textureIndex);
                     DX12Utils::TextureCache::Texture loadedTextureSlice = DX12Utils::TextureCache::GetAs(indexedFileName, false, desiredType, formatInfo.sRGB, formatInfo.channelCount);
 
                     if(!loadedTextureSlice.Valid())
@@ -2081,6 +2118,122 @@ namespace Threshold
                 else if (formatInfo.channelType == DX12Utils::DXGI_FORMAT_Info::ChannelType::_float)
                     desiredType = DX12Utils::TextureCache::Type::F32;
                 else
+                    Context::LogFn(LogLevel::Error, "Unhandled channel type");
+
+                int textureIndex = -1;
+                while(1)
+                {
+                    textureIndex++;
+                    char indexedFileName[1024];
+                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png", s_techniqueLocation.c_str(), textureIndex);
+                    DX12Utils::TextureCache::Texture loadedTextureSlice = DX12Utils::TextureCache::GetAs(indexedFileName, false, desiredType, formatInfo.sRGB, formatInfo.channelCount);
+
+                    if(!loadedTextureSlice.Valid())
+                    {
+                        if (textureIndex == 0)
+                            Context::LogFn(LogLevel::Error, "Could not load image: %s", indexedFileName);
+                        break;
+                    }
+
+                    if (textureIndex > 0 && (loadedTextureSlice.width != loadedTextureSlices[0].width || loadedTextureSlice.height != loadedTextureSlices[0].height))
+                        Context::LogFn(LogLevel::Error, "%s does not match dimensions of the first texture loaded!", indexedFileName);
+
+                    loadedTextureSlices.push_back(loadedTextureSlice);
+                }
+
+                unsigned int size[3] = { (unsigned int)loadedTextureSlices[0].width, (unsigned int)loadedTextureSlices[0].height, (unsigned int)loadedTextureSlices.size() };
+
+                static const unsigned int desiredNumMips = 1;
+
+                // Create the texture
+                dirty = true;
+                m_internal.texture__loadedTexture_8_size[0] = size[0];
+                m_internal.texture__loadedTexture_8_size[1] = size[1];
+                m_internal.texture__loadedTexture_8_size[2] = size[2];
+                m_internal.texture__loadedTexture_8_numMips = desiredNumMips;
+                m_internal.texture__loadedTexture_8_format = DXGI_FORMAT_R8_UNORM;
+                m_internal.texture__loadedTexture_8 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_8_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2DArray, (c_debugNames ? L"_loadedTexture_8" : nullptr), Context::LogFn);
+
+
+                std::vector<unsigned char> pixels;
+                for (const DX12Utils::TextureCache::Texture& texture : loadedTextureSlices)
+                    pixels.insert(pixels.end(), texture.pixels.begin(), texture.pixels.end());
+
+                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_8, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
+            }
+        }
+
+        // _loadedTexture_9
+        {
+            if (!m_internal.texture__loadedTexture_9)
+            {
+                // Load the texture
+                std::vector<DX12Utils::TextureCache::Texture> loadedTextureSlices;
+                DX12Utils::DXGI_FORMAT_Info formatInfo = DX12Utils::Get_DXGI_FORMAT_Info(DXGI_FORMAT_R8_UNORM, Context::LogFn);
+                DX12Utils::TextureCache::Type desiredType = DX12Utils::TextureCache::Type::U8;
+                if (formatInfo.channelType == DX12Utils::DXGI_FORMAT_Info::ChannelType::_uint8_t)
+                    desiredType = DX12Utils::TextureCache::Type::U8;
+                else if (formatInfo.channelType == DX12Utils::DXGI_FORMAT_Info::ChannelType::_float)
+                    desiredType = DX12Utils::TextureCache::Type::F32;
+                else
+                    Context::LogFn(LogLevel::Error, "Unhandled channel type");
+
+                int textureIndex = -1;
+                while(1)
+                {
+                    textureIndex++;
+                    char indexedFileName[1024];
+                    sprintf_s(indexedFileName, "%lsassets/Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png", s_techniqueLocation.c_str(), textureIndex);
+                    DX12Utils::TextureCache::Texture loadedTextureSlice = DX12Utils::TextureCache::GetAs(indexedFileName, false, desiredType, formatInfo.sRGB, formatInfo.channelCount);
+
+                    if(!loadedTextureSlice.Valid())
+                    {
+                        if (textureIndex == 0)
+                            Context::LogFn(LogLevel::Error, "Could not load image: %s", indexedFileName);
+                        break;
+                    }
+
+                    if (textureIndex > 0 && (loadedTextureSlice.width != loadedTextureSlices[0].width || loadedTextureSlice.height != loadedTextureSlices[0].height))
+                        Context::LogFn(LogLevel::Error, "%s does not match dimensions of the first texture loaded!", indexedFileName);
+
+                    loadedTextureSlices.push_back(loadedTextureSlice);
+                }
+
+                unsigned int size[3] = { (unsigned int)loadedTextureSlices[0].width, (unsigned int)loadedTextureSlices[0].height, (unsigned int)loadedTextureSlices.size() };
+
+                static const unsigned int desiredNumMips = 1;
+
+                // Create the texture
+                dirty = true;
+                m_internal.texture__loadedTexture_9_size[0] = size[0];
+                m_internal.texture__loadedTexture_9_size[1] = size[1];
+                m_internal.texture__loadedTexture_9_size[2] = size[2];
+                m_internal.texture__loadedTexture_9_numMips = desiredNumMips;
+                m_internal.texture__loadedTexture_9_format = DXGI_FORMAT_R8_UNORM;
+                m_internal.texture__loadedTexture_9 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_9_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2DArray, (c_debugNames ? L"_loadedTexture_9" : nullptr), Context::LogFn);
+
+
+                std::vector<unsigned char> pixels;
+                for (const DX12Utils::TextureCache::Texture& texture : loadedTextureSlices)
+                    pixels.insert(pixels.end(), texture.pixels.begin(), texture.pixels.end());
+
+                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_9, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
+            }
+        }
+
+        // _loadedTexture_10
+        {
+            if (!m_internal.texture__loadedTexture_10)
+            {
+                // Load the texture
+                std::vector<DX12Utils::TextureCache::Texture> loadedTextureSlices;
+                DX12Utils::DXGI_FORMAT_Info formatInfo = DX12Utils::Get_DXGI_FORMAT_Info(DXGI_FORMAT_R8_UNORM, Context::LogFn);
+                DX12Utils::TextureCache::Type desiredType = DX12Utils::TextureCache::Type::U8;
+                if (formatInfo.channelType == DX12Utils::DXGI_FORMAT_Info::ChannelType::_uint8_t)
+                    desiredType = DX12Utils::TextureCache::Type::U8;
+                else if (formatInfo.channelType == DX12Utils::DXGI_FORMAT_Info::ChannelType::_float)
+                    desiredType = DX12Utils::TextureCache::Type::F32;
+                else
                     Context::LogFn(LogLevel::Error, "Unhandled channel type for image: Textures/tellusim/128x128_l64_s16_resave.png");
 
                 char loadedTextureFileName[1024];
@@ -2097,25 +2250,25 @@ namespace Threshold
 
                 // Create the texture
                 dirty = true;
-                m_internal.texture__loadedTexture_8_size[0] = size[0];
-                m_internal.texture__loadedTexture_8_size[1] = size[1];
-                m_internal.texture__loadedTexture_8_size[2] = size[2];
-                m_internal.texture__loadedTexture_8_numMips = desiredNumMips;
-                m_internal.texture__loadedTexture_8_format = DXGI_FORMAT_R8_UNORM;
-                m_internal.texture__loadedTexture_8 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_8_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2D, (c_debugNames ? L"_loadedTexture_8" : nullptr), Context::LogFn);
+                m_internal.texture__loadedTexture_10_size[0] = size[0];
+                m_internal.texture__loadedTexture_10_size[1] = size[1];
+                m_internal.texture__loadedTexture_10_size[2] = size[2];
+                m_internal.texture__loadedTexture_10_numMips = desiredNumMips;
+                m_internal.texture__loadedTexture_10_format = DXGI_FORMAT_R8_UNORM;
+                m_internal.texture__loadedTexture_10 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_10_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2D, (c_debugNames ? L"_loadedTexture_10" : nullptr), Context::LogFn);
 
 
                 std::vector<unsigned char> pixels;
                 for (const DX12Utils::TextureCache::Texture& texture : loadedTextureSlices)
                     pixels.insert(pixels.end(), texture.pixels.begin(), texture.pixels.end());
 
-                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_8, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
+                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_10, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
             }
         }
 
-        // _loadedTexture_9
+        // _loadedTexture_11
         {
-            if (!m_internal.texture__loadedTexture_9)
+            if (!m_internal.texture__loadedTexture_11)
             {
                 // Load the texture
                 std::vector<DX12Utils::TextureCache::Texture> loadedTextureSlices;
@@ -2142,19 +2295,19 @@ namespace Threshold
 
                 // Create the texture
                 dirty = true;
-                m_internal.texture__loadedTexture_9_size[0] = size[0];
-                m_internal.texture__loadedTexture_9_size[1] = size[1];
-                m_internal.texture__loadedTexture_9_size[2] = size[2];
-                m_internal.texture__loadedTexture_9_numMips = desiredNumMips;
-                m_internal.texture__loadedTexture_9_format = DXGI_FORMAT_R8_UNORM;
-                m_internal.texture__loadedTexture_9 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_9_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2D, (c_debugNames ? L"_loadedTexture_9" : nullptr), Context::LogFn);
+                m_internal.texture__loadedTexture_11_size[0] = size[0];
+                m_internal.texture__loadedTexture_11_size[1] = size[1];
+                m_internal.texture__loadedTexture_11_size[2] = size[2];
+                m_internal.texture__loadedTexture_11_numMips = desiredNumMips;
+                m_internal.texture__loadedTexture_11_format = DXGI_FORMAT_R8_UNORM;
+                m_internal.texture__loadedTexture_11 = DX12Utils::CreateTexture(device, size, desiredNumMips, DXGI_FORMAT_R8_UNORM, m_internal.texture__loadedTexture_11_flags, D3D12_RESOURCE_STATE_COPY_DEST, DX12Utils::ResourceType::Texture2D, (c_debugNames ? L"_loadedTexture_11" : nullptr), Context::LogFn);
 
 
                 std::vector<unsigned char> pixels;
                 for (const DX12Utils::TextureCache::Texture& texture : loadedTextureSlices)
                     pixels.insert(pixels.end(), texture.pixels.begin(), texture.pixels.end());
 
-                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_9, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
+                DX12Utils::UploadTextureToGPUAndMakeMips(device, commandList, s_ubTracker, m_internal.texture__loadedTexture_11, pixels, size, desiredNumMips, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, LogFn);
             }
         }
 

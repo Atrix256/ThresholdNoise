@@ -19,6 +19,22 @@ float3 ConvertToNBits(float3 value, int bits, float3 ditherRnd)
 	);
 }
 
+// AKA Subtractive Dithering
+float ConvertFromNBits(float value, int bits, float ditherRnd)
+{
+	int multiplier = (int(1) << (bits)) - 1;
+	return (value * multiplier - ditherRnd) / multiplier;
+}
+
+float3 ConvertFromNBits(float3 value, int bits, float3 ditherRnd)
+{
+	return float3(
+		ConvertFromNBits(value.r, bits, ditherRnd.r),
+		ConvertFromNBits(value.g, bits, ditherRnd.g),
+		ConvertFromNBits(value.b, bits, ditherRnd.b)
+	);
+}
+
 float ReadNoiseTexture(Texture2DArray<float> tex, uint3 px, float2 offsetF, bool extendNoise)
 {
 	uint3 noiseDims;
@@ -60,6 +76,40 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 	switch (noiseType)
 	{
 		case NoiseTypes::White: return wang_hash_float01(wangStatePixel);
+		case NoiseTypes::White_Triangular:
+		{
+			return ReshapeUniformToTriangle(wang_hash_float01(wangStatePixel));
+		}
+		case NoiseTypes::White4:
+	 	{
+			float value = wang_hash_float01(wangStatePixel);
+			value = clamp(floor(value * 4.0f), 0.0f, 3.0f) / 4.0f;
+			return value;
+		}
+		case NoiseTypes::White4_Plus_Half:
+	 	{
+			float value = wang_hash_float01(wangStatePixel);
+			value = (clamp(floor(value * 4.0f), 0.0f, 3.0f) + 0.5f) / 4.0f;
+			return value;
+		}
+		case NoiseTypes::White8:
+	 	{
+			float value = wang_hash_float01(wangStatePixel);
+			value = clamp(floor(value * 8.0f), 0.0f, 7.0f) / 8.0f;
+			return value;
+		}
+		case NoiseTypes::White8_Plus_Half:
+	 	{
+			float value = wang_hash_float01(wangStatePixel);
+			value = (clamp(floor(value * 8.0f), 0.0f, 7.0f) + 0.5f) / 8.0f;
+			return value;
+		}
+		case NoiseTypes::White512:
+	 	{
+			float value = wang_hash_float01(wangStatePixel);
+			value = clamp(floor(value * 512.0f), 0.0f, 511.0f) / 512.0f;
+			return value;
+		}
 		case NoiseTypes::Blue2D_Offset:
 		{
 			float2 frameOffsetF = float2(wang_hash_float01(wangStateGlobal), wang_hash_float01(wangStateGlobal));
@@ -121,6 +171,15 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 
 			return Bayer(px.x + frameOffset.x, px.y + frameOffset.y, bitsX, bitsY);
 		}
+		case NoiseTypes::Bayer_Plus_Half:
+		{
+			uint2 frameOffset = uint2(wang_hash_uint(wangStateGlobal), wang_hash_uint(wangStateGlobal));
+
+			int bitsX = /*$(Variable:BitsPerColorChannel)*/ / 2;
+			int bitsY = /*$(Variable:BitsPerColorChannel)*/ - bitsX;
+
+			return Bayer(px.x + frameOffset.x, px.y + frameOffset.y, bitsX, bitsY, 0.5f);
+		}
 		case NoiseTypes::Round:
 		{
 			return 0.5f;
@@ -154,6 +213,7 @@ float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, i
 	int noiseType = 0;
 	bool animate = true;
 	bool extendNoise = false;
+	bool subtractiveDither = false;
 	if (px.x <= dims.x)
 	{
 		if (px.y <= dims.y)
@@ -161,12 +221,14 @@ float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, i
 			noiseType = /*$(Variable:NoiseType1)*/;
 			animate = /*$(Variable:Animate1)*/;
 			extendNoise = /*$(Variable:ExtendNoise1)*/;
+			subtractiveDither = /*$(Variable:SubtractiveDither1)*/;
 		}
 		else
 		{
 			noiseType = /*$(Variable:NoiseType3)*/;
 			animate = /*$(Variable:Animate3)*/;
 			extendNoise = /*$(Variable:ExtendNoise3)*/;
+			subtractiveDither = /*$(Variable:SubtractiveDither3)*/;
 		}
 	}
 	else
@@ -176,12 +238,14 @@ float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, i
 			noiseType = /*$(Variable:NoiseType2)*/;
 			animate = /*$(Variable:Animate2)*/;
 			extendNoise = /*$(Variable:ExtendNoise2)*/;
+			subtractiveDither = /*$(Variable:SubtractiveDither2)*/;
 		}
 		else
 		{
 			noiseType = /*$(Variable:NoiseType4)*/;
 			animate = /*$(Variable:Animate4)*/;
 			extendNoise = /*$(Variable:ExtendNoise4)*/;
+			subtractiveDither = /*$(Variable:SubtractiveDither4)*/;
 		}
 	}
 
@@ -195,6 +259,10 @@ float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, i
 	// Dither
 	float3 rng = GetRng3(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal);
 	color.rgb = ConvertToNBits(color.rgb, /*$(Variable:BitsPerColorChannel)*/, rng);
+
+	// Subtractive dither, if we should
+	if(subtractiveDither)
+		color.rgb = ConvertFromNBits(color.rgb, /*$(Variable:BitsPerColorChannel)*/, rng);
 
 	// Write out result
 	color.rgb = LinearToSRGB(color.rgb);

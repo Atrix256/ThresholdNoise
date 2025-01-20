@@ -19,7 +19,7 @@
             },
             {
                 "name": "BitsPerColorChannel",
-                "value": "1"
+                "value": "2"
             },
             {
                 "name": "Animate",
@@ -27,10 +27,14 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "4"
+                "value": "8"
             },
             {
                 "name": "ExtendNoise1",
+                "value": "false"
+            },
+            {
+                "name": "SubtractiveDither1",
                 "value": "false"
             },
             {
@@ -43,7 +47,7 @@
             },
             {
                 "name": "TemporalFilter1",
-                "value": "3"
+                "value": "1"
             },
             {
                 "name": "TemporalFilterAlpha1",
@@ -55,10 +59,14 @@
             },
             {
                 "name": "NoiseType2",
-                "value": "4"
+                "value": "6"
             },
             {
                 "name": "ExtendNoise2",
+                "value": "false"
+            },
+            {
+                "name": "SubtractiveDither2",
                 "value": "true"
             },
             {
@@ -71,7 +79,7 @@
             },
             {
                 "name": "TemporalFilter2",
-                "value": "3"
+                "value": "1"
             },
             {
                 "name": "TemporalFilterAlpha2",
@@ -83,10 +91,14 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "6"
+                "value": "25"
             },
             {
                 "name": "ExtendNoise3",
+                "value": "false"
+            },
+            {
+                "name": "SubtractiveDither3",
                 "value": "false"
             },
             {
@@ -99,7 +111,7 @@
             },
             {
                 "name": "TemporalFilter3",
-                "value": "3"
+                "value": "1"
             },
             {
                 "name": "TemporalFilterAlpha3",
@@ -111,10 +123,14 @@
             },
             {
                 "name": "NoiseType4",
-                "value": "6"
+                "value": "0"
             },
             {
                 "name": "ExtendNoise4",
+                "value": "false"
+            },
+            {
+                "name": "SubtractiveDither4",
                 "value": "true"
             },
             {
@@ -127,7 +143,7 @@
             },
             {
                 "name": "TemporalFilter4",
-                "value": "3"
+                "value": "1"
             },
             {
                 "name": "TemporalFilterAlpha4",

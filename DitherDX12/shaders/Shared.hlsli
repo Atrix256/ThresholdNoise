@@ -113,7 +113,7 @@ float IntegrateGaussian(float x, float sigma)
 
 // Portions of this code were based on https://bisqwit.iki.fi/story/howto/dither/jy/
 // returns M_{xy} for an XxY Bayer Matrix
-float Bayer(uint x, uint y, uint XBits, uint YBits)
+float Bayer(uint x, uint y, uint XBits, uint YBits, float addBeforeDiv = 0.0f)
 {
     if (YBits == 0 || (XBits < YBits && XBits != 0))
     {
@@ -152,7 +152,27 @@ float Bayer(uint x, uint y, uint XBits, uint YBits)
         }
     }
 
-    return float(value) / float(matrixWidth*matrixHeight);
+    return float(value + addBeforeDiv) / float(matrixWidth*matrixHeight);
 }
 
 static const float c_goldenRatioConjugate = 0.61803399f;
+
+float ReshapeUniformToTriangle(float rnd)
+{
+    float input = rnd;
+
+    rnd = frac(rnd + 0.5f);
+    float orig = rnd * 2.0f - 1.0f;
+    rnd = (orig == 0.0f) ? -1.0f : (orig / sqrt(abs(orig)));
+    rnd = rnd - sign(orig) + 0.5f;
+    
+    if (rnd < -1.0f)
+    {
+        if (input < 0.1f)
+            rnd = -0.5f;
+        else if (input > 0.9f)
+            rnd = 1.5f;
+    }
+
+    return rnd;
+}
