@@ -14,6 +14,10 @@
         ],
         "savedVariables": [
             {
+                "name": "Reset_Accumulation",
+                "value": "false"
+            },
+            {
                 "name": "BitsPerColorChannel",
                 "value": "1"
             },
@@ -23,23 +27,27 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "6"
+                "value": "4"
+            },
+            {
+                "name": "ExtendNoise1",
+                "value": "false"
             },
             {
                 "name": "SpatialFilter1",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam1",
                 "value": "1.000000"
             },
             {
-                "name": "TemporalFilterAlpha1",
-                "value": "0.100000"
+                "name": "TemporalFilter1",
+                "value": "3"
             },
             {
-                "name": "NeighborhoodClamp1",
-                "value": "false"
+                "name": "TemporalFilterAlpha1",
+                "value": "0.100000"
             },
             {
                 "name": "Animate1",
@@ -47,23 +55,27 @@
             },
             {
                 "name": "NoiseType2",
-                "value": "7"
+                "value": "4"
+            },
+            {
+                "name": "ExtendNoise2",
+                "value": "true"
             },
             {
                 "name": "SpatialFilter2",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam2",
                 "value": "1.000000"
             },
             {
-                "name": "TemporalFilterAlpha2",
-                "value": "0.100000"
+                "name": "TemporalFilter2",
+                "value": "3"
             },
             {
-                "name": "NeighborhoodClamp2",
-                "value": "false"
+                "name": "TemporalFilterAlpha2",
+                "value": "0.100000"
             },
             {
                 "name": "Animate2",
@@ -71,23 +83,27 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "10"
+                "value": "6"
+            },
+            {
+                "name": "ExtendNoise3",
+                "value": "false"
             },
             {
                 "name": "SpatialFilter3",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam3",
-                "value": "2.000000"
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilter3",
+                "value": "3"
             },
             {
                 "name": "TemporalFilterAlpha3",
                 "value": "0.100000"
-            },
-            {
-                "name": "NeighborhoodClamp3",
-                "value": "false"
             },
             {
                 "name": "Animate3",
@@ -95,23 +111,27 @@
             },
             {
                 "name": "NoiseType4",
-                "value": "9"
+                "value": "6"
+            },
+            {
+                "name": "ExtendNoise4",
+                "value": "true"
             },
             {
                 "name": "SpatialFilter4",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam4",
-                "value": "2.000000"
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilter4",
+                "value": "3"
             },
             {
                 "name": "TemporalFilterAlpha4",
                 "value": "0.100000"
-            },
-            {
-                "name": "NeighborhoodClamp4",
-                "value": "false"
             },
             {
                 "name": "Animate4",

@@ -14,18 +14,18 @@
 
 	// Get the parameters for whatever quadrant we are in
 	float temporalAlpha = 1.0f;
-	bool neighborhoodClamp = false;
+	int temporalFilter = TemporalFilters::None;
 	if (px.x <= dims.x)
 	{
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha1)*/;
-			neighborhoodClamp = /*$(Variable:NeighborhoodClamp1)*/;
+			temporalFilter = /*$(Variable:TemporalFilter1)*/;
 		}
 		else
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha3)*/;
-			neighborhoodClamp = /*$(Variable:NeighborhoodClamp3)*/;
+			temporalFilter = /*$(Variable:TemporalFilter3)*/;
 		}
 	}
 	else
@@ -33,14 +33,15 @@
 		if (px.y <= dims.y)
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha2)*/;
-			neighborhoodClamp = /*$(Variable:NeighborhoodClamp2)*/;
+			temporalFilter = /*$(Variable:TemporalFilter2)*/;
 		}
 		else
 		{
 			temporalAlpha = /*$(Variable:TemporalFilterAlpha4)*/;
-			neighborhoodClamp = /*$(Variable:NeighborhoodClamp4)*/;
+			temporalFilter = /*$(Variable:TemporalFilter4)*/;
 		}
 	}
+	bool neighborhoodClamp = (temporalFilter == TemporalFilters::EMA_plus_Clamp);
 
 	// Get the previous and next colors
 	float4 temporalAccum = TemporalAccum[px];
@@ -48,9 +49,23 @@
 	float3 nextValue = Input[px].rgb;
 
 	// Reset temporal buffer when the temporal filter parameters change, or when the temporal accumulation buffer doesn't have data in it yet (alpha is 0)
-	if (temporalAccum.a < 1.0f)
+	// Also reset every frame if the filter is "none"
+	// Also reset if the user clicks "Reset Accumulation"
+	if (temporalAccum.a < 1.0f || temporalFilter == TemporalFilters::None)
 		temporalAlpha = 1.0f;
 	temporalAlpha = clamp(temporalAlpha, 0.0f, 1.0f);
+
+	// Logic for monte carlo
+	float alphaOut = 1.0f;
+	if (temporalFilter == TemporalFilters::Monte_Carlo)
+	{
+		if (/*$(Variable:Reset Accumulation)*/)
+			temporalAccum.a = 1.0f;
+
+		float sampleCount = max(temporalAccum.a, 1.0f);
+		alphaOut = sampleCount + 1.0f;
+		temporalAlpha = 1.0f / sampleCount;
+	}
 
 	// Do a neighborhood clamp if we should, to simulate that anti ghosting feature of TAA
 	if (neighborhoodClamp && temporalAlpha < 1.0f)
@@ -75,7 +90,7 @@
 	float3 value = lerp(lastValue, nextValue, temporalAlpha);
 
 	// Write result to output, and accumulation buffer
-	TemporalAccum[px] = float4(value, 1.0f);
+	TemporalAccum[px] = float4(value, alphaOut);
 	Output[px] = float4(LinearToSRGB(value), 1.0f);
 }
 

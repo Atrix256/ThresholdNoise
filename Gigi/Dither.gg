@@ -3,6 +3,14 @@
     "version": "0.99b",
     "variables": [
         {
+            "name": "Reset Accumulation",
+            "type": "Bool",
+            "visibility": "User",
+            "UISettings": {
+                "UIHint": "Button"
+            }
+        },
+        {
             "name": "BitsPerColorChannel",
             "type": "Int",
             "dflt": "8",
@@ -23,6 +31,13 @@
             "UIGroup": "1 Upper Left"
         },
         {
+            "name": "ExtendNoise1",
+            "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "1 Upper Left"
+        },
+        {
             "name": "SpatialFilter1",
             "type": "Int",
             "visibility": "User",
@@ -38,17 +53,18 @@
             "UIGroup": "1 Upper Left"
         },
         {
-            "name": "TemporalFilterAlpha1",
-            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
-            "type": "Float",
-            "dflt": "1.0f",
+            "name": "TemporalFilter1",
+            "type": "Int",
+            "dflt": "None",
             "visibility": "User",
+            "Enum": "TemporalFilters",
             "UIGroup": "1 Upper Left"
         },
         {
-            "name": "NeighborhoodClamp1",
-            "type": "Bool",
-            "dflt": "false",
+            "name": "TemporalFilterAlpha1",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "0.1f",
             "visibility": "User",
             "UIGroup": "1 Upper Left"
         },
@@ -69,6 +85,13 @@
             "UIGroup": "2 Upper Right"
         },
         {
+            "name": "ExtendNoise2",
+            "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "2 Upper Right"
+        },
+        {
             "name": "SpatialFilter2",
             "type": "Int",
             "visibility": "User",
@@ -84,17 +107,18 @@
             "UIGroup": "2 Upper Right"
         },
         {
-            "name": "TemporalFilterAlpha2",
-            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
-            "type": "Float",
-            "dflt": "1.0f",
+            "name": "TemporalFilter2",
+            "type": "Int",
+            "dflt": "None",
             "visibility": "User",
+            "Enum": "TemporalFilters",
             "UIGroup": "2 Upper Right"
         },
         {
-            "name": "NeighborhoodClamp2",
-            "type": "Bool",
-            "dflt": "false",
+            "name": "TemporalFilterAlpha2",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "0.1f",
             "visibility": "User",
             "UIGroup": "2 Upper Right"
         },
@@ -115,6 +139,13 @@
             "UIGroup": "3 Lower Left"
         },
         {
+            "name": "ExtendNoise3",
+            "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "3 Lower Left"
+        },
+        {
             "name": "SpatialFilter3",
             "type": "Int",
             "visibility": "User",
@@ -130,17 +161,18 @@
             "UIGroup": "3 Lower Left"
         },
         {
-            "name": "TemporalFilterAlpha3",
-            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
-            "type": "Float",
-            "dflt": "1.0f",
+            "name": "TemporalFilter3",
+            "type": "Int",
+            "dflt": "None",
             "visibility": "User",
+            "Enum": "TemporalFilters",
             "UIGroup": "3 Lower Left"
         },
         {
-            "name": "NeighborhoodClamp3",
-            "type": "Bool",
-            "dflt": "false",
+            "name": "TemporalFilterAlpha3",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "0.1f",
             "visibility": "User",
             "UIGroup": "3 Lower Left"
         },
@@ -161,6 +193,13 @@
             "UIGroup": "4 Lower Right"
         },
         {
+            "name": "ExtendNoise4",
+            "comment": "If true, uses a 2d low discrepancy shuffle to offset the texture every cycle, using all offsets before repeating, in a low discrepancy pattern.",
+            "type": "Bool",
+            "visibility": "User",
+            "UIGroup": "4 Lower Right"
+        },
+        {
             "name": "SpatialFilter4",
             "type": "Int",
             "visibility": "User",
@@ -176,17 +215,18 @@
             "UIGroup": "4 Lower Right"
         },
         {
-            "name": "TemporalFilterAlpha4",
-            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
-            "type": "Float",
-            "dflt": "1.0f",
+            "name": "TemporalFilter4",
+            "type": "Int",
+            "dflt": "None",
             "visibility": "User",
+            "Enum": "TemporalFilters",
             "UIGroup": "4 Lower Right"
         },
         {
-            "name": "NeighborhoodClamp4",
-            "type": "Bool",
-            "dflt": "false",
+            "name": "TemporalFilterAlpha4",
+            "comment": "Alpha for exponential moving average. 0.1 is common for TAA.",
+            "type": "Float",
+            "dflt": "0.1f",
             "visibility": "User",
             "UIGroup": "4 Lower Right"
         },
@@ -266,6 +306,10 @@
     "fileCopies": [
         {
             "fileName": "Shared.hlsli",
+            "type": "Shader"
+        },
+        {
+            "fileName": "LDSShuffler.hlsli",
             "type": "Shader"
         },
         {
@@ -501,6 +545,12 @@
                     "label": "FAST_Blue_Exp_Product"
                 },
                 {
+                    "label": "FAST_Triangle_Blue_Exp_Separate"
+                },
+                {
+                    "label": "FAST_Triangle_Blue_Exp_Product"
+                },
+                {
                     "label": "FAST_Binomial3x3_Exp"
                 },
                 {
@@ -542,6 +592,23 @@
                     "label": "Gauss"
                 }
             ]
+        },
+        {
+            "name": "TemporalFilters",
+            "items": [
+                {
+                    "label": "None"
+                },
+                {
+                    "label": "EMA"
+                },
+                {
+                    "label": "EMA + Clamp"
+                },
+                {
+                    "label": "Monte Carlo"
+                }
+            ]
         }
     ],
     "setVars": [
@@ -581,5 +648,8 @@
     ],
     "buildSettings": {
         "outDX12": "../DitherDX12/"
+    },
+    "PrimaryOutput": {
+        "name": "Color"
     }
 }

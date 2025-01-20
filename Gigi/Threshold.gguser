@@ -25,12 +25,16 @@
         ],
         "savedVariables": [
             {
+                "name": "Reset_Accumulation",
+                "value": "false"
+            },
+            {
                 "name": "Threshold",
-                "value": "0.017000"
+                "value": "0.058000"
             },
             {
                 "name": "BrightnessMultiplier",
-                "value": "58.823524"
+                "value": "17.241381"
             },
             {
                 "name": "Auto_Brightness",
@@ -42,98 +46,130 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "0"
+                "value": "4"
+            },
+            {
+                "name": "ExtendNoise1",
+                "value": "false"
             },
             {
                 "name": "SpatialFilter1",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam1",
-                "value": "4.000000"
-            },
-            {
-                "name": "TemporalFilterAlpha1",
                 "value": "1.000000"
             },
             {
-                "name": "NeighborhoodClamp1",
-                "value": "false"
+                "name": "TemporalFilter1",
+                "value": "3"
+            },
+            {
+                "name": "TemporalFilterAlpha1",
+                "value": "0.100000"
             },
             {
                 "name": "Animate1",
                 "value": "true"
             },
             {
+                "name": "Brighten1",
+                "value": "true"
+            },
+            {
                 "name": "NoiseType2",
-                "value": "0"
+                "value": "4"
+            },
+            {
+                "name": "ExtendNoise2",
+                "value": "true"
             },
             {
                 "name": "SpatialFilter2",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam2",
-                "value": "4.000000"
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilter2",
+                "value": "3"
             },
             {
                 "name": "TemporalFilterAlpha2",
                 "value": "0.100000"
             },
             {
-                "name": "NeighborhoodClamp2",
-                "value": "false"
-            },
-            {
                 "name": "Animate2",
                 "value": "true"
             },
             {
+                "name": "Brighten2",
+                "value": "true"
+            },
+            {
                 "name": "NoiseType3",
-                "value": "7"
+                "value": "6"
+            },
+            {
+                "name": "ExtendNoise3",
+                "value": "false"
             },
             {
                 "name": "SpatialFilter3",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam3",
-                "value": "4.000000"
-            },
-            {
-                "name": "TemporalFilterAlpha3",
                 "value": "1.000000"
             },
             {
-                "name": "NeighborhoodClamp3",
-                "value": "false"
+                "name": "TemporalFilter3",
+                "value": "3"
+            },
+            {
+                "name": "TemporalFilterAlpha3",
+                "value": "0.100000"
             },
             {
                 "name": "Animate3",
                 "value": "true"
             },
             {
+                "name": "Brighten3",
+                "value": "true"
+            },
+            {
                 "name": "NoiseType4",
-                "value": "7"
+                "value": "6"
+            },
+            {
+                "name": "ExtendNoise4",
+                "value": "true"
             },
             {
                 "name": "SpatialFilter4",
-                "value": "2"
+                "value": "0"
             },
             {
                 "name": "SpatialFilterParam4",
-                "value": "4.000000"
+                "value": "1.000000"
+            },
+            {
+                "name": "TemporalFilter4",
+                "value": "3"
             },
             {
                 "name": "TemporalFilterAlpha4",
                 "value": "0.100000"
             },
             {
-                "name": "NeighborhoodClamp4",
-                "value": "false"
+                "name": "Animate4",
+                "value": "true"
             },
             {
-                "name": "Animate4",
+                "name": "Brighten4",
                 "value": "true"
             }
         ]
