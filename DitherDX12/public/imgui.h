@@ -34,6 +34,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Blue_Exp_Separate_Triangle_Plus",
+                "FAST_Blue_Exp_Product_Triangle_Plus",
                 "FAST_Triangle_Blue_Exp_Separate",
                 "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
@@ -48,10 +50,8 @@ namespace Dither
                 "Floor",
                 "White4",
                 "White4 Plus Half",
-                "White8",
-                "White8 Plus Half",
-                "White512",
                 "White Triangular",
+                "White Triangular Plus",
             };
             ImGui::Combo("NoiseType1", (int*)&context->m_input.variable_NoiseType1, labels, 26);
             ShowToolTip("Upper Left");
@@ -93,6 +93,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Blue_Exp_Separate_Triangle_Plus",
+                "FAST_Blue_Exp_Product_Triangle_Plus",
                 "FAST_Triangle_Blue_Exp_Separate",
                 "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
@@ -107,10 +109,8 @@ namespace Dither
                 "Floor",
                 "White4",
                 "White4 Plus Half",
-                "White8",
-                "White8 Plus Half",
-                "White512",
                 "White Triangular",
+                "White Triangular Plus",
             };
             ImGui::Combo("NoiseType2", (int*)&context->m_input.variable_NoiseType2, labels, 26);
             ShowToolTip("Upper Right");
@@ -152,6 +152,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Blue_Exp_Separate_Triangle_Plus",
+                "FAST_Blue_Exp_Product_Triangle_Plus",
                 "FAST_Triangle_Blue_Exp_Separate",
                 "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
@@ -166,10 +168,8 @@ namespace Dither
                 "Floor",
                 "White4",
                 "White4 Plus Half",
-                "White8",
-                "White8 Plus Half",
-                "White512",
                 "White Triangular",
+                "White Triangular Plus",
             };
             ImGui::Combo("NoiseType3", (int*)&context->m_input.variable_NoiseType3, labels, 26);
             ShowToolTip("Lower Left");
@@ -211,6 +211,8 @@ namespace Dither
                 "STBN_19",
                 "FAST_Blue_Exp_Separate",
                 "FAST_Blue_Exp_Product",
+                "FAST_Blue_Exp_Separate_Triangle_Plus",
+                "FAST_Blue_Exp_Product_Triangle_Plus",
                 "FAST_Triangle_Blue_Exp_Separate",
                 "FAST_Triangle_Blue_Exp_Product",
                 "FAST_Binomial3x3_Exp",
@@ -225,10 +227,8 @@ namespace Dither
                 "Floor",
                 "White4",
                 "White4 Plus Half",
-                "White8",
-                "White8 Plus Half",
-                "White512",
                 "White Triangular",
+                "White Triangular Plus",
             };
             ImGui::Combo("NoiseType4", (int*)&context->m_input.variable_NoiseType4, labels, 26);
             ShowToolTip("Lower Right");

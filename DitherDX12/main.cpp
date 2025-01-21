@@ -512,28 +512,35 @@ int main(int, char**)
             {
                 firstPreExecute = false;
 
-                m_Dither->m_input.texture_Input_format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-
-                m_Dither->m_input.texture_Input = m_Dither->CreateManagedTextureFromFile(
-                    g_pd3dDevice,
-                    g_pd3dCommandList,
-                    m_Dither->m_input.texture_Input_flags,
-                    m_Dither->m_input.texture_Input_format,
-                    DX12Utils::ResourceType::Texture2D,
-                    "assets/Textures/flags_512.png",
-                    true,
-                    m_Dither->m_input.texture_Input_size,
-                    L"texture_Input",
-                    D3D12_RESOURCE_STATE_COMMON
-                );
+                // Texture Input
+                {
+                    const char* fileName = "assets/Textures/flags_512.png";
+                    bool fileIsSRGB = true;
+                    m_Dither->m_input.texture_Input_format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+                    m_Dither->m_input.texture_Input_state = D3D12_RESOURCE_STATE_COMMON;
+                    m_Dither->m_input.texture_Input = m_Dither->CreateManagedTextureFromFile(
+                        g_pd3dDevice,
+                        g_pd3dCommandList,
+                        m_Dither->m_input.texture_Input_flags,
+                        m_Dither->m_input.texture_Input_format,
+                        DX12Utils::ResourceType::Texture2D,
+                        fileName,
+                        fileIsSRGB,
+                        m_Dither->m_input.texture_Input_size,
+                        L"Dither.Input",
+                        m_Dither->m_input.texture_Input_state
+                    );
+                }
             }
 
             Dither::OnNewFrame(NUM_FRAMES_IN_FLIGHT);
             if (m_Dither)
                 Dither::Execute(m_Dither, g_pd3dDevice, g_pd3dCommandList);
 
-            if (m_Dither->m_output.texture_Color)
-                CopyTextureToTexture(g_pd3dCommandList, m_Dither->m_output.texture_Color, m_Dither->m_output.c_texture_Color_endingState, g_mainRenderTargetResource[backBufferIdx], D3D12_RESOURCE_STATE_RENDER_TARGET);
+            // Copy the primary output to the screen
+            if (m_Dither->GetPrimaryOutputTexture())
+                CopyTextureToTexture(g_pd3dCommandList, m_Dither->GetPrimaryOutputTexture(), m_Dither->GetPrimaryOutputTextureState(), g_mainRenderTargetResource[backBufferIdx], D3D12_RESOURCE_STATE_RENDER_TARGET);
+
         }
         // Gigi Modification End
 

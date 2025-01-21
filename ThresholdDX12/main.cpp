@@ -512,16 +512,79 @@ int main(int, char**)
             {
                 firstPreExecute = false;
                 // TODO: Do one time setup here, such as creating imported resources or setting variables
+                // Texture Input
+                {
+                    const char* fileName = "assets/Textures/flags_512.png";
+                    bool fileIsSRGB = true;
+                    m_Threshold->m_input.texture_Input_format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+                    m_Threshold->m_input.texture_Input_state = D3D12_RESOURCE_STATE_COMMON;
+                    m_Threshold->m_input.texture_Input = m_Threshold->CreateManagedTextureFromFile(
+                        g_pd3dDevice,
+                        g_pd3dCommandList,
+                        m_Threshold->m_input.texture_Input_flags,
+                        m_Threshold->m_input.texture_Input_format,
+                        DX12Utils::ResourceType::Texture2D,
+                        fileName,
+                        fileIsSRGB,
+                        m_Threshold->m_input.texture_Input_size,
+                        L"Threshold.Input",
+                        m_Threshold->m_input.texture_Input_state
+                    );
+                }
+
+                // Texture ThresholdMap
+                {
+                    m_Threshold->m_input.texture_ThresholdMap_format = DXGI_FORMAT_R8G8B8A8_UNORM;
+                    m_Threshold->m_input.texture_ThresholdMap_state = D3D12_RESOURCE_STATE_COMMON;
+
+                    // change to #if 1 to load the threshold map image
+                    #if 0
+                        const char* fileName = "assets/Textures/threshold.png";
+                        bool fileIsSRGB = false;
+                        m_Threshold->m_input.texture_ThresholdMap = m_Threshold->CreateManagedTextureFromFile(
+                            g_pd3dDevice,
+                            g_pd3dCommandList,
+                            m_Threshold->m_input.texture_ThresholdMap_flags,
+                            m_Threshold->m_input.texture_ThresholdMap_format,
+                            DX12Utils::ResourceType::Texture2D,
+                            fileName,
+                            fileIsSRGB,
+                            m_Threshold->m_input.texture_ThresholdMap_size,
+                            L"Threshold.ThresholdMap",
+                            m_Threshold->m_input.texture_ThresholdMap_state
+                        );
+                    #else
+                        unsigned char clearValue[4] = { 255, 255, 255, 255 };
+
+                        m_Threshold->m_input.texture_ThresholdMap_size[0] = 32;
+                        m_Threshold->m_input.texture_ThresholdMap_size[1] = 32;
+                        m_Threshold->m_input.texture_ThresholdMap_size[2] = 1;
+
+                        m_Threshold->m_input.texture_ThresholdMap = m_Threshold->CreateManagedTextureAndClear(
+                            g_pd3dDevice,
+                            g_pd3dCommandList,
+                            m_Threshold->m_input.texture_ThresholdMap_flags,
+                            m_Threshold->m_input.texture_ThresholdMap_format,
+                            m_Threshold->m_input.texture_ThresholdMap_size,
+                            1,
+                            DX12Utils::ResourceType::Texture2D,
+                            clearValue,
+                            4,
+                            L"texture_ThresholdMap",
+                            m_Threshold->m_input.texture_ThresholdMap_state
+                        );
+                    #endif
+                }
             }
-            // TODO: do per frame setup here, such as setting camera matrices, or keyboard and mouse states.
 
             Threshold::OnNewFrame(NUM_FRAMES_IN_FLIGHT);
             if (m_Threshold)
                 Threshold::Execute(m_Threshold, g_pd3dDevice, g_pd3dCommandList);
 
-            // TODO: Do post execution work here, such as copying an output texture to g_mainRenderTargetResource[backBufferIdx]
-            //CopyTextureToTexture(g_pd3dCommandList, resource, resourceState, g_mainRenderTargetResource[backBufferIdx], D3D12_RESOURCE_STATE_RENDER_TARGET);
-            
+            // Copy the primary output to the screen
+            if (m_Threshold->GetPrimaryOutputTexture())
+                CopyTextureToTexture(g_pd3dCommandList, m_Threshold->GetPrimaryOutputTexture(), m_Threshold->GetPrimaryOutputTextureState(), g_mainRenderTargetResource[backBufferIdx], D3D12_RESOURCE_STATE_RENDER_TARGET);
+
         }
         // Gigi Modification End
 

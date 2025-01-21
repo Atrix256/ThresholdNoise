@@ -176,3 +176,21 @@ float ReshapeUniformToTriangle(float rnd)
 
     return rnd;
 }
+
+// triangular in the middle, uniform at the edges of quantization bins
+// shadertoy: https://www.shadertoy.com/view/Wts3zH
+// idea: https://computergraphics.stackexchange.com/a/5952/10515
+float ReshapeUniformToTriangleNoEdges(float value, int numDiscreteValues, float rng)
+{
+		float cmax = float(numDiscreteValues) - 1.0f;
+		float ci = value * cmax;
+		float d;
+		if (ci < 0.5 || ci >= cmax - 0.5) {
+			// Uniform distribution on [-0.5, 0.5] for edges.
+			d = rng - 0.5;
+		} else {
+			// Symmetric triangular distribution on [-1, 1].
+			d = (rng < 0.5) ? sqrt(2.0 * rng) - 1.0 : 1.0 - sqrt(2.0 - 2.0*rng);
+		}
+		return d + 0.5f;
+}

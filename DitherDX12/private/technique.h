@@ -31,6 +31,8 @@ namespace Dither
         STBN_19,
         FAST_Blue_Exp_Separate,
         FAST_Blue_Exp_Product,
+        FAST_Blue_Exp_Separate_Triangle_Plus,
+        FAST_Blue_Exp_Product_Triangle_Plus,
         FAST_Triangle_Blue_Exp_Separate,
         FAST_Triangle_Blue_Exp_Product,
         FAST_Binomial3x3_Exp,
@@ -45,10 +47,8 @@ namespace Dither
         Floor,
         White4,
         White4_Plus_Half,
-        White8,
-        White8_Plus_Half,
-        White512,
         White_Triangular,
+        White_Triangular_Plus,
     };
 
     enum class SpatialFilters: int
@@ -78,6 +78,8 @@ namespace Dither
             case NoiseTypes::STBN_19: return displayString ? "STBN_19" : "STBN_19";
             case NoiseTypes::FAST_Blue_Exp_Separate: return displayString ? "FAST_Blue_Exp_Separate" : "FAST_Blue_Exp_Separate";
             case NoiseTypes::FAST_Blue_Exp_Product: return displayString ? "FAST_Blue_Exp_Product" : "FAST_Blue_Exp_Product";
+            case NoiseTypes::FAST_Blue_Exp_Separate_Triangle_Plus: return displayString ? "FAST_Blue_Exp_Separate_Triangle_Plus" : "FAST_Blue_Exp_Separate_Triangle_Plus";
+            case NoiseTypes::FAST_Blue_Exp_Product_Triangle_Plus: return displayString ? "FAST_Blue_Exp_Product_Triangle_Plus" : "FAST_Blue_Exp_Product_Triangle_Plus";
             case NoiseTypes::FAST_Triangle_Blue_Exp_Separate: return displayString ? "FAST_Triangle_Blue_Exp_Separate" : "FAST_Triangle_Blue_Exp_Separate";
             case NoiseTypes::FAST_Triangle_Blue_Exp_Product: return displayString ? "FAST_Triangle_Blue_Exp_Product" : "FAST_Triangle_Blue_Exp_Product";
             case NoiseTypes::FAST_Binomial3x3_Exp: return displayString ? "FAST_Binomial3x3_Exp" : "FAST_Binomial3x3_Exp";
@@ -92,10 +94,8 @@ namespace Dither
             case NoiseTypes::Floor: return displayString ? "Floor" : "Floor";
             case NoiseTypes::White4: return displayString ? "White4" : "White4";
             case NoiseTypes::White4_Plus_Half: return displayString ? "White4 Plus Half" : "White4_Plus_Half";
-            case NoiseTypes::White8: return displayString ? "White8" : "White8";
-            case NoiseTypes::White8_Plus_Half: return displayString ? "White8 Plus Half" : "White8_Plus_Half";
-            case NoiseTypes::White512: return displayString ? "White512" : "White512";
             case NoiseTypes::White_Triangular: return displayString ? "White Triangular" : "White_Triangular";
+            case NoiseTypes::White_Triangular_Plus: return displayString ? "White Triangular Plus" : "White_Triangular_Plus";
             default: return nullptr;
         }
     }

@@ -181,15 +181,9 @@ namespace Dither
             return true;
         }
 
-        ID3D12Resource* GetPrimaryOutputTexture()
-        {
-            
-        }
-
-        D3D12_RESOURCE_STATES GetPrimaryOutputTextureState()
-        {
-            
-        }
+        // Get information about the primary output texture, if specified in the render graph
+        ID3D12Resource* GetPrimaryOutputTexture();
+        D3D12_RESOURCE_STATES GetPrimaryOutputTextureState();
 
     private:
         friend void DestroyContext(Context* context);

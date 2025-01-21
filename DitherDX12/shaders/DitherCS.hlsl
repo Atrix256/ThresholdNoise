@@ -11,24 +11,24 @@ struct NoiseTypes
     static const int STBN_19 = 5;
     static const int FAST_Blue_Exp_Separate = 6;
     static const int FAST_Blue_Exp_Product = 7;
-    static const int FAST_Triangle_Blue_Exp_Separate = 8;
-    static const int FAST_Triangle_Blue_Exp_Product = 9;
-    static const int FAST_Binomial3x3_Exp = 10;
-    static const int FAST_Box3x3_Exp = 11;
-    static const int Blue_Tellusim_128_128_64 = 12;
-    static const int Blue_Stable_Fiddusion = 13;
-    static const int R2 = 14;
-    static const int IGN = 15;
-    static const int Bayer = 16;
-    static const int Bayer_Plus_Half = 17;
-    static const int Round = 18;
-    static const int Floor = 19;
-    static const int White4 = 20;
-    static const int White4_Plus_Half = 21;
-    static const int White8 = 22;
-    static const int White8_Plus_Half = 23;
-    static const int White512 = 24;
-    static const int White_Triangular = 25;
+    static const int FAST_Blue_Exp_Separate_Triangle_Plus = 8;
+    static const int FAST_Blue_Exp_Product_Triangle_Plus = 9;
+    static const int FAST_Triangle_Blue_Exp_Separate = 10;
+    static const int FAST_Triangle_Blue_Exp_Product = 11;
+    static const int FAST_Binomial3x3_Exp = 12;
+    static const int FAST_Box3x3_Exp = 13;
+    static const int Blue_Tellusim_128_128_64 = 14;
+    static const int Blue_Stable_Fiddusion = 15;
+    static const int R2 = 16;
+    static const int IGN = 17;
+    static const int Bayer = 18;
+    static const int Bayer_Plus_Half = 19;
+    static const int Round = 20;
+    static const int Floor = 21;
+    static const int White4 = 22;
+    static const int White4_Plus_Half = 23;
+    static const int White_Triangular = 24;
+    static const int White_Triangular_Plus = 25;
 };
 
 struct SpatialFilters
@@ -156,7 +156,7 @@ float ReadNoiseTexture(Texture2D<float> tex, uint2 px, float2 offsetF)
 	return tex[readPos % noiseDims];
 }
 
-float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixel, inout uint wangStateGlobal, int index)
+float GetRng(uint3 px, int noiseType, bool extendNoise, float color, inout uint wangStatePixel, inout uint wangStateGlobal, int index)
 {
 	float2 indexOffsetF = R2LDS(index);
 
@@ -166,6 +166,10 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 		case NoiseTypes::White_Triangular:
 		{
 			return ReshapeUniformToTriangle(wang_hash_float01(wangStatePixel));
+		}
+		case NoiseTypes::White_Triangular_Plus:
+		{
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(_DitherCB.BitsPerColorChannel), wang_hash_float01(wangStatePixel));
 		}
 		case NoiseTypes::White4:
 	 	{
@@ -177,24 +181,6 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 	 	{
 			float value = wang_hash_float01(wangStatePixel);
 			value = (clamp(floor(value * 4.0f), 0.0f, 3.0f) + 0.5f) / 4.0f;
-			return value;
-		}
-		case NoiseTypes::White8:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = clamp(floor(value * 8.0f), 0.0f, 7.0f) / 8.0f;
-			return value;
-		}
-		case NoiseTypes::White8_Plus_Half:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = (clamp(floor(value * 8.0f), 0.0f, 7.0f) + 0.5f) / 8.0f;
-			return value;
-		}
-		case NoiseTypes::White512:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = clamp(floor(value * 512.0f), 0.0f, 511.0f) / 512.0f;
 			return value;
 		}
 		case NoiseTypes::Blue2D_Offset:
@@ -218,6 +204,16 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 		case NoiseTypes::FAST_Triangle_Blue_Exp_Product: return ReadNoiseTexture(_loadedTexture_7, px, indexOffsetF, extendNoise) * 2.0f - 0.5f;
 		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(_loadedTexture_8, px, indexOffsetF, extendNoise);
 		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(_loadedTexture_9, px, indexOffsetF, extendNoise);
+		case NoiseTypes::FAST_Blue_Exp_Separate_Triangle_Plus:
+		{
+			float rng = ReadNoiseTexture(_loadedTexture_4, px, indexOffsetF, extendNoise);
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(_DitherCB.BitsPerColorChannel), rng);
+		}
+		case NoiseTypes::FAST_Blue_Exp_Product_Triangle_Plus:
+		{
+			float rng = ReadNoiseTexture(_loadedTexture_5, px, indexOffsetF, extendNoise);
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(_DitherCB.BitsPerColorChannel), rng);
+		}
 		case NoiseTypes::Blue_Tellusim_128_128_64:
 		{
 			// This texture is an 8x8 grid of tiles that are each 128x128.
@@ -279,17 +275,17 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 	return 0.0f;
 }
 
-float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, inout uint wangStateGlobal)
+float3 GetRng3(uint3 px, int noiseType, bool extendNoise, float3 color, uint wangStatePixel, inout uint wangStateGlobal)
 {
 	float3 ret;
-	ret.x = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 0);
-	ret.y = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 1);
-	ret.z = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 2);
+	ret.x = GetRng(px, noiseType, extendNoise, color.r, wangStatePixel, wangStateGlobal, 0);
+	ret.y = GetRng(px, noiseType, extendNoise, color.g, wangStatePixel, wangStateGlobal, 1);
+	ret.z = GetRng(px, noiseType, extendNoise, color.b, wangStatePixel, wangStateGlobal, 2);
 	return ret;
 }
 
 [numthreads(8, 8, 1)]
-#line 204
+#line 200
 void csmain(uint3 DTid : SV_DispatchThreadID)
 {
 	// Get the color of the pixel
@@ -346,7 +342,7 @@ void csmain(uint3 DTid : SV_DispatchThreadID)
 	uint wangStateGlobal = wang_hash_init(uint3(1337, 435, px.z));
 
 	// Dither
-	float3 rng = GetRng3(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal);
+	float3 rng = GetRng3(px, noiseType, extendNoise, color.rgb, wangStatePixel, wangStateGlobal);
 	color.rgb = ConvertToNBits(color.rgb, _DitherCB.BitsPerColorChannel, rng);
 
 	// Subtractive dither, if we should
