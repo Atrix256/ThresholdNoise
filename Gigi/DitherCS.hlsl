@@ -69,7 +69,7 @@ float ReadNoiseTexture(Texture2D<float> tex, uint2 px, float2 offsetF)
 	return tex[readPos % noiseDims];
 }
 
-float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixel, inout uint wangStateGlobal, int index)
+float GetRng(uint3 px, int noiseType, bool extendNoise, float color, inout uint wangStatePixel, inout uint wangStateGlobal, int index)
 {
 	float2 indexOffsetF = R2LDS(index);
 
@@ -79,6 +79,10 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 		case NoiseTypes::White_Triangular:
 		{
 			return ReshapeUniformToTriangle(wang_hash_float01(wangStatePixel));
+		}
+		case NoiseTypes::White_Triangular_Plus:
+		{
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(/*$(Variable:BitsPerColorChannel)*/), wang_hash_float01(wangStatePixel));
 		}
 		case NoiseTypes::White4:
 	 	{
@@ -90,24 +94,6 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 	 	{
 			float value = wang_hash_float01(wangStatePixel);
 			value = (clamp(floor(value * 4.0f), 0.0f, 3.0f) + 0.5f) / 4.0f;
-			return value;
-		}
-		case NoiseTypes::White8:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = clamp(floor(value * 8.0f), 0.0f, 7.0f) / 8.0f;
-			return value;
-		}
-		case NoiseTypes::White8_Plus_Half:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = (clamp(floor(value * 8.0f), 0.0f, 7.0f) + 0.5f) / 8.0f;
-			return value;
-		}
-		case NoiseTypes::White512:
-	 	{
-			float value = wang_hash_float01(wangStatePixel);
-			value = clamp(floor(value * 512.0f), 0.0f, 511.0f) / 512.0f;
 			return value;
 		}
 		case NoiseTypes::Blue2D_Offset:
@@ -131,6 +117,16 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 		case NoiseTypes::FAST_Triangle_Blue_Exp_Product: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Tent_Blue_Exp/real_tent_gauss1_0_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF, extendNoise) * 2.0f - 0.5f;
 		case NoiseTypes::FAST_Binomial3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Binomial3x3_Exp/real_uniform_binomial3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF, extendNoise);
 		case NoiseTypes::FAST_Box3x3_Exp: return ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Box3x3_Exp/real_uniform_box3x3_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF, extendNoise);
+		case NoiseTypes::FAST_Blue_Exp_Separate_Triangle_Plus:
+		{
+			float rng = ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_separate05_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF, extendNoise);
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(/*$(Variable:BitsPerColorChannel)*/), rng);
+		}
+		case NoiseTypes::FAST_Blue_Exp_Product_Triangle_Plus:
+		{
+			float rng = ReadNoiseTexture(/*$(Image2DArray:Textures/FAST_Blue_Exp/real_uniform_gauss1_0_exp0101_product_%i.png:R8_Unorm:float:false)*/, px, indexOffsetF, extendNoise);
+			return ReshapeUniformToTriangleNoEdges(color, 1u << uint(/*$(Variable:BitsPerColorChannel)*/), rng);
+		}
 		case NoiseTypes::Blue_Tellusim_128_128_64:
 		{
 			// This texture is an 8x8 grid of tiles that are each 128x128.
@@ -192,12 +188,12 @@ float GetRng(uint3 px, int noiseType, bool extendNoise, inout uint wangStatePixe
 	return 0.0f;
 }
 
-float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, inout uint wangStateGlobal)
+float3 GetRng3(uint3 px, int noiseType, bool extendNoise, float3 color, uint wangStatePixel, inout uint wangStateGlobal)
 {
 	float3 ret;
-	ret.x = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 0);
-	ret.y = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 1);
-	ret.z = GetRng(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal, 2);
+	ret.x = GetRng(px, noiseType, extendNoise, color.r, wangStatePixel, wangStateGlobal, 0);
+	ret.y = GetRng(px, noiseType, extendNoise, color.g, wangStatePixel, wangStateGlobal, 1);
+	ret.z = GetRng(px, noiseType, extendNoise, color.b, wangStatePixel, wangStateGlobal, 2);
 	return ret;
 }
 
@@ -257,7 +253,7 @@ float3 GetRng3(uint3 px, int noiseType, bool extendNoise, uint wangStatePixel, i
 	uint wangStateGlobal = wang_hash_init(uint3(1337, 435, px.z));
 
 	// Dither
-	float3 rng = GetRng3(px, noiseType, extendNoise, wangStatePixel, wangStateGlobal);
+	float3 rng = GetRng3(px, noiseType, extendNoise, color.rgb, wangStatePixel, wangStateGlobal);
 	color.rgb = ConvertToNBits(color.rgb, /*$(Variable:BitsPerColorChannel)*/, rng);
 
 	// Subtractive dither, if we should

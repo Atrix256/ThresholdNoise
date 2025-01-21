@@ -205,9 +205,12 @@ Shader Resources:
 /*
 TODO:
 
-* find info about triangle noise going to non triangle at low and high? and link to it.
+* make it so you can have a label for each square, and it centers it at the top. use it to label your diagrams. might need 2 labels per square. noise type and filtering? or maybe that is 2 different labels?
 * Make sure c++ dx12 generated code is up to date for both
 * check in proj and solution files, but with relative paths instead of absolute.
+
+
+
 
 
 Threshold blog post notes:
@@ -225,6 +228,11 @@ Dither BLOG NOTES:
 title image: Evolution of dithering
 * Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
 * show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
+
+* triangular blue noise that is uniform on the edges.
+ * i was thinking about using triangular blue noise, and mapping to uniform on the edges. Problem: tent not invertible!
+ * so, i took uniform blue noise and remapped it to triangle away from the edges. Works decently. you can see the difference in the sky at 3 bits per color!
+ * there may be a better way to do things, because the triangular remapping does diminish blue noise quality.
 
 * subtractive dithering: show how there is no obvious banding. both with white noise and blue noise. does darken at low bit depths though (and triangular brightens). compare to triangular which also doesn't have banding?
 
@@ -284,6 +292,9 @@ round, white, blue, TAA blue
 
 * put link to post, link to gigi, and description in readme
 
+? how to do "proper dithering" with blue noise? that is uniform on the edges, but triangular in the middle.
+ * maybe we can convert the edges to uniform?
+
 Link to:
 * inside rendering: https://loopit.dk/rendering_inside.pdf
 * bart's post: https://bartwronski.com/2016/10/30/dithering-part-three-real-world-2d-quantization-dithering/
@@ -296,7 +307,8 @@ Link to:
 
 * triangular dithering stuff:
  * https://www.shadertoy.com/view/4ssXRX
- * "proper dithering" https://www.shadertoy.com/view/Wts3zH
- * you added comments here: https://www.shadertoy.com/view/4t2SDh
+  * you added comments here: https://www.shadertoy.com/view/4t2SDh
+ * this where it's uniform at the edes: https://computergraphics.stackexchange.com/a/5952/10515
+  * "proper dithering" https://www.shadertoy.com/view/Wts3zH
  
 */

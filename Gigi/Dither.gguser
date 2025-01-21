@@ -19,7 +19,7 @@
             },
             {
                 "name": "BitsPerColorChannel",
-                "value": "2"
+                "value": "3"
             },
             {
                 "name": "Animate",
@@ -27,7 +27,7 @@
             },
             {
                 "name": "NoiseType1",
-                "value": "8"
+                "value": "6"
             },
             {
                 "name": "ExtendNoise1",
@@ -47,7 +47,7 @@
             },
             {
                 "name": "TemporalFilter1",
-                "value": "1"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha1",
@@ -55,7 +55,7 @@
             },
             {
                 "name": "Animate1",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "NoiseType2",
@@ -67,7 +67,7 @@
             },
             {
                 "name": "SubtractiveDither2",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "SpatialFilter2",
@@ -91,7 +91,7 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "25"
+                "value": "8"
             },
             {
                 "name": "ExtendNoise3",
@@ -111,7 +111,7 @@
             },
             {
                 "name": "TemporalFilter3",
-                "value": "1"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha3",
@@ -119,11 +119,11 @@
             },
             {
                 "name": "Animate3",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "NoiseType4",
-                "value": "0"
+                "value": "8"
             },
             {
                 "name": "ExtendNoise4",
@@ -131,7 +131,7 @@
             },
             {
                 "name": "SubtractiveDither4",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "SpatialFilter4",

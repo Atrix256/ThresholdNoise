@@ -573,6 +573,12 @@
                     "label": "FAST_Blue_Exp_Product"
                 },
                 {
+                    "label": "FAST_Blue_Exp_Separate_Triangle_Plus"
+                },
+                {
+                    "label": "FAST_Blue_Exp_Product_Triangle_Plus"
+                },
+                {
                     "label": "FAST_Triangle_Blue_Exp_Separate"
                 },
                 {
@@ -615,16 +621,10 @@
                     "label": "White4 Plus Half"
                 },
                 {
-                    "label": "White8"
-                },
-                {
-                    "label": "White8 Plus Half"
-                },
-                {
-                    "label": "White512"
-                },
-                {
                     "label": "White Triangular"
+                },
+                {
+                    "label": "White Triangular Plus"
                 }
             ]
         },

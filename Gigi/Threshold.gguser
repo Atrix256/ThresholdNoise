@@ -30,11 +30,11 @@
             },
             {
                 "name": "Threshold",
-                "value": "0.058000"
+                "value": "0.279000"
             },
             {
                 "name": "BrightnessMultiplier",
-                "value": "17.241381"
+                "value": "3.584229"
             },
             {
                 "name": "Auto_Brightness",
@@ -42,11 +42,11 @@
             },
             {
                 "name": "Animate",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "NoiseType1",
-                "value": "16"
+                "value": "0"
             },
             {
                 "name": "ExtendNoise1",
@@ -62,7 +62,7 @@
             },
             {
                 "name": "TemporalFilter1",
-                "value": "3"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha1",
@@ -78,11 +78,11 @@
             },
             {
                 "name": "NoiseType2",
-                "value": "16"
+                "value": "0"
             },
             {
                 "name": "ExtendNoise2",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "SpatialFilter2",
@@ -94,7 +94,7 @@
             },
             {
                 "name": "TemporalFilter2",
-                "value": "3"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha2",
@@ -110,7 +110,7 @@
             },
             {
                 "name": "NoiseType3",
-                "value": "6"
+                "value": "0"
             },
             {
                 "name": "ExtendNoise3",
@@ -126,7 +126,7 @@
             },
             {
                 "name": "TemporalFilter3",
-                "value": "3"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha3",
@@ -142,11 +142,11 @@
             },
             {
                 "name": "NoiseType4",
-                "value": "6"
+                "value": "0"
             },
             {
                 "name": "ExtendNoise4",
-                "value": "true"
+                "value": "false"
             },
             {
                 "name": "SpatialFilter4",
@@ -158,7 +158,7 @@
             },
             {
                 "name": "TemporalFilter4",
-                "value": "3"
+                "value": "0"
             },
             {
                 "name": "TemporalFilterAlpha4",
