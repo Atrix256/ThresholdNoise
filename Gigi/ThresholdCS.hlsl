@@ -297,6 +297,7 @@ round, white, blue, TAA blue
 
 Link to:
 * inside rendering: https://loopit.dk/rendering_inside.pdf
+ * and more on shipping for ios: https://loopit.dk/inside_shipping_on_ios.pdf#page=99
 * bart's post: https://bartwronski.com/2016/10/30/dithering-part-three-real-world-2d-quantization-dithering/
 * srgb or not: http://www.thetenthplanet.de/archives/5367
 * the thesis: https://dspacemainprd01.lib.uwaterloo.ca/server/api/core/bitstreams/022b1b01-5e4d-441a-bc53-ea13c65d1dd7/content
