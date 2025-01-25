@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DX12Utils\Camera.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\CompileShaders_dxc.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\CompileShaders_fxc.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\FileCache.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\TextureCache.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\dxutils.cpp">
+      <Filter>DX12Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DX12Utils\tinyexr\deps\miniz\miniz.c">
+      <Filter>DX12Utils\tinyexr\deps\miniz</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx12.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="private\technique.cpp">
+      <Filter>private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DX12Utils\Camera.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\CompileShaders.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\DelayedReleaseTracker.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\FileCache.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\HeapAllocationTracker.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\ParseCSV.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\ReadbackHelper.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\SRGB.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\TextureCache.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\dxutils.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\logfn.h">
+      <Filter>DX12Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\stb\stb_image.h">
+      <Filter>DX12Utils\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\stb\stb_image_write.h">
+      <Filter>DX12Utils\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\tinyexr\deps\miniz\miniz.h">
+      <Filter>DX12Utils\tinyexr\deps\miniz</Filter>
+    </ClInclude>
+    <ClInclude Include="DX12Utils\tinyexr\tinyexr.h">
+      <Filter>DX12Utils\tinyexr</Filter>
+    </ClInclude>
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEvents.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsCommon.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsLegacy.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3_win.h">
+      <Filter>WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx12.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="private\technique.h">
+      <Filter>private</Filter>
+    </ClInclude>
+    <ClInclude Include="public\all.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="public\imgui.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="public\pythoninterface.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="public\technique.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders\AdjustBrightnessCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders\SpatialFilterCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders\TemporalFilterCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders\ThresholdCS.hlsl">
+      <Filter>shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\async.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\async_logger-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\async_logger.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\cfg\argv.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\cfg\env.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\cfg\helpers-inl.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\cfg\helpers.h">
+      <Filter>spdlog\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\common-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\common.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\backtracer-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\backtracer.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\circular_q.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\console_globals.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\file_helper-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\file_helper.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\fmt_helper.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\log_msg-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\log_msg.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\log_msg_buffer-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\log_msg_buffer.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\mpmc_blocking_q.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\null_mutex.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\os-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\os.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\periodic_worker-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\periodic_worker.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\registry-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\registry.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\synchronous_factory.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\tcp_client-windows.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\tcp_client.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\thread_pool-inl.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\thread_pool.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\udp_client-windows.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\udp_client.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\details\windows_include.h">
+      <Filter>spdlog\details</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bin_to_hex.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\args.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\chrono.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\color.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\compile.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\core.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\format-inl.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\format.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\locale.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\os.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\ostream.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\printf.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\ranges.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\std.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\bundled\xchar.h">
+      <Filter>spdlog\fmt\bundled</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\chrono.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\compile.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\fmt.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\ostr.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\ranges.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\std.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fmt\xchar.h">
+      <Filter>spdlog\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\formatter.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\fwd.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\logger-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\logger.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\pattern_formatter-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\pattern_formatter.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\android_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\ansicolor_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\ansicolor_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\base_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\base_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\basic_file_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\basic_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\daily_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\dist_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\dup_filter_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\hourly_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\mongo_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\msvc_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\null_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\ostream_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\qt_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\ringbuffer_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\rotating_file_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\rotating_file_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\stdout_color_sinks-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\stdout_color_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\stdout_sinks-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\stdout_sinks.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\syslog_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\systemd_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\tcp_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\udp_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\win_eventlog_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\wincolor_sink-inl.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\sinks\wincolor_sink.h">
+      <Filter>spdlog\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\spdlog-inl.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\spdlog.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\stopwatch.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\tweakme.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="spdlog\version.h">
+      <Filter>spdlog</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DX12Utils">
+      <UniqueIdentifier>{4EE3B8F7-10A5-34D7-9DD2-BEE08CBC42CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\stb">
+      <UniqueIdentifier>{5D84198B-F055-39B6-8AA2-2203615B64E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr">
+      <UniqueIdentifier>{C0102B81-1FEB-307A-A04F-FCC256CFEC17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr\deps">
+      <UniqueIdentifier>{9AD56FE7-8AA9-3EEB-A471-BC5492DFA11D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12Utils\tinyexr\deps\miniz">
+      <UniqueIdentifier>{2A9AF93F-34AE-3BAC-8F8F-70A6BE6BAD42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001">
+      <UniqueIdentifier>{1EFFF428-FE79-39FD-8CFA-283925FF65AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001\Include">
+      <UniqueIdentifier>{06A0C10D-D93E-3849-B6E2-75ACD173CF00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime">
+      <UniqueIdentifier>{F76B8577-E2D1-3737-B47A-BCF899B9756C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{B1A95837-2377-362A-95F4-46116C895BDA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="private">
+      <UniqueIdentifier>{D9D9CF80-5841-3E68-BD1B-305327C0603A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="public">
+      <UniqueIdentifier>{21873265-7D04-333B-A316-B4A32FC619F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{76B8B943-73F2-31D5-936E-8187C2202470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog">
+      <UniqueIdentifier>{BA7FB882-752D-311A-A455-33C76D1C841A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\cfg">
+      <UniqueIdentifier>{E556934A-9532-358B-A408-57C222CE6065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\details">
+      <UniqueIdentifier>{8AB583A8-870B-3467-828B-7BCADF548B40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\fmt">
+      <UniqueIdentifier>{D8A24FC0-B22F-3438-939D-6062D25A13EA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\fmt\bundled">
+      <UniqueIdentifier>{85CF5998-59EA-3127-9865-04D98B9D933C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spdlog\sinks">
+      <UniqueIdentifier>{FDE48318-3372-3FF1-892A-514D52B1F64F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

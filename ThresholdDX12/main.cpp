@@ -32,7 +32,7 @@
 
 #define MAKE_PIX_CAPTURE() false // if true, will emit a pix capture for every frame the unit tests run.
 
-static const unsigned int c_renderSize[2] = { 1024, 768 };
+static const unsigned int c_renderSize[2] = { 1024, 1024 };
 // Gigi Modification End
 
 #ifdef DX12_ENABLE_DEBUG_LAYER

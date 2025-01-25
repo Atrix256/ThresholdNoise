@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E41DB241-83BC-3290-8A1B-298B8BD4A530}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>Threshold</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Threshold.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Threshold</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Threshold.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Threshold</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Threshold.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Threshold</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Threshold.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Threshold</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;WinPixEventRuntime.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64;D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;WinPixEventRuntime.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64;D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;WinPixEventRuntime.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64;D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>.\;.\imgui;.\DX12Utils\tinyexr;.\DX12Utils\tinyexr\deps\miniz;.\WinPixEventRuntime.1.0.240308001\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;WinPixEventRuntime.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64;D:/dev/github/ThresholdNoise/ThresholdDX12/./WinPixEventRuntime.1.0.240308001/bin/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/dev/github/ThresholdNoise/ThresholdDX12/Threshold.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DX12Utils\Camera.cpp" />
+    <ClInclude Include="DX12Utils\Camera.h" />
+    <ClInclude Include="DX12Utils\CompileShaders.h" />
+    <ClCompile Include="DX12Utils\CompileShaders_dxc.cpp" />
+    <ClCompile Include="DX12Utils\CompileShaders_fxc.cpp" />
+    <ClInclude Include="DX12Utils\DelayedReleaseTracker.h" />
+    <ClCompile Include="DX12Utils\FileCache.cpp" />
+    <ClInclude Include="DX12Utils\FileCache.h" />
+    <ClInclude Include="DX12Utils\HeapAllocationTracker.h" />
+    <ClInclude Include="DX12Utils\ParseCSV.h" />
+    <ClInclude Include="DX12Utils\ReadbackHelper.h" />
+    <ClInclude Include="DX12Utils\SRGB.h" />
+    <ClCompile Include="DX12Utils\TextureCache.cpp" />
+    <ClInclude Include="DX12Utils\TextureCache.h" />
+    <ClCompile Include="DX12Utils\dxutils.cpp" />
+    <ClInclude Include="DX12Utils\dxutils.h" />
+    <ClInclude Include="DX12Utils\logfn.h" />
+    <ClInclude Include="DX12Utils\stb\stb_image.h" />
+    <ClInclude Include="DX12Utils\stb\stb_image_write.h" />
+    <ClCompile Include="DX12Utils\tinyexr\deps\miniz\miniz.c" />
+    <ClInclude Include="DX12Utils\tinyexr\deps\miniz\miniz.h" />
+    <ClInclude Include="DX12Utils\tinyexr\tinyexr.h" />
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEvents.h" />
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsCommon.h" />
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\PIXEventsLegacy.h" />
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3.h" />
+    <ClInclude Include="WinPixEventRuntime.1.0.240308001\Include\WinPixEventRuntime\pix3_win.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_dx12.cpp" />
+    <ClInclude Include="imgui\imgui_impl_dx12.h" />
+    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
+    <ClInclude Include="imgui\imgui_impl_win32.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="private\technique.cpp" />
+    <ClInclude Include="private\technique.h" />
+    <ClInclude Include="public\all.h" />
+    <ClInclude Include="public\imgui.h" />
+    <ClInclude Include="public\pythoninterface.h" />
+    <ClInclude Include="public\technique.h" />
+    <ClInclude Include="shaders\AdjustBrightnessCS.hlsl" />
+    <ClInclude Include="shaders\SpatialFilterCS.hlsl" />
+    <ClInclude Include="shaders\TemporalFilterCS.hlsl" />
+    <ClInclude Include="shaders\ThresholdCS.hlsl" />
+    <ClInclude Include="spdlog\async.h" />
+    <ClInclude Include="spdlog\async_logger-inl.h" />
+    <ClInclude Include="spdlog\async_logger.h" />
+    <ClInclude Include="spdlog\cfg\argv.h" />
+    <ClInclude Include="spdlog\cfg\env.h" />
+    <ClInclude Include="spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="spdlog\cfg\helpers.h" />
+    <ClInclude Include="spdlog\common-inl.h" />
+    <ClInclude Include="spdlog\common.h" />
+    <ClInclude Include="spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="spdlog\details\backtracer.h" />
+    <ClInclude Include="spdlog\details\circular_q.h" />
+    <ClInclude Include="spdlog\details\console_globals.h" />
+    <ClInclude Include="spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="spdlog\details\file_helper.h" />
+    <ClInclude Include="spdlog\details\fmt_helper.h" />
+    <ClInclude Include="spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="spdlog\details\log_msg.h" />
+    <ClInclude Include="spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="spdlog\details\null_mutex.h" />
+    <ClInclude Include="spdlog\details\os-inl.h" />
+    <ClInclude Include="spdlog\details\os.h" />
+    <ClInclude Include="spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="spdlog\details\periodic_worker.h" />
+    <ClInclude Include="spdlog\details\registry-inl.h" />
+    <ClInclude Include="spdlog\details\registry.h" />
+    <ClInclude Include="spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="spdlog\details\tcp_client.h" />
+    <ClInclude Include="spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="spdlog\details\thread_pool.h" />
+    <ClInclude Include="spdlog\details\udp_client-windows.h" />
+    <ClInclude Include="spdlog\details\udp_client.h" />
+    <ClInclude Include="spdlog\details\windows_include.h" />
+    <ClInclude Include="spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="spdlog\fmt\bundled\args.h" />
+    <ClInclude Include="spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="spdlog\fmt\bundled\locale.h" />
+    <ClInclude Include="spdlog\fmt\bundled\os.h" />
+    <ClInclude Include="spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="spdlog\fmt\bundled\std.h" />
+    <ClInclude Include="spdlog\fmt\bundled\xchar.h" />
+    <ClInclude Include="spdlog\fmt\chrono.h" />
+    <ClInclude Include="spdlog\fmt\compile.h" />
+    <ClInclude Include="spdlog\fmt\fmt.h" />
+    <ClInclude Include="spdlog\fmt\ostr.h" />
+    <ClInclude Include="spdlog\fmt\ranges.h" />
+    <ClInclude Include="spdlog\fmt\std.h" />
+    <ClInclude Include="spdlog\fmt\xchar.h" />
+    <ClInclude Include="spdlog\formatter.h" />
+    <ClInclude Include="spdlog\fwd.h" />
+    <ClInclude Include="spdlog\logger-inl.h" />
+    <ClInclude Include="spdlog\logger.h" />
+    <ClInclude Include="spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="spdlog\pattern_formatter.h" />
+    <ClInclude Include="spdlog\sinks\android_sink.h" />
+    <ClInclude Include="spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\base_sink.h" />
+    <ClInclude Include="spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="spdlog\sinks\hourly_file_sink.h" />
+    <ClInclude Include="spdlog\sinks\mongo_sink.h" />
+    <ClInclude Include="spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="spdlog\sinks\null_sink.h" />
+    <ClInclude Include="spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="spdlog\sinks\qt_sinks.h" />
+    <ClInclude Include="spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\sink.h" />
+    <ClInclude Include="spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="spdlog\sinks\udp_sink.h" />
+    <ClInclude Include="spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="spdlog\spdlog-inl.h" />
+    <ClInclude Include="spdlog\spdlog.h" />
+    <ClInclude Include="spdlog\stopwatch.h" />
+    <ClInclude Include="spdlog\tweakme.h" />
+    <ClInclude Include="spdlog\version.h" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

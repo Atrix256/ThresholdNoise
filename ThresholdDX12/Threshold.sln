@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Threshold", "Threshold.vcxproj", "{E41DB241-83BC-3290-8A1B-298B8BD4A530}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+		MinSizeRel|x64 = MinSizeRel|x64
+		RelWithDebInfo|x64 = RelWithDebInfo|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.Debug|x64.ActiveCfg = Debug|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.Debug|x64.Build.0 = Debug|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.Release|x64.ActiveCfg = Release|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.Release|x64.Build.0 = Release|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{E41DB241-83BC-3290-8A1B-298B8BD4A530}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{531AC380-6AD0-373D-AE1F-190EA2F1BE50}.Debug|x64.ActiveCfg = Debug|x64
+		{531AC380-6AD0-373D-AE1F-190EA2F1BE50}.Release|x64.ActiveCfg = Release|x64
+		{531AC380-6AD0-373D-AE1F-190EA2F1BE50}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{531AC380-6AD0-373D-AE1F-190EA2F1BE50}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{531AC380-6AD0-373D-AE1F-190EA2F1BE50} = {14E1A8C3-F19B-3F43-B2D6-43E473940AFF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {636D89DE-782B-3786-8CD0-5947AEF3AE85}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

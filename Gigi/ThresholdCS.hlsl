@@ -207,8 +207,7 @@ TODO:
 
 * make it so you can have a label for each square, and it centers it at the top. use it to label your diagrams. might need 2 labels per square. noise type and filtering? or maybe that is 2 different labels?
 * Make sure c++ dx12 generated code is up to date for both
-* check in proj and solution files, but with relative paths instead of absolute.
-
+* make sure the C++ code builds ok from a different directory.
 
 
 
@@ -220,6 +219,9 @@ Threshold blog post notes:
  * should do it that way. show dots without auto brightness and show filtered with auto brightness.
 * also mention the C++ code to make bayer matrix images.
 * adjusting brightness is like importance sampling (is it?), we are multiplying the color since fewer pixels remain.
+
+* link to this fractal temporally stable dithering thing: https://www.youtube.com/watch?v=HPqGaIMVuLs
+ * would be nice if that was blue noise. and spatiotemporal blue noise.
 
 Dither BLOG NOTES:
 
