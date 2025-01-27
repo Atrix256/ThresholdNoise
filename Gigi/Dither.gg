@@ -271,6 +271,18 @@
             "type": "Int",
             "dflt": "0",
             "transient": true
+        },
+        {
+            "name": "SinglePanelCount",
+            "comment": "How many times to show in the SinglePanel output",
+            "type": "Uint2",
+            "dflt": "1,1",
+            "visibility": "User"
+        },
+        {
+            "name": "Color1PanelSize",
+            "type": "Uint2",
+            "dflt": "4,4"
         }
     ],
     "shaders": [
@@ -325,6 +337,55 @@
                 },
                 {
                     "name": "TemporalAccum",
+                    "type": "Texture",
+                    "access": "UAV"
+                }
+            ]
+        },
+        {
+            "name": "ApplyLabels",
+            "fileName": "ApplyLabelsCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Color",
+                    "type": "Texture",
+                    "access": "UAV"
+                },
+                {
+                    "name": "Label1_UL",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Label2_UR",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Label3_BL",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Label4_BR",
+                    "type": "Texture",
+                    "access": "SRV"
+                }
+            ]
+        },
+        {
+            "name": "SinglePanel",
+            "fileName": "SinglePanelCS.hlsl",
+            "entryPoint": "csmain",
+            "resources": [
+                {
+                    "name": "Input",
+                    "type": "Texture",
+                    "access": "SRV"
+                },
+                {
+                    "name": "Output",
                     "type": "Texture",
                     "access": "UAV"
                 }
@@ -542,6 +603,151 @@
                     }
                 }
             }
+        },
+        {
+            "actionComputeShader": {
+                "name": "ApplyLabels",
+                "editorPos": [
+                    635.0,
+                    92.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {},
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Color",
+                        "dstNode": "TemporalFilter",
+                        "dstPin": "Output"
+                    },
+                    {
+                        "srcPin": "Label1_UL",
+                        "dstNode": "Label1_UL",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "Label2_UR",
+                        "dstNode": "Label2_UR",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "Label3_BL",
+                        "dstNode": "Label3_BL",
+                        "dstPin": "resource"
+                    },
+                    {
+                        "srcPin": "Label4_BR",
+                        "dstNode": "Label4_BR",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "ApplyLabels"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Label1_UL",
+                "editorPos": [
+                    443.0,
+                    98.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Label2_UR",
+                "editorPos": [
+                    443.0,
+                    146.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Label3_BL",
+                "editorPos": [
+                    443.0,
+                    194.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Label4_BR",
+                "editorPos": [
+                    443.0,
+                    242.0
+                ],
+                "visibility": "Imported"
+            }
+        },
+        {
+            "actionComputeShader": {
+                "name": "SinglePanel",
+                "editorPos": [
+                    843.0,
+                    92.0
+                ],
+                "linkProperties": [
+                    {},
+                    {},
+                    {}
+                ],
+                "connections": [
+                    {
+                        "srcPin": "Input",
+                        "dstNode": "ApplyLabels",
+                        "dstPin": "Color"
+                    },
+                    {
+                        "srcPin": "Output",
+                        "dstNode": "Color1Panel",
+                        "dstPin": "resource"
+                    }
+                ],
+                "shader": {
+                    "name": "SinglePanel"
+                },
+                "dispatchSize": {
+                    "node": {
+                        "name": "Color1Panel"
+                    }
+                }
+            }
+        },
+        {
+            "resourceTexture": {
+                "name": "Color1Panel",
+                "editorPos": [
+                    667.0,
+                    258.0
+                ],
+                "format": {
+                    "node": {
+                        "name": "Color"
+                    }
+                },
+                "size": {
+                    "variable": {
+                        "name": "Color1PanelSize"
+                    }
+                }
+            }
         }
     ],
     "enums": [
@@ -693,6 +899,84 @@
                 "variable1": "Animate",
                 "comparison": "IsTrue"
             }
+        },
+        {
+            "destination": {
+                "name": "SinglePanelCount"
+            },
+            "destinationIndex": 0,
+            "AVar": {
+                "name": "SinglePanelCount"
+            },
+            "AVarIndex": 0,
+            "op": "Maximum",
+            "BLiteral": "1"
+        },
+        {
+            "destination": {
+                "name": "SinglePanelCount"
+            },
+            "destinationIndex": 1,
+            "AVar": {
+                "name": "SinglePanelCount"
+            },
+            "AVarIndex": 1,
+            "op": "Maximum",
+            "BLiteral": "1"
+        },
+        {
+            "destination": {
+                "name": "SinglePanelCount"
+            },
+            "destinationIndex": 0,
+            "AVar": {
+                "name": "SinglePanelCount"
+            },
+            "AVarIndex": 0,
+            "op": "Minimum",
+            "BLiteral": "2"
+        },
+        {
+            "destination": {
+                "name": "SinglePanelCount"
+            },
+            "destinationIndex": 1,
+            "AVar": {
+                "name": "SinglePanelCount"
+            },
+            "AVarIndex": 1,
+            "op": "Minimum",
+            "BLiteral": "2"
+        },
+        {
+            "destination": {
+                "name": "Color1PanelSize"
+            },
+            "destinationIndex": 0,
+            "AVarIndex": 0,
+            "ANode": {
+                "name": "Input"
+            },
+            "op": "Multiply",
+            "BVar": {
+                "name": "SinglePanelCount"
+            },
+            "BVarIndex": 0
+        },
+        {
+            "destination": {
+                "name": "Color1PanelSize"
+            },
+            "destinationIndex": 1,
+            "AVarIndex": 1,
+            "ANode": {
+                "name": "Input"
+            },
+            "op": "Multiply",
+            "BVar": {
+                "name": "SinglePanelCount"
+            },
+            "BVarIndex": 1
         }
     ],
     "buildSettings": {

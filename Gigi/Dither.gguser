@@ -1,13 +1,41 @@
 {
     "version": "2.0",
     "snapshot": {
-        "resourceViewNodeIndex": 6,
+        "resourceViewNodeIndex": 7,
         "resourceViewResourceIndex": 5,
         "importedResources": [
             {
                 "nodeName": "Input",
                 "texture": {
                     "fileName": "Textures\\flags_512.png",
+                    "binaryFormat": "Any"
+                }
+            },
+            {
+                "nodeName": "Label1_UL",
+                "texture": {
+                    "fileName": "Label_Bayer.png",
+                    "binaryFormat": "Any"
+                }
+            },
+            {
+                "nodeName": "Label2_UR",
+                "texture": {
+                    "fileName": "Label_WhiteNoise.png",
+                    "binaryFormat": "Any"
+                }
+            },
+            {
+                "nodeName": "Label3_BL",
+                "texture": {
+                    "fileName": "Label_BlueNoise.png",
+                    "binaryFormat": "Any"
+                }
+            },
+            {
+                "nodeName": "Label4_BR",
+                "texture": {
+                    "fileName": "Label_FASTNoise_EMA.png",
                     "binaryFormat": "Any"
                 }
             }

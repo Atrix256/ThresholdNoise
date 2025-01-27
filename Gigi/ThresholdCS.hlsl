@@ -208,9 +208,10 @@ TODO:
 * make it so you can have a label for each square, and it centers it at the top. use it to label your diagrams. might need 2 labels per square. noise type and filtering? or maybe that is 2 different labels?
 * Make sure c++ dx12 generated code is up to date for both
 * make sure the C++ code builds ok from a different directory.
-
-
-
+* When done with post, add the gigi techniques to the browser and mention it in the post!
+* check in gguser files with labels of 4x4 solid color textures, and make the labels not render if the label size is <= 4x4
+ * and 512x512 images
+* register 2 gigi techniques - one for dithering, one for stippling.
 
 Threshold blog post notes:
 * auto brightness to make up for pixels being black.
@@ -223,6 +224,8 @@ Threshold blog post notes:
 * link to this fractal temporally stable dithering thing: https://www.youtube.com/watch?v=HPqGaIMVuLs
  * would be nice if that was blue noise. and spatiotemporal blue noise.
 
+* show abdalla's work in reconstruction in latest paper. our thresholded blue noise is not as good as his, but his isn't real time.
+
 Dither BLOG NOTES:
 
 * Title "Analyzing Animated Dithering Techniques"?
@@ -230,6 +233,8 @@ Dither BLOG NOTES:
 title image: Evolution of dithering
 * Round -> white -> bayer -> blue -> STBN (filtered space / time) -> FAST product (filtered space / time)
 * show 2 bits per color channel (64 colors), but show what happens when it drops to 1 bit (8 colors). temporal blue noise still looks pretty great.
+
+* important to mention that we work in linear space, not sRGB. so need to convert from sRGB to linear, do the work, then convert from linear back to sRGB before writing it out.
 
 * triangular blue noise that is uniform on the edges.
  * i was thinking about using triangular blue noise, and mapping to uniform on the edges. Problem: tent not invertible!
@@ -296,6 +301,8 @@ round, white, blue, TAA blue
 
 ? how to do "proper dithering" with blue noise? that is uniform on the edges, but triangular in the middle.
  * maybe we can convert the edges to uniform?
+
+* link to beyond white noise in rendering video.
 
 Link to:
 * inside rendering: https://loopit.dk/rendering_inside.pdf
